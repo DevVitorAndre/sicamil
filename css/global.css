@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+:root {
+
+    --blue-950: #031426;
+    --blue-900: #061b31;
+    --blue-850: #08233e;
+    --blue-800: #0b2d4e;
+
+    --blue-700: #0d4c91;
+    --blue-600: #176ee8;
+    --blue-500: #4387ff;
+
+    --white: #ffffff;
+
+    --text-light: #d9e6f3;
+    --text-muted: #9eb3ca;
+
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+
+    font-family:
+        "Inter",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: var(--blue-950);
+
+    color: var(--white);
+
+}
+
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+
+button {
+    cursor: pointer;
+}
+
+
+a {
+    text-decoration: none;
+}

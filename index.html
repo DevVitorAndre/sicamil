@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SICAMIL | Login</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <!-- =========================
+             LADO ESQUERDO
+        ========================== -->
+
+        <section class="login-hero">
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+
+                <!-- Símbolo provisório -->
+                <div class="sicamil-symbol">
+                    <span class="wing wing-left"></span>
+
+                    <span class="star">
+                        ★
+                    </span>
+
+                    <span class="wing wing-right"></span>
+                </div>
+
+                <h1>
+                    SICAMIL
+                </h1>
+
+                <h2>
+                    SISTEMA DE CONTROLE
+                    <br>
+                    DE MILITARES
+                </h2>
+
+                <div class="blue-line"></div>
+
+                <p>
+                    Gestão eficiente para uma
+                    <br>
+                    Força cada vez mais preparada.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             LADO DIREITO
+        ========================== -->
+
+        <section class="login-area">
+
+            <div class="login-card">
+
+                <div class="login-header">
+
+                    <h3>
+                        Bem-vindo ao SICAMIL
+                    </h3>
+
+                    <p>
+                        Acesse o sistema e gerencie as informações
+                        do efetivo e das atividades de sua unidade.
+                    </p>
+
+                </div>
+
+
+                <form id="loginForm">
+
+                    <!-- LOGIN -->
+
+                    <div class="form-group">
+
+                        <label for="login">
+                            Login
+                        </label>
+
+                        <div class="input-box">
+
+                            <svg
+                                class="input-icon"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5Zm0 2c-4.418 0-8 2.239-8 5v3h16v-3c0-2.761-3.582-5-8-5Z"
+                                />
+                            </svg>
+
+                            <input
+                                type="text"
+                                id="login"
+                                name="login"
+                                placeholder="Digite seu login..."
+                                autocomplete="username"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SENHA -->
+
+                    <div class="form-group">
+
+                        <label for="senha">
+                            Senha
+                        </label>
+
+                        <div class="input-box">
+
+                            <svg
+                                class="input-icon lock-icon"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M17 8h-1V6a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Zm-7-2a2 2 0 0 1 4 0v2h-4V6Zm3 9.73V18h-2v-2.27a2 2 0 1 1 2 0Z"
+                                />
+                            </svg>
+
+                            <input
+                                type="password"
+                                id="senha"
+                                name="senha"
+                                placeholder="Digite sua senha..."
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="show-password"
+                                id="mostrarSenha"
+                                aria-label="Mostrar senha"
+                            >
+
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 5c-5.5 0-9.5 5-9.5 7s4 7 9.5 7 9.5-5 9.5-7S17.5 5 12 5Zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
+                                    />
+                                </svg>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BOTÃO -->
+
+                    <button
+                        type="submit"
+                        class="btn-login"
+                    >
+
+                        <span>
+                            Entrar
+                        </span>
+
+                        <span class="arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <a
+                        href="esqueci-senha.html"
+                        class="forgot-password"
+                    >
+                        Esqueci a senha
+                    </a>
+
+                </form>
+
+
+                <div class="login-divider"></div>
+
+
+                <!-- RECUPERAÇÃO -->
+
+                <div class="recovery-card">
+
+                    <div class="recovery-icon">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <path
+                                d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"
+                            />
+
+                        </svg>
+
+                    </div>
+
+
+                    <div class="recovery-content">
+
+                        <strong>
+                            Recuperação de acesso
+                        </strong>
+
+                        <p>
+                            Você pode recuperar sua senha por e-mail
+                            cadastrado em nosso sistema.
+                        </p>
+
+                        <a href="esqueci-senha.html">
+                            Solicitar recuperação por e-mail
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/auth.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1194 @@
+/* ==========================================================
+   SICAMIL
+   Página de Login
+========================================================== */
+
+
+/* ==========================================================
+   ESTRUTURA PRINCIPAL
+========================================================== */
+
+body {
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+}
+
+
+.login-page {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns:
+        60% 40%;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+/* ==========================================================
+   ÁREA ESQUERDA
+========================================================== */
+
+.login-hero {
+
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+
+    /*
+       FUNDO PROVISÓRIO.
+
+       Quando colocarmos a imagem:
+       img/backgrounds/login-bg.png
+
+       vamos adicionar aqui.
+    */
+
+    background:
+
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(54, 116, 174, 0.7),
+            transparent 38%
+        ),
+
+        radial-gradient(
+            circle at 65% 80%,
+            rgba(20, 84, 145, 0.5),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            #0d416d 0%,
+            #0a3155 40%,
+            #071e36 75%,
+            #051629 100%
+        );
+
+}
+
+
+/*
+    Escurecimento semelhante ao Figma
+*/
+
+.hero-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(0, 15, 30, 0.08),
+            rgba(0, 15, 30, 0.12),
+            rgba(0, 15, 30, 0.35)
+        );
+
+}
+
+
+/*
+    Efeito de céu / luz
+*/
+
+.login-hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 750px;
+
+    height: 750px;
+
+    left: -220px;
+
+    bottom: -360px;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(91, 164, 228, 0.17),
+            transparent 68%
+        );
+
+}
+
+
+/* ==========================================================
+   CONTEÚDO ESQUERDO
+========================================================== */
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 700px;
+
+    padding: 50px;
+
+    text-align: center;
+
+}
+
+
+/* ==========================================================
+   LOGO PROVISÓRIO
+========================================================== */
+
+.sicamil-symbol {
+
+    width: 280px;
+
+    height: 85px;
+
+    margin:
+
+        0 auto
+        22px auto;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.star {
+
+    font-size: 42px;
+
+    color: #dcebf8;
+
+    text-shadow:
+
+        0 4px 15px
+        rgba(0, 0, 0, 0.35);
+
+}
+
+
+.wing {
+
+    width: 95px;
+
+    height: 28px;
+
+    position: relative;
+
+}
+
+
+.wing::before,
+.wing::after {
+
+    content: "";
+
+    position: absolute;
+
+    height: 12px;
+
+    border-radius: 3px;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #adc8df
+        );
+
+}
+
+
+.wing-left {
+
+    margin-right: 15px;
+
+}
+
+
+.wing-right {
+
+    margin-left: 15px;
+
+}
+
+
+.wing-left::before {
+
+    width: 95px;
+
+    right: 0;
+
+    top: 2px;
+
+    transform:
+        skewX(28deg)
+        rotate(8deg);
+
+}
+
+
+.wing-left::after {
+
+    width: 72px;
+
+    right: 4px;
+
+    top: 21px;
+
+    transform:
+        skewX(26deg)
+        rotate(8deg);
+
+}
+
+
+.wing-right::before {
+
+    width: 95px;
+
+    left: 0;
+
+    top: 2px;
+
+    transform:
+        skewX(-28deg)
+        rotate(-8deg);
+
+}
+
+
+.wing-right::after {
+
+    width: 72px;
+
+    left: 4px;
+
+    top: 21px;
+
+    transform:
+        skewX(-26deg)
+        rotate(-8deg);
+
+}
+
+
+/* ==========================================================
+   SICAMIL
+========================================================== */
+
+.hero-content h1 {
+
+    font-size:
+
+        clamp(
+            3.3rem,
+            5vw,
+            5.5rem
+        );
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: 7px;
+
+    color: #ffffff;
+
+    text-shadow:
+
+        0 6px 20px
+        rgba(0, 0, 0, 0.32);
+
+}
+
+
+/* ==========================================================
+   SUBTÍTULO
+========================================================== */
+
+.hero-content h2 {
+
+    margin-top: 18px;
+
+    font-size:
+
+        clamp(
+            1rem,
+            1.3vw,
+            1.25rem
+        );
+
+    font-weight: 500;
+
+    line-height: 1.55;
+
+    letter-spacing: 6px;
+
+    color: #e5eff9;
+
+}
+
+
+/* ==========================================================
+   LINHA AZUL
+========================================================== */
+
+.blue-line {
+
+    width: 42px;
+
+    height: 4px;
+
+    margin:
+
+        30px auto
+        26px auto;
+
+    border-radius: 20px;
+
+    background: #4b8fff;
+
+}
+
+
+/* ==========================================================
+   TEXTO HERO
+========================================================== */
+
+.hero-content p {
+
+    font-size:
+
+        clamp(
+            1.05rem,
+            1.5vw,
+            1.4rem
+        );
+
+    line-height: 1.45;
+
+    color: #c9d9e8;
+
+}
+
+
+/* ==========================================================
+   LADO DIREITO
+========================================================== */
+
+.login-area {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    padding: 40px 55px;
+
+
+    background:
+
+        radial-gradient(
+            circle at 100% 20%,
+            rgba(40, 100, 160, 0.18),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            150deg,
+            #071d33,
+            #04172a
+        );
+
+}
+
+
+/*
+    Camuflado abstrato provisório
+*/
+
+.login-area::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0.10;
+
+    background:
+
+        radial-gradient(
+            ellipse at 30% 20%,
+            #4f789c 0 8%,
+            transparent 9%
+        ),
+
+        radial-gradient(
+            ellipse at 72% 35%,
+            #51799c 0 9%,
+            transparent 10%
+        ),
+
+        radial-gradient(
+            ellipse at 50% 70%,
+            #527b9e 0 10%,
+            transparent 11%
+        ),
+
+        radial-gradient(
+            ellipse at 90% 85%,
+            #4c7396 0 8%,
+            transparent 9%
+        );
+
+    background-size:
+
+        210px 180px;
+
+}
+
+
+/* ==========================================================
+   CARD LOGIN
+========================================================== */
+
+.login-card {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 560px;
+
+    padding:
+
+        54px
+        54px
+        42px;
+
+    border:
+
+        1px solid
+        rgba(102, 164, 219, 0.38);
+
+    border-radius: 18px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(7, 38, 67, 0.95),
+            rgba(4, 27, 50, 0.94)
+        );
+
+    box-shadow:
+
+        0 30px 80px
+        rgba(0, 0, 0, 0.33);
+
+}
+
+
+/* ==========================================================
+   CABEÇALHO LOGIN
+========================================================== */
+
+.login-header h3 {
+
+    font-size:
+
+        clamp(
+            1.8rem,
+            2.5vw,
+            2.4rem
+        );
+
+    line-height: 1.15;
+
+    color: #ffffff;
+
+    font-weight: 700;
+
+}
+
+
+.login-header p {
+
+    margin-top: 12px;
+
+    margin-bottom: 36px;
+
+    max-width: 450px;
+
+    line-height: 1.55;
+
+    color: #a8bdd2;
+
+    font-size: 0.96rem;
+
+}
+
+
+/* ==========================================================
+   FORMULÁRIO
+========================================================== */
+
+.form-group {
+
+    margin-bottom: 24px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+
+    color: #ffffff;
+
+}
+
+
+/* ==========================================================
+   INPUT
+========================================================== */
+
+.input-box {
+
+    position: relative;
+
+    width: 100%;
+
+}
+
+
+.input-box input {
+
+    width: 100%;
+
+    height: 58px;
+
+    padding:
+
+        0 55px
+        0 54px;
+
+    border:
+
+        1px solid
+        #416a91;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            0.025
+        );
+
+    color: #ffffff;
+
+    font-size: 0.92rem;
+
+    transition:
+
+        border-color
+        0.2s,
+
+        box-shadow
+        0.2s,
+
+        background
+        0.2s;
+
+}
+
+
+.input-box input::placeholder {
+
+    color: #829bb5;
+
+}
+
+
+.input-box input:focus {
+
+    border-color: #4389ff;
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            0.045
+        );
+
+    box-shadow:
+
+        0 0 0 3px
+        rgba(67, 137, 255, 0.13);
+
+}
+
+
+/* ==========================================================
+   ÍCONES INPUT
+========================================================== */
+
+.input-icon {
+
+    position: absolute;
+
+    left: 18px;
+
+    top: 50%;
+
+    width: 22px;
+
+    height: 22px;
+
+    transform:
+
+        translateY(-50%);
+
+    fill: #b6cee5;
+
+    opacity: 0.9;
+
+}
+
+
+/* ==========================================================
+   MOSTRAR SENHA
+========================================================== */
+
+.show-password {
+
+    position: absolute;
+
+    top: 50%;
+
+    right: 11px;
+
+    transform:
+
+        translateY(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 38px;
+
+    height: 38px;
+
+    border: none;
+
+    background: transparent;
+
+}
+
+
+.show-password svg {
+
+    width: 22px;
+
+    height: 22px;
+
+    fill: #bed1e4;
+
+}
+
+
+/* ==========================================================
+   BOTÃO ENTRAR
+========================================================== */
+
+.btn-login {
+
+    width: 100%;
+
+    height: 62px;
+
+    margin-top: 1px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    display: grid;
+
+    grid-template-columns:
+
+        1fr auto;
+
+    align-items: center;
+
+    padding:
+
+        0 25px;
+
+    color: white;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #176fe9,
+            #4589ff
+        );
+
+    transition:
+
+        transform 0.2s,
+
+        box-shadow 0.2s,
+
+        filter 0.2s;
+
+}
+
+
+.btn-login span:first-child {
+
+    justify-self: center;
+
+    margin-left: 25px;
+
+}
+
+
+.btn-login .arrow {
+
+    font-size: 1.5rem;
+
+    font-weight: 400;
+
+}
+
+
+.btn-login:hover {
+
+    transform:
+
+        translateY(-2px);
+
+    filter:
+
+        brightness(1.07);
+
+    box-shadow:
+
+        0 12px 28px
+        rgba(39, 119, 255, 0.30);
+
+}
+
+
+/* ==========================================================
+   ESQUECI SENHA
+========================================================== */
+
+.forgot-password {
+
+    display: block;
+
+    margin-top: 21px;
+
+    text-align: center;
+
+    color: #71a9ff;
+
+    font-size: 0.86rem;
+
+}
+
+
+.forgot-password:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* ==========================================================
+   DIVISOR
+========================================================== */
+
+.login-divider {
+
+    width: 100%;
+
+    height: 1px;
+
+    margin:
+
+        28px 0
+        26px;
+
+    background:
+
+        rgba(
+            121,
+            166,
+            205,
+            0.25
+        );
+
+}
+
+
+/* ==========================================================
+   RECUPERAÇÃO
+========================================================== */
+
+.recovery-card {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+
+        48px 1fr;
+
+    gap: 16px;
+
+    align-items: start;
+
+    padding: 18px;
+
+    border:
+
+        1px solid
+        rgba(103, 164, 218, 0.30);
+
+    border-radius: 10px;
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            0.025
+        );
+
+}
+
+
+.recovery-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius: 9px;
+
+    background:
+
+        rgba(
+            43,
+            113,
+            213,
+            0.17
+        );
+
+}
+
+
+.recovery-icon svg {
+
+    width: 27px;
+
+    height: 27px;
+
+    fill: #62a5ff;
+
+}
+
+
+.recovery-content strong {
+
+    display: block;
+
+    font-size: 0.91rem;
+
+    margin-bottom: 5px;
+
+    color: #ffffff;
+
+}
+
+
+.recovery-content p {
+
+    max-width: 350px;
+
+    font-size: 0.82rem;
+
+    line-height: 1.45;
+
+    color: #9db5cd;
+
+}
+
+
+.recovery-content a {
+
+    display: inline-flex;
+
+    gap: 8px;
+
+    margin-top: 9px;
+
+    align-items: center;
+
+    font-size: 0.81rem;
+
+    font-weight: 600;
+
+    color: #5499ff;
+
+}
+
+
+/* ==========================================================
+   NOTEBOOK
+========================================================== */
+
+@media
+(max-height: 780px)
+and
+(min-width: 901px) {
+
+    .login-area {
+
+        padding:
+
+            20px 40px;
+
+    }
+
+
+    .login-card {
+
+        max-width: 520px;
+
+        padding:
+
+            30px 40px;
+
+    }
+
+
+    .login-header p {
+
+        margin-bottom: 22px;
+
+    }
+
+
+    .form-group {
+
+        margin-bottom: 16px;
+
+    }
+
+
+    .input-box input {
+
+        height: 50px;
+
+    }
+
+
+    .btn-login {
+
+        height: 52px;
+
+    }
+
+
+    .login-divider {
+
+        margin:
+
+            19px 0;
+
+    }
+
+
+    .recovery-card {
+
+        padding: 14px;
+
+    }
+
+
+    .hero-content h1 {
+
+        font-size: 4rem;
+
+    }
+
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media
+(max-width: 900px) {
+
+    .login-page {
+
+        grid-template-columns:
+
+            1fr;
+
+    }
+
+
+    .login-hero {
+
+        display: none;
+
+    }
+
+
+    .login-area {
+
+        width: 100%;
+
+        min-height: 100vh;
+
+        padding: 25px;
+
+    }
+
+
+    .login-card {
+
+        max-width: 520px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   CELULAR
+========================================================== */
+
+@media
+(max-width: 520px) {
+
+    .login-area {
+
+        padding: 15px;
+
+    }
+
+
+    .login-card {
+
+        padding:
+
+            30px 22px;
+
+    }
+
+
+    .login-header h3 {
+
+        font-size: 1.8rem;
+
+    }
+
+
+    .input-box input {
+
+        height: 54px;
+
+    }
+
+
+    .recovery-card {
+
+        grid-template-columns:
+
+            1fr;
+
+    }
+
+}
