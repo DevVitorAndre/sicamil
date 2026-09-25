@@ -1,5 +1,11 @@
-import { sessionService } from "./services/sessionService.js";
+import {
+    sessionService
+} from "./services/sessionService.js";
 
+
+/* =========================================================
+   CARREGAR COMPONENTES
+========================================================= */
 
 export async function carregarComponentes() {
 
@@ -18,6 +24,8 @@ export async function carregarComponentes() {
     ]);
 
 
+    aplicarPermissoesMenu();
+
     marcarPaginaAtual();
 
     preencherDataAtual();
@@ -26,6 +34,10 @@ export async function carregarComponentes() {
 
 }
 
+
+/* =========================================================
+   CARREGAR COMPONENTE
+========================================================= */
 
 async function carregarComponente(
     containerId,
@@ -39,14 +51,18 @@ async function carregarComponente(
 
 
     if (!container) {
+
         return;
+
     }
 
 
     try {
 
         const resposta =
-            await fetch(caminho);
+            await fetch(
+                caminho
+            );
 
 
         if (!resposta.ok) {
@@ -58,72 +74,179 @@ async function carregarComponente(
         }
 
 
-        container.innerHTML =
+        const html =
             await resposta.text();
+
+
+        container.innerHTML =
+            html;
+
 
     } catch (erro) {
 
-        console.error(erro);
+        console.error(
+            erro
+        );
 
 
-        container.innerHTML =
-            `
-                <div class="component-error">
-                    Não foi possível carregar este componente.
-                </div>
-            `;
+        container.innerHTML = `
+            <div class="component-error">
+                Não foi possível carregar este componente.
+            </div>
+        `;
 
     }
 
 }
 
 
-function marcarPaginaAtual() {
+/* =========================================================
+   PERMISSÕES DO MENU
+========================================================= */
 
-    const arquivo =
+function aplicarPermissoesMenu() {
 
-        window.location.pathname
-            .split("/")
-            .pop();
+    const usuario =
+        sessionService.obter();
 
 
-    document
-        .querySelectorAll(
-            ".menu-item"
-        )
-        .forEach(
-            item => {
+    if (!usuario) {
 
-                item.classList.remove(
-                    "active"
+        return;
+
+    }
+
+
+    const itensProtegidos =
+        document.querySelectorAll(
+            "[data-permission]"
+        );
+
+
+    itensProtegidos.forEach(
+        (item) => {
+
+            const permissao =
+                item.dataset.permission;
+
+
+            const autorizado =
+                usuario.possuiPermissao(
+                    permissao
                 );
 
 
-                const href =
-                    item.getAttribute(
-                        "href"
-                    );
+            item.hidden =
+                !autorizado;
+
+        }
+    );
 
 
-                if (href === arquivo) {
-
-                    item.classList.add(
-                        "active"
-                    );
-
-                }
-
-            }
-        );
+    ajustarTituloCadastros();
 
 }
 
 
+/* =========================================================
+   ESCONDER "CADASTROS" CASO NÃO HAJA OPÇÕES
+========================================================= */
+
+function ajustarTituloCadastros() {
+
+    const titulo =
+        document.getElementById(
+            "menuCadastrosTitulo"
+        );
+
+
+    if (!titulo) {
+
+        return;
+
+    }
+
+
+    const itens =
+        document.querySelectorAll(
+            ".menu-cadastro"
+        );
+
+
+    const existeItemVisivel =
+        Array.from(
+            itens
+        ).some(
+            (item) =>
+                !item.hidden
+        );
+
+
+    titulo.hidden =
+        !existeItemVisivel;
+
+}
+
+
+/* =========================================================
+   PÁGINA ATUAL
+========================================================= */
+
+function marcarPaginaAtual() {
+
+    const paginaAtual =
+        window.location.pathname
+            .split("/")
+            .pop() ||
+        "dashboard.html";
+
+
+    const links =
+        document.querySelectorAll(
+            ".sidebar-menu a"
+        );
+
+
+    links.forEach(
+        (link) => {
+
+            const destino =
+                link
+                    .getAttribute(
+                        "href"
+                    )
+                    ?.split("/")
+                    .pop();
+
+
+            if (
+                destino ===
+                paginaAtual
+            ) {
+
+                link.classList.add(
+                    "active"
+                );
+
+            } else {
+
+                link.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
 function preencherDataAtual() {
-
-    const agora =
-        new Date();
-
 
     const diaSemana =
         document.getElementById(
@@ -135,6 +258,10 @@ function preencherDataAtual() {
         document.getElementById(
             "dataAtual"
         );
+
+
+    const agora =
+        new Date();
 
 
     if (diaSemana) {
@@ -163,11 +290,27 @@ function preencherDataAtual() {
 }
 
 
+/* =========================================================
+   USUÁRIO
+========================================================= */
+
 function preencherUsuario() {
 
     const usuario =
-        sessionService
-            .obterUsuario();
+        sessionService.obter();
+
+
+    if (!usuario) {
+
+        return;
+
+    }
+
+
+    const saudacao =
+        document.getElementById(
+            "usuarioSaudacao"
+        );
 
 
     const nome =
@@ -188,27 +331,13 @@ function preencherUsuario() {
         );
 
 
-    const saudacao =
-        document.getElementById(
-            "usuarioSaudacao"
-        );
+    if (saudacao) {
 
-
-    if (!usuario) {
-
-        if (nome) {
-            nome.textContent = "—";
-        }
-
-        if (tipo) {
-            tipo.textContent = "—";
-        }
-
-        if (avatar) {
-            avatar.textContent = "--";
-        }
-
-        return;
+        saudacao.textContent =
+            usuario.nomeGuerra ||
+            usuario.nome ||
+            usuario.login ||
+            "Usuário";
 
     }
 
@@ -216,7 +345,10 @@ function preencherUsuario() {
     if (nome) {
 
         nome.textContent =
-            usuario.nomeExibicao;
+            usuario.nome ||
+            usuario.nomeGuerra ||
+            usuario.login ||
+            "Usuário";
 
     }
 
@@ -224,7 +356,9 @@ function preencherUsuario() {
     if (tipo) {
 
         tipo.textContent =
-            usuario.tipo || "—";
+            formatarTipoUsuario(
+                usuario.tipo
+            );
 
     }
 
@@ -232,16 +366,39 @@ function preencherUsuario() {
     if (avatar) {
 
         avatar.textContent =
-            usuario.iniciais;
+            usuario.iniciais ||
+            "--";
+
+    }
+
+}
+
+
+/* =========================================================
+   FORMATAR TIPO
+========================================================= */
+
+function formatarTipoUsuario(
+    tipo
+) {
+
+    if (!tipo) {
+
+        return "—";
 
     }
 
 
-    if (saudacao) {
-
-        saudacao.textContent =
-            usuario.nomeExibicao;
-
-    }
+    return tipo
+        .replaceAll(
+            "_",
+            " "
+        )
+        .toLowerCase()
+        .replace(
+            /\b\w/g,
+            (letra) =>
+                letra.toUpperCase()
+        );
 
 }

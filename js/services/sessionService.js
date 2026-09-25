@@ -7,25 +7,69 @@ const CHAVE_USUARIO =
 
 class SessionService {
 
-    salvarUsuario(usuario) {
+
+    /* =====================================================
+       SALVAR USUÁRIO
+
+       Guarda apenas dados básicos do usuário no navegador.
+       A autenticação verdadeira continua sendo controlada
+       pelo backend através da sessão.
+    ===================================================== */
+
+    salvar(usuario) {
 
         if (!usuario) {
+
             return;
+
         }
 
 
+        const dados = {
+
+            id:
+                usuario.id,
+
+            nome:
+                usuario.nome,
+
+            nomeGuerra:
+                usuario.nomeGuerra,
+
+            login:
+                usuario.login,
+
+            email:
+                usuario.email,
+
+            tipo:
+                usuario.tipo,
+
+            secao:
+                usuario.secao,
+
+            permissoes:
+                usuario.permissoes || [],
+
+            ativo:
+                usuario.ativo
+
+        };
+
+
         sessionStorage.setItem(
-
             CHAVE_USUARIO,
-
-            JSON.stringify(usuario)
-
+            JSON.stringify(dados)
         );
 
     }
 
 
-    obterUsuario() {
+    /* =====================================================
+       OBTER USUÁRIO
+    ===================================================== */
+
+    obter() {
 
         const dados =
             sessionStorage.getItem(
@@ -34,19 +78,33 @@ class SessionService {
 
 
         if (!dados) {
+
             return null;
+
         }
 
 
         try {
 
+            const objeto =
+                JSON.parse(dados);
+
+
             return new Usuario(
-                JSON.parse(dados)
+                objeto
             );
 
-        } catch {
+
+        } catch (erro) {
+
+            console.error(
+                "Erro ao recuperar usuário da sessão:",
+                erro
+            );
+
 
             this.limpar();
+
 
             return null;
 
@@ -54,6 +112,10 @@ class SessionService {
 
     }
 
+
+    /* =====================================================
+       LIMPAR SESSÃO LOCAL
+    ===================================================== */
 
     limpar() {
 
@@ -64,10 +126,16 @@ class SessionService {
     }
 
 
+    /* =====================================================
+       VERIFICAR SE EXISTE USUÁRIO LOCAL
+
+       Isso não substitui a validação do backend.
+    ===================================================== */
+
     estaAutenticado() {
 
-        return Boolean(
-            this.obterUsuario()
+        return (
+            this.obter() !== null
         );
 
     }

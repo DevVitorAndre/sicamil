@@ -1,8 +1,18 @@
-import { carregarComponentes } from "./components.js";
+import {
+    carregarComponentes
+} from "./components.js";
 
-import { dashboardService } from "./services/dashboardService.js";
+import {
+    authService
+} from "./services/authService.js";
 
-import { formatarNumero } from "./utils/formatters.js";
+import {
+    dashboardService
+} from "./services/dashboardService.js";
+
+import {
+    formatarNumero
+} from "./utils/formatters.js";
 
 
 document.addEventListener(
@@ -11,32 +21,75 @@ document.addEventListener(
 );
 
 
+/* =========================================================
+   INICIAR DASHBOARD
+========================================================= */
+
 async function iniciarDashboard() {
-
-    await carregarComponentes();
-
-
-    exibirCarregamento();
-
 
     try {
 
+        /*
+            Primeiro confirma a sessão REAL
+            diretamente com o backend.
+        */
+
+        await authService.usuarioAtual();
+
+
+        /*
+            Depois carregamos sidebar e header.
+
+            Nesse ponto o sessionService já possui
+            o usuário validado pelo servidor.
+        */
+
+        await carregarComponentes();
+
+
+        exibirCarregamento();
+
+
+        /*
+            Busca os dados reais do dashboard.
+        */
+
         const dashboard =
-            await dashboardService
-                .buscar();
+            await dashboardService.buscar();
 
 
         renderizarDashboard(
             dashboard
         );
 
+
     } catch (erro) {
 
-        console.error(erro);
+        console.error(
+            "Erro ao iniciar Dashboard:",
+            erro
+        );
+
+
+        /*
+            401 = usuário não autenticado
+        */
+
+        if (
+            erro.status === 401
+        ) {
+
+            window.location.href =
+                "index.html";
+
+            return;
+
+        }
 
 
         exibirErro(
-            erro.message
+            erro.message ||
+            "Não foi possível carregar o Dashboard."
         );
 
     }
@@ -45,15 +98,45 @@ async function iniciarDashboard() {
 
 
 /* =========================================================
-   DASHBOARD
+   RENDERIZAÇÃO PRINCIPAL
 ========================================================= */
 
 function renderizarDashboard(
     dashboard
 ) {
 
-    renderizarResumo(
+    preencherValor(
+        "efetivoTotal",
         dashboard.resumo
+            ?.efetivoTotal
+    );
+
+
+    preencherValor(
+        "presentesHoje",
+        dashboard.resumo
+            ?.presentesHoje
+    );
+
+
+    preencherValor(
+        "naoDisponiveis",
+        dashboard.resumo
+            ?.naoDisponiveis
+    );
+
+
+    preencherValor(
+        "secoesPendentes",
+        dashboard.resumo
+            ?.secoesPendentes
+    );
+
+
+    preencherValor(
+        "secoesConcluidas",
+        dashboard.resumo
+            ?.secoesConcluidas
     );
 
 
@@ -80,61 +163,11 @@ function renderizarDashboard(
 
 
 /* =========================================================
-   CARDS
-========================================================= */
-
-function renderizarResumo(
-    resumo
-) {
-
-    preencherTexto(
-        "efetivoTotal",
-        formatarNumero(
-            resumo.efetivoTotal
-        )
-    );
-
-
-    preencherTexto(
-        "presentesHoje",
-        formatarNumero(
-            resumo.presentesHoje
-        )
-    );
-
-
-    preencherTexto(
-        "naoDisponiveis",
-        formatarNumero(
-            resumo.naoDisponiveis
-        )
-    );
-
-
-    preencherTexto(
-        "secoesPendentes",
-        formatarNumero(
-            resumo.secoesPendentes
-        )
-    );
-
-
-    preencherTexto(
-        "secoesConcluidas",
-        formatarNumero(
-            resumo.secoesConcluidas
-        )
-    );
-
-}
-
-
-/* =========================================================
    EFETIVO POR SEÇÃO
 ========================================================= */
 
 function renderizarEfetivoPorSecao(
-    secoes
+    dados = []
 ) {
 
     const container =
@@ -144,22 +177,22 @@ function renderizarEfetivoPorSecao(
 
 
     if (!container) {
+
         return;
+
     }
 
 
-    container.innerHTML = "";
-
-
     if (
-        !Array.isArray(secoes) ||
-        secoes.length === 0
+        !Array.isArray(dados) ||
+        dados.length === 0
     ) {
 
-        container.innerHTML =
-            criarEstadoVazio(
-                "Nenhuma informação de efetivo disponível."
-            );
+        container.innerHTML = `
+            <div class="empty-state">
+                Nenhum dado disponível.
+            </div>
+        `;
 
         return;
 
@@ -168,63 +201,64 @@ function renderizarEfetivoPorSecao(
 
     const maiorValor =
         Math.max(
-            ...secoes.map(
-                item =>
-                    Number(item.total) || 0
-            ),
-            1
+            ...dados.map(
+                (item) =>
+                    Number(
+                        item.total || 0
+                    )
+            )
         );
 
 
-    secoes.forEach(
-        item => {
+    container.innerHTML =
+        dados
+            .map(
+                (item) => {
 
-            const total =
-                Number(item.total) || 0;
-
-
-            const percentual =
-                (
-                    total /
-                    maiorValor
-                ) * 100;
+                    const total =
+                        Number(
+                            item.total || 0
+                        );
 
 
-            const elemento =
-                document.createElement(
-                    "div"
-                );
+                    const percentual =
+                        maiorValor > 0
+                            ? (
+                                total /
+                                maiorValor
+                            ) * 100
+                            : 0;
 
 
-            elemento.className =
-                "bar-item";
+                    return `
+                        <div class="bar-item">
 
+                            <span class="bar-value">
+                                ${formatarNumero(total)}
+                            </span>
 
-            elemento.innerHTML =
-                `
-                    <span class="bar-value">
-                        ${formatarNumero(total)}
-                    </span>
+                            <div
+                                class="bar"
+                                style="
+                                    --valor:
+                                    ${percentual}%;
+                                "
+                            ></div>
 
-                    <div
-                        class="bar"
-                        style="--valor: ${percentual}%"
-                    ></div>
+                            <small>
+                                ${escaparHTML(
+                                    item.sigla ||
+                                    item.nome ||
+                                    "—"
+                                )}
+                            </small>
 
-                    <small>
-                        ${escaparHTML(
-                            item.sigla || "—"
-                        )}
-                    </small>
-                `;
+                        </div>
+                    `;
 
-
-            container.appendChild(
-                elemento
-            );
-
-        }
-    );
+                }
+            )
+            .join("");
 
 }
 
@@ -234,7 +268,7 @@ function renderizarEfetivoPorSecao(
 ========================================================= */
 
 function renderizarSituacoes(
-    situacoes
+    dados = []
 ) {
 
     const totalElemento =
@@ -249,31 +283,41 @@ function renderizarSituacoes(
         );
 
 
-    if (!legenda) {
-        return;
-    }
-
-
-    legenda.innerHTML = "";
+    const grafico =
+        document.getElementById(
+            "graficoSituacoes"
+        );
 
 
     if (
-        !Array.isArray(situacoes) ||
-        situacoes.length === 0
+        !totalElemento ||
+        !legenda ||
+        !grafico
     ) {
 
-        if (totalElemento) {
+        return;
 
-            totalElemento.textContent =
-                "—";
-
-        }
+    }
 
 
-        legenda.innerHTML =
-            criarEstadoVazio(
-                "Nenhuma situação registrada."
-            );
+    if (
+        !Array.isArray(dados) ||
+        dados.length === 0
+    ) {
+
+        totalElemento.textContent =
+            "—";
+
+
+        legenda.innerHTML = `
+            <div class="empty-state">
+                Nenhum dado disponível.
+            </div>
+        `;
+
+
+        grafico.style.background =
+            "#e1e9f0";
 
 
         return;
@@ -282,72 +326,60 @@ function renderizarSituacoes(
 
 
     const total =
-        situacoes.reduce(
-
-            (soma, item) =>
+        dados.reduce(
+            (
+                soma,
+                item
+            ) =>
                 soma +
-                (
-                    Number(
-                        item.total
-                    ) || 0
+                Number(
+                    item.total || 0
                 ),
-
             0
-
         );
 
 
-    if (totalElemento) {
-
-        totalElemento.textContent =
-            formatarNumero(total);
-
-    }
+    totalElemento.textContent =
+        formatarNumero(
+            total
+        );
 
 
-    situacoes.forEach(
-        item => {
+    legenda.innerHTML =
+        dados
+            .map(
+                (item) => `
+                    <div class="legend-item">
 
-            const linha =
-                document.createElement(
-                    "div"
-                );
+                        <span
+                            class="dot"
+                            style="
+                                background:
+                                ${item.cor || "#7f9bb5"};
+                            "
+                        ></span>
 
+                        <div>
 
-            linha.className =
-                "legend-item";
+                            <strong>
+                                ${escaparHTML(
+                                    item.nome ||
+                                    "Situação"
+                                )}
+                            </strong>
 
+                            <small>
+                                ${formatarNumero(
+                                    item.total
+                                )}
+                            </small>
 
-            linha.innerHTML =
-                `
-                    <span
-                        class="dot"
-                        style="
-                            background:
-                            ${item.cor || "#8495a8"}
-                        "
-                    ></span>
+                        </div>
 
-                    <div>
-                        <strong>
-                            ${formatarNumero(item.total)}
-                        </strong>
-
-                        <small>
-                            ${escaparHTML(
-                                item.nome || "—"
-                            )}
-                        </small>
                     </div>
-                `;
-
-
-            legenda.appendChild(
-                linha
-            );
-
-        }
-    );
+                `
+            )
+            .join("");
 
 }
 
@@ -357,7 +389,7 @@ function renderizarSituacoes(
 ========================================================= */
 
 function renderizarChamadas(
-    chamadas
+    chamadas = []
 ) {
 
     const container =
@@ -367,11 +399,10 @@ function renderizarChamadas(
 
 
     if (!container) {
+
         return;
+
     }
-
-
-    container.innerHTML = "";
 
 
     if (
@@ -379,64 +410,56 @@ function renderizarChamadas(
         chamadas.length === 0
     ) {
 
-        container.innerHTML =
-            criarEstadoVazio(
-                "Nenhuma chamada registrada hoje."
-            );
+        container.innerHTML = `
+            <div class="empty-state">
+                Nenhuma chamada disponível.
+            </div>
+        `;
 
         return;
 
     }
 
 
-    chamadas.forEach(
-        chamada => {
+    container.innerHTML =
+        chamadas
+            .map(
+                (chamada) => {
 
-            const linha =
-                document.createElement(
-                    "div"
-                );
-
-
-            linha.className =
-                "call-row";
+                    const status =
+                        normalizarStatus(
+                            chamada.status
+                        );
 
 
-            const status =
-                normalizarStatus(
-                    chamada.status
-                );
+                    return `
+                        <div class="call-row">
 
+                            <span>
+                                ${escaparHTML(
+                                    chamada.secao
+                                        ?.sigla ||
+                                    chamada.secao
+                                        ?.nome ||
+                                    "—"
+                                )}
+                            </span>
 
-            linha.innerHTML =
-                `
-                    <span>
-                        ${
-                            escaparHTML(
-                                chamada.secao?.sigla ||
-                                chamada.secao?.nome ||
-                                "—"
-                            )
-                        }
-                    </span>
+                            <span
+                                class="
+                                    status
+                                    ${status.classe}
+                                "
+                            >
+                                ${status.texto}
+                            </span>
 
-                    <span
-                        class="
-                            status
-                            ${status.classe}
-                        "
-                    >
-                        ${status.texto}
-                    </span>
-                `;
+                        </div>
+                    `;
 
-
-            container.appendChild(
-                linha
-            );
-
-        }
-    );
+                }
+            )
+            .join("");
 
 }
 
@@ -446,21 +469,20 @@ function renderizarChamadas(
 ========================================================= */
 
 function renderizarPresentes(
-    militares
+    militares = []
 ) {
 
-    const tabela =
+    const tbody =
         document.getElementById(
             "tabelaPresentes"
         );
 
 
-    if (!tabela) {
+    if (!tbody) {
+
         return;
+
     }
-
-
-    tabela.innerHTML = "";
 
 
     if (
@@ -468,100 +490,95 @@ function renderizarPresentes(
         militares.length === 0
     ) {
 
-        tabela.innerHTML =
-            `
-                <tr>
-                    <td
-                        colspan="4"
-                        class="table-empty"
-                    >
-                        Nenhum militar disponível para exibição.
-                    </td>
-                </tr>
-            `;
+        tbody.innerHTML = `
+            <tr>
+                <td
+                    colspan="4"
+                    class="table-empty"
+                >
+                    Nenhum militar disponível.
+                </td>
+            </tr>
+        `;
 
         return;
 
     }
 
 
-    militares.forEach(
-        militar => {
+    tbody.innerHTML =
+        militares
+            .map(
+                (militar) => `
+                    <tr>
 
-            const linha =
-                document.createElement(
-                    "tr"
-                );
+                        <td>
+                            ${escaparHTML(
+                                militar.postoGraduacao ||
+                                "—"
+                            )}
+                        </td>
 
+                        <td>
+                            ${escaparHTML(
+                                militar.nomeGuerra ||
+                                "—"
+                            )}
+                        </td>
 
-            linha.innerHTML =
+                        <td>
+                            ${escaparHTML(
+                                militar.secao?.sigla ||
+                                militar.secao?.nome ||
+                                "—"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escaparHTML(
+                                militar.situacao?.nome ||
+                                militar.situacao ||
+                                "—"
+                            )}
+                        </td>
+
+                    </tr>
                 `
-                    <td>
-                        ${escaparHTML(
-                            militar.postoGraduacao || "—"
-                        )}
-                    </td>
-
-                    <td>
-                        ${escaparHTML(
-                            militar.nomeGuerra || "—"
-                        )}
-                    </td>
-
-                    <td>
-                        ${escaparHTML(
-                            militar.secao?.sigla || "—"
-                        )}
-                    </td>
-
-                    <td>
-                        ${escaparHTML(
-                            militar.situacao?.nome ||
-                            militar.situacao ||
-                            "—"
-                        )}
-                    </td>
-                `;
-
-
-            tabela.appendChild(
-                linha
-            );
-
-        }
-    );
+            )
+            .join("");
 
 }
 
 
 /* =========================================================
-   ESTADO DE CARREGAMENTO
+   CARREGAMENTO
 ========================================================= */
 
 function exibirCarregamento() {
 
-    const ids = [
+    [
 
         "efetivoTotal",
-
         "presentesHoje",
-
         "naoDisponiveis",
-
         "secoesPendentes",
-
         "secoesConcluidas"
 
-    ];
+    ].forEach(
+        (id) => {
+
+            const elemento =
+                document.getElementById(
+                    id
+                );
 
 
-    ids.forEach(
-        id => {
+            if (elemento) {
 
-            preencherTexto(
-                id,
-                "..."
-            );
+                elemento.textContent =
+                    "...";
+
+            }
 
         }
     );
@@ -577,89 +594,94 @@ function exibirErro(
     mensagem
 ) {
 
-    const container =
+    const elemento =
         document.getElementById(
             "dashboardMensagem"
         );
 
 
-    if (!container) {
-
-        console.error(
-            mensagem
-        );
+    if (!elemento) {
 
         return;
 
     }
 
 
-    container.hidden =
-        false;
-
-
-    container.textContent =
+    elemento.textContent =
         mensagem;
+
+
+    elemento.hidden =
+        false;
 
 }
 
 
 /* =========================================================
-   HELPERS
+   VALORES
 ========================================================= */
 
-function preencherTexto(
+function preencherValor(
     id,
     valor
 ) {
 
     const elemento =
-        document.getElementById(id);
+        document.getElementById(
+            id
+        );
 
 
-    if (elemento) {
+    if (!elemento) {
 
-        elemento.textContent =
-            valor;
+        return;
 
     }
 
-}
 
-
-function criarEstadoVazio(
-    mensagem
-) {
-
-    return `
-        <div class="empty-state">
-            ${escaparHTML(mensagem)}
-        </div>
-    `;
+    elemento.textContent =
+        valor === null ||
+        valor === undefined
+            ? "—"
+            : formatarNumero(
+                valor
+            );
 
 }
 
+
+/* =========================================================
+   STATUS
+========================================================= */
 
 function normalizarStatus(
     status
 ) {
 
-    const valor =
-        String(status || "")
-            .toUpperCase();
-
-
-    switch (valor) {
+    switch (status) {
 
         case "REALIZADA":
 
             return {
 
+                texto:
+                    "Realizada",
+
                 classe:
-                    "success",
+                    "success"
+
+            };
+
+
+        case "EM_ANDAMENTO":
+
+            return {
 
                 texto:
-                    "✓ Realizada"
+                    "Em andamento",
+
+                classe:
+                    "progress"
 
             };
 
@@ -668,26 +690,11 @@ function normalizarStatus(
 
             return {
 
-                classe:
-                    "pending",
-
                 texto:
-                    "• Pendente"
-
-            };
-
-
-        case "EM_ANDAMENTO":
-
-        case "EM ANDAMENTO":
-
-            return {
+                    "Pendente",
 
                 classe:
-                    "progress",
-
-                texto:
-                    "↻ Em andamento"
+                    "pending"
 
             };
 
@@ -696,10 +703,12 @@ function normalizarStatus(
 
             return {
 
-                classe: "",
-
                 texto:
-                    status || "—"
+                    status ||
+                    "—",
+
+                classe:
+                    ""
 
             };
 
@@ -708,20 +717,36 @@ function normalizarStatus(
 }
 
 
+/* =========================================================
+   SEGURANÇA HTML
+========================================================= */
+
 function escaparHTML(
     valor
 ) {
 
-    const elemento =
-        document.createElement(
-            "div"
+    return String(
+        valor ?? ""
+    )
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
         );
-
-
-    elemento.textContent =
-        String(valor ?? "");
-
-
-    return elemento.innerHTML;
 
 }

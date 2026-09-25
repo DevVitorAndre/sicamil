@@ -1,8 +1,8 @@
 <aside class="sidebar">
 
-    <!-- =========================================
+    <!-- =====================================================
          LOGO
-    ========================================== -->
+    ====================================================== -->
 
     <div class="sidebar-brand">
 
@@ -15,111 +15,219 @@
     </div>
 
 
-    <!-- =========================================
+    <!-- =====================================================
          MENU
-    ========================================== -->
+    ====================================================== -->
 
     <nav class="sidebar-menu">
+
+
+        <!-- DASHBOARD -->
 
         <a
             href="dashboard.html"
             class="menu-item"
+            data-permission="DASHBOARD_VISUALIZAR"
         >
-            <span class="menu-icon">⌂</span>
-            <span>Dashboard</span>
+
+            <span class="menu-icon">
+                ⌂
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+
         </a>
 
+
+        <!-- CHAMADA -->
 
         <a
             href="chamada.html"
             class="menu-item"
+            data-permission="CHAMADA_REALIZAR"
         >
-            <span class="menu-icon">✓</span>
-            <span>Chamada</span>
+
+            <span class="menu-icon">
+                ✓
+            </span>
+
+            <span>
+                Chamada
+            </span>
+
         </a>
 
+
+        <!-- REGISTROS -->
 
         <a
             href="registros.html"
             class="menu-item"
+            data-permission="REGISTROS_VISUALIZAR"
         >
-            <span class="menu-icon">▤</span>
-            <span>Registros</span>
+
+            <span class="menu-icon">
+                ▤
+            </span>
+
+            <span>
+                Registros
+            </span>
+
         </a>
 
+
+        <!-- PESQUISA -->
 
         <a
             href="pesquisa.html"
             class="menu-item"
+            data-permission="PESQUISA_REALIZAR"
         >
-            <span class="menu-icon">⌕</span>
-            <span>Pesquisa</span>
+
+            <span class="menu-icon">
+                ⌕
+            </span>
+
+            <span>
+                Pesquisa
+            </span>
+
         </a>
 
 
-        <div class="menu-separator">
+        <!-- =================================================
+             CADASTROS
+        ================================================== -->
+
+        <div
+            class="menu-separator"
+            id="menuCadastrosTitulo"
+        >
             CADASTROS
         </div>
 
 
+        <!-- USUÁRIOS -->
+
         <a
             href="usuarios.html"
-            class="menu-item"
+            class="menu-item menu-cadastro"
+            data-permission="USUARIOS_GERENCIAR"
         >
-            <span class="menu-icon">♟</span>
-            <span>Usuários</span>
+
+            <span class="menu-icon">
+                ♟
+            </span>
+
+            <span>
+                Usuários
+            </span>
+
         </a>
 
+
+        <!-- SEÇÕES -->
 
         <a
             href="secoes.html"
-            class="menu-item"
+            class="menu-item menu-cadastro"
+            data-permission="SECOES_GERENCIAR"
         >
-            <span class="menu-icon">▣</span>
-            <span>Seções</span>
+
+            <span class="menu-icon">
+                ▣
+            </span>
+
+            <span>
+                Seções
+            </span>
+
         </a>
 
+
+        <!-- MILITARES -->
 
         <a
             href="militares.html"
-            class="menu-item"
+            class="menu-item menu-cadastro"
+            data-permission="MILITARES_GERENCIAR"
         >
-            <span class="menu-icon">♙</span>
-            <span>Militares</span>
+
+            <span class="menu-icon">
+                ♙
+            </span>
+
+            <span>
+                Militares
+            </span>
+
         </a>
 
+
+        <!-- RELATÓRIOS -->
 
         <a
             href="relatorios.html"
             class="menu-item"
+            data-permission="RELATORIOS_EXPORTAR"
         >
-            <span class="menu-icon">▥</span>
-            <span>Relatórios</span>
+
+            <span class="menu-icon">
+                ▥
+            </span>
+
+            <span>
+                Relatórios
+            </span>
+
         </a>
 
+
+        <!-- =================================================
+             CONFIGURAÇÕES
+
+             Não exige permissão administrativa,
+             pois depois terá senha e dados do próprio usuário.
+        ================================================== -->
 
         <a
             href="configuracoes.html"
             class="menu-item"
         >
-            <span class="menu-icon">⚙</span>
-            <span>Configurações</span>
+
+            <span class="menu-icon">
+                ⚙
+            </span>
+
+            <span>
+                Configurações
+            </span>
+
         </a>
 
     </nav>
 
 
-    <!-- =========================================
-         FRASE INFERIOR
-    ========================================== -->
+    <!-- =====================================================
+         RODAPÉ
+    ====================================================== -->
 
     <div class="sidebar-footer">
 
-        <span>DISCIPLINA</span>
+        <span>
+            DISCIPLINA
+        </span>
 
-        <span>ORGANIZAÇÃO</span>
+        <span>
+            ORGANIZAÇÃO
+        </span>
 
-        <span>PRONTIDÃO</span>
+        <span>
+            PRONTIDÃO
+        </span>
 
     </div>
 

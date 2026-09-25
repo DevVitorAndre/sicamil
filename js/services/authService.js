@@ -1,18 +1,16 @@
 import { api } from "./api.js";
-
 import { CONFIG } from "../config.js";
-
 import { Usuario } from "../models/Usuario.js";
-
 import { sessionService } from "./sessionService.js";
 
 
 class AuthService {
 
-    async login(
-        login,
-        senha
-    ) {
+    /* =====================================================
+       LOGIN
+    ===================================================== */
+
+    async login(login, senha) {
 
         const resposta =
             await api.post(
@@ -24,10 +22,10 @@ class AuthService {
             );
 
 
-        if (!resposta?.usuario) {
+        if (!resposta.usuario) {
 
             throw new Error(
-                "Resposta de autenticação inválida."
+                "O servidor não retornou os dados do usuário."
             );
 
         }
@@ -39,16 +37,21 @@ class AuthService {
             );
 
 
-        sessionService
-            .salvarUsuario(
-                usuario
-            );
+        sessionService.salvar(
+            usuario
+        );
 
 
         return usuario;
 
     }
 
+
+    /* =====================================================
+       USUÁRIO ATUAL
+
+       O backend é a fonte oficial da sessão.
+    ===================================================== */
 
     async usuarioAtual() {
 
@@ -58,9 +61,11 @@ class AuthService {
             );
 
 
-        if (!resposta?.usuario) {
+        if (!resposta.usuario) {
 
-            return null;
+            throw new Error(
+                "Sessão inválida."
+            );
 
         }
 
@@ -71,10 +76,9 @@ class AuthService {
             );
 
 
-        sessionService
-            .salvarUsuario(
-                usuario
-            );
+        sessionService.salvar(
+            usuario
+        );
 
 
         return usuario;
@@ -82,13 +86,16 @@ class AuthService {
     }
 
 
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
     async logout() {
 
         try {
 
             await api.post(
-                CONFIG.ROTAS.logout,
-                {}
+                CONFIG.ROTAS.logout
             );
 
         } finally {

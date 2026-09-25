@@ -1,16 +1,21 @@
 export const CONFIG = {
 
-    API_URL: "/api",
+    API_URL:
+        "http://127.0.0.1:3000/api",
 
     ROTAS: {
 
-        login: "/auth/login",
+        login:
+            "/auth/login",
 
-        logout: "/auth/logout",
+        logout:
+            "/auth/logout",
 
-        usuarioAtual: "/auth/me",
+        usuarioAtual:
+            "/auth/me",
 
-        dashboard: "/dashboard"
+        dashboard:
+            "/dashboard"
 
     }
 
