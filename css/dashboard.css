@@ -1,0 +1,1546 @@
+/* =========================================================
+   SICAMIL - DASHBOARD
+========================================================= */
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+    background: #e8eff6;
+
+    color: #0c2948;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.app-layout {
+    min-height: 100vh;
+
+    display: flex;
+}
+
+
+/* =========================================================
+   SIDEBAR CONTAINER
+========================================================= */
+
+#sidebar-container {
+    width: 245px;
+
+    min-width: 245px;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    width: 245px;
+
+    height: 100vh;
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+
+    /*
+        IMAGEM VERTICAL NOVA
+    */
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(2, 24, 45, 0.16),
+            rgba(2, 19, 37, 0.20)
+        ),
+
+        url("../img/backgrounds/sidebar-bg.png");
+
+
+    background-size:
+        cover;
+
+    background-position:
+        center center;
+
+    background-repeat:
+        no-repeat;
+
+
+    border-right:
+
+        1px solid
+        rgba(110, 166, 215, 0.18);
+}
+
+
+/* =========================================================
+   ESCURECIMENTO SIDEBAR
+========================================================= */
+
+.sidebar::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(2, 22, 42, 0.12),
+            rgba(2, 19, 37, 0.20)
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.sidebar-brand {
+    height: 155px;
+
+    padding:
+        18px 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.sidebar-logo {
+
+    /*
+       LOGO UM POUCO MAIOR
+    */
+
+    width: 200px;
+
+    max-width: 92%;
+
+    height: auto;
+
+    object-fit: contain;
+
+    filter:
+
+        drop-shadow(
+            0 4px 10px
+            rgba(0, 0, 0, 0.25)
+        );
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.sidebar-menu {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.menu-item {
+    min-height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding:
+        0 24px;
+
+    color: #d6e3f0;
+
+    font-size: 0.94rem;
+
+    font-weight: 500;
+
+    border-left:
+        4px solid transparent;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.menu-item:hover {
+    color: #ffffff;
+
+    background:
+        rgba(
+            44,
+            112,
+            188,
+            0.18
+        );
+}
+
+
+.menu-item.active {
+    color: #ffffff;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(24, 105, 201, 0.95),
+            rgba(52, 132, 220, 0.78)
+        );
+
+    border-left:
+        4px solid #75b7ff;
+
+    box-shadow:
+
+        inset
+        0 0 0 1px
+        rgba(255, 255, 255, 0.05);
+}
+
+
+.menu-icon {
+    width: 22px;
+
+    text-align: center;
+
+    font-size: 1.15rem;
+}
+
+
+.menu-separator {
+    padding:
+        18px 24px
+        8px;
+
+    color: #829eb8;
+
+    font-size: 0.67rem;
+
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+}
+
+
+/* =========================================================
+   RODAPÉ SIDEBAR
+========================================================= */
+
+.sidebar-footer {
+    margin-top: auto;
+
+    padding:
+        25px 28px
+        35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    position: relative;
+
+    z-index: 2;
+
+    color: #9cbbd8;
+
+    font-size: 0.67rem;
+
+    letter-spacing: 4px;
+
+    text-shadow:
+        0 2px 6px
+        rgba(0, 0, 0, 0.6);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main-content {
+    flex: 1;
+
+    min-width: 0;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar {
+    min-height: 118px;
+
+    padding:
+        20px 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    position: relative;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    background:
+        #07365e;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.10);
+}
+
+
+/* =========================================================
+   FOTO CABEÇALHO
+========================================================= */
+
+.topbar::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(3, 30, 56, 0.88) 0%,
+            rgba(3, 30, 56, 0.48) 38%,
+            rgba(3, 30, 56, 0.30) 67%,
+            rgba(3, 30, 56, 0.60) 100%
+        ),
+
+        url("../img/backgrounds/dashboard-header.png");
+
+
+    background-size:
+        cover;
+
+    background-position:
+        center 48%;
+
+    background-repeat:
+        no-repeat;
+
+    pointer-events:
+        none;
+}
+
+
+.topbar > * {
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   TÍTULO HEADER
+========================================================= */
+
+.topbar-title > span {
+    color: #d3e2ef;
+
+    font-size: 0.86rem;
+}
+
+
+.topbar-title h1 {
+    margin:
+        2px 0 3px;
+
+    color: #ffffff;
+
+    font-size: 2rem;
+
+    line-height: 1;
+}
+
+
+.topbar-title p {
+    color: #bdd0e1;
+
+    font-size: 0.86rem;
+}
+
+
+/* =========================================================
+   DIREITA HEADER
+========================================================= */
+
+.topbar-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 28px;
+}
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+.topbar-date {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding-right: 26px;
+
+    border-right:
+        1px solid
+        rgba(255, 255, 255, 0.25);
+}
+
+
+.date-icon {
+    color: #e5f1fb;
+
+    font-size: 1.45rem;
+}
+
+
+.topbar-date div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.topbar-date strong {
+    font-size: 0.82rem;
+
+    text-transform: capitalize;
+}
+
+
+.topbar-date span {
+    color: #d0dfec;
+
+    font-size: 0.77rem;
+}
+
+
+/* =========================================================
+   USUÁRIO
+========================================================= */
+
+.topbar-user {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.user-avatar {
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.45);
+
+    border-radius: 50%;
+
+    background:
+        rgba(4, 37, 68, 0.50);
+
+    color: #ffffff;
+
+    font-weight: 700;
+}
+
+
+.user-info {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.user-info strong {
+    color: #ffffff;
+
+    font-size: 0.90rem;
+}
+
+
+.user-info span {
+    margin-top: 3px;
+
+    color: #c8d9e7;
+
+    font-size: 0.72rem;
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard-content {
+    padding: 22px;
+
+    background: #e8eff6;
+}
+
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
+
+.dashboard-message {
+    margin-bottom: 18px;
+
+    padding:
+        14px 16px;
+
+    border:
+        1px solid #efb6b6;
+
+    border-radius: 8px;
+
+    background:
+        #fff0f0;
+
+    color:
+        #a62a2a;
+
+    font-size:
+        0.84rem;
+}
+
+
+/* =========================================================
+   ESPAÇAMENTO
+========================================================= */
+
+.stats-grid,
+.dashboard-grid,
+.present-card {
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   CARDS SUPERIORES
+========================================================= */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            5,
+            minmax(0, 1fr)
+        );
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   CARD INDICADOR
+========================================================= */
+
+.stat-card {
+    min-height: 124px;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    position: relative;
+
+    overflow: hidden;
+
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #e8f4ff,
+            #dcecf8
+        );
+
+
+    border:
+        1px solid
+        #b7d0e5;
+
+
+    border-radius:
+        12px;
+
+
+    box-shadow:
+
+        0 5px 16px
+        rgba(18, 56, 91, 0.07);
+}
+
+
+/* =========================================================
+   LINHA SUPERIOR CARD
+========================================================= */
+
+.stat-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 4px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #0d68bd,
+            #3b93df
+        );
+}
+
+
+/* =========================================================
+   DETALHE CARD
+========================================================= */
+
+.stat-card::after {
+    content: "";
+
+    position: absolute;
+
+    right: -20px;
+
+    bottom: -25px;
+
+    width: 100px;
+
+    height: 100px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(31, 116, 190, 0.06);
+}
+
+
+/* =========================================================
+   ÍCONES
+========================================================= */
+
+.stat-icon {
+    width: 54px;
+
+    height: 54px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    color: #ffffff;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.stat-icon svg {
+    width: 28px;
+
+    height: 28px;
+}
+
+
+.stat-icon.blue {
+    background:
+        linear-gradient(
+            145deg,
+            #0f72ef,
+            #2c8cff
+        );
+}
+
+
+.stat-icon.green {
+    background:
+        linear-gradient(
+            145deg,
+            #08a759,
+            #19c773
+        );
+}
+
+
+.stat-icon.red {
+    background:
+        linear-gradient(
+            145deg,
+            #ef3b4e,
+            #ff6373
+        );
+}
+
+
+.stat-icon.orange {
+    background:
+        linear-gradient(
+            145deg,
+            #f49022,
+            #ffaf48
+        );
+}
+
+
+/* =========================================================
+   DADOS CARDS
+========================================================= */
+
+.stat-info {
+    min-width: 0;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.stat-info span {
+    display: block;
+
+    color: #234765;
+
+    font-size: 0.76rem;
+
+    font-weight: 800;
+}
+
+
+.stat-info strong {
+    display: block;
+
+    margin:
+        5px 0;
+
+    color: #082f59;
+
+    font-size: 1.95rem;
+
+    line-height: 1;
+}
+
+
+.stat-info small {
+    color: #718ba3;
+
+    font-size: 0.7rem;
+}
+
+
+/* =========================================================
+   GRID CENTRAL
+========================================================= */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        1.45fr
+        0.85fr
+        1fr;
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   BLOCOS
+========================================================= */
+
+.dashboard-card,
+.present-card {
+    overflow: hidden;
+
+    background:
+        #f5f9fd;
+
+    border:
+        1px solid
+        #bcd1e4;
+
+    border-radius:
+        12px;
+
+    box-shadow:
+
+        0 6px 18px
+        rgba(17, 52, 87, 0.06);
+}
+
+
+/* =========================================================
+   CABEÇALHO BLOCOS
+========================================================= */
+
+.card-header {
+    min-height: 68px;
+
+    padding:
+        16px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #dcebf8,
+            #e9f3fb
+        );
+
+
+    border-bottom:
+        1px solid
+        #bfd3e5;
+
+
+    box-shadow:
+
+        inset 4px 0 0
+        #176fc2;
+}
+
+
+.card-header h2 {
+    color: #0d477d;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+}
+
+
+.card-header p {
+    margin-top: 3px;
+
+    color: #718da6;
+
+    font-size: 0.7rem;
+}
+
+
+.card-header select {
+    padding:
+        8px 12px;
+
+    border:
+        1px solid #b7cce0;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #405872;
+
+    font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   GRÁFICO BARRAS
+========================================================= */
+
+.bar-chart {
+    height: 300px;
+
+    margin: 14px;
+
+    padding:
+        28px 18px
+        18px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-around;
+
+    gap: 10px;
+
+    background:
+        #ffffff;
+
+    border:
+        1px solid #d8e2eb;
+
+    border-radius: 9px;
+}
+
+
+.bar-item {
+    height: 100%;
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.bar-value {
+    color: #43627f;
+
+    font-size: 0.74rem;
+
+    font-weight: 700;
+}
+
+
+.bar {
+    width: 56%;
+
+    max-width: 38px;
+
+    height: var(--valor);
+
+    min-height: 4px;
+
+    border-radius:
+        6px 6px
+        0 0;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #4da7ff,
+            #1777e0
+        );
+}
+
+
+.bar-item small {
+    color: #677c92;
+
+    font-size: 0.66rem;
+}
+
+
+/* =========================================================
+   SITUAÇÃO
+========================================================= */
+
+.situation-body {
+    min-height: 300px;
+
+    margin: 14px;
+
+    padding:
+        22px 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        #ffffff;
+
+    border:
+        1px solid #d8e2eb;
+
+    border-radius: 9px;
+}
+
+
+/* =========================================================
+   DONUT
+========================================================= */
+
+.donut {
+    width: 180px;
+
+    height: 180px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        #e1e9f0;
+}
+
+
+.donut-center {
+    width: 115px;
+
+    height: 115px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+}
+
+
+.donut-center strong {
+    color: #12385f;
+
+    font-size: 1.75rem;
+}
+
+
+.donut-center span {
+    margin-top: 2px;
+
+    color: #8a9cad;
+
+    font-size: 0.7rem;
+}
+
+
+/* =========================================================
+   LEGENDA
+========================================================= */
+
+.legend {
+    width: 100%;
+
+    margin-top: 22px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+
+.legend > div,
+.legend-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.dot {
+    width: 10px;
+
+    height: 10px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+}
+
+
+.legend strong {
+    display: block;
+
+    color: #24425f;
+
+    font-size: 0.8rem;
+}
+
+
+.legend small {
+    display: block;
+
+    color: #8193a5;
+
+    font-size: 0.58rem;
+}
+
+
+/* =========================================================
+   CHAMADAS
+========================================================= */
+
+.call-list {
+    min-height: 300px;
+
+    margin: 14px;
+
+    padding:
+        8px 14px;
+
+    background: #ffffff;
+
+    border:
+        1px solid #d8e2eb;
+
+    border-radius: 9px;
+}
+
+
+.call-row {
+    min-height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    border-bottom:
+        1px solid #e8edf2;
+
+    color: #294a6c;
+
+    font-size: 0.78rem;
+}
+
+
+.call-row:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+    padding:
+        6px 10px;
+
+    border-radius: 20px;
+
+    white-space: nowrap;
+
+    font-size: 0.66rem;
+
+    font-weight: 600;
+}
+
+
+.status.success {
+    color: #0c9c55;
+
+    background: #e1f8eb;
+}
+
+
+.status.pending {
+    color: #dd861a;
+
+    background: #fff1dc;
+}
+
+
+.status.progress {
+    color: #2077d5;
+
+    background: #e2f0ff;
+}
+
+
+/* =========================================================
+   ESTADO VAZIO
+========================================================= */
+
+.empty-state {
+    width: 100%;
+
+    min-height: 80px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #8296a9;
+
+    font-size: 0.78rem;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   VER TODOS
+========================================================= */
+
+.view-all {
+    padding:
+        8px 13px;
+
+    border:
+        1px solid #aac7df;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #1965b7;
+
+    font-size: 0.72rem;
+
+    font-weight: 600;
+}
+
+
+.view-all:hover {
+    background: #edf6ff;
+}
+
+
+/* =========================================================
+   PLANILHA
+========================================================= */
+
+.table-wrapper {
+    width:
+        calc(
+            100% - 28px
+        );
+
+    margin: 14px;
+
+    overflow-x: auto;
+
+    border:
+        1px solid #d6e0e9;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+}
+
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+
+    background: #ffffff;
+}
+
+
+/* CABEÇALHO */
+
+thead {
+    background: #d6e8f7;
+}
+
+
+th {
+    padding:
+        13px 16px;
+
+    color: #365a79;
+
+    font-size: 0.7rem;
+
+    font-weight: 700;
+
+    text-align: left;
+
+    border-bottom:
+        1px solid #c4d5e3;
+
+    border-right:
+        1px solid #cedce8;
+}
+
+
+th:last-child {
+    border-right: none;
+}
+
+
+/* CÉLULAS */
+
+td {
+    padding:
+        13px 16px;
+
+    color: #344e69;
+
+    font-size: 0.76rem;
+
+    text-align: left;
+
+    border-bottom:
+        1px solid #e4e9ee;
+
+    border-right:
+        1px solid #e8edf1;
+}
+
+
+td:last-child {
+    border-right: none;
+}
+
+
+/* LINHA AZUL */
+
+tbody tr:nth-child(odd) {
+    background: #eaf4fc;
+}
+
+
+/* LINHA BRANCA */
+
+tbody tr:nth-child(even) {
+    background: #ffffff;
+}
+
+
+tbody tr:hover {
+    background: #dceefc;
+}
+
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   TABELA VAZIA
+========================================================= */
+
+.table-empty {
+    padding:
+        28px 16px;
+
+    color: #8296a9;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    font-size: 0.78rem;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1450px) {
+
+    .stats-grid {
+        grid-template-columns:
+            repeat(
+                3,
+                1fr
+            );
+    }
+
+
+    .dashboard-grid {
+        grid-template-columns:
+            1fr
+            1fr;
+    }
+
+
+    .dashboard-grid
+    .dashboard-card:last-child {
+        grid-column:
+            1 / -1;
+    }
+
+}
+
+
+@media (max-width: 1000px) {
+
+    #sidebar-container {
+        display: none;
+    }
+
+
+    .main-content {
+        width: 100%;
+    }
+
+
+    .stats-grid {
+        grid-template-columns:
+            1fr
+            1fr;
+    }
+
+
+    .dashboard-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .dashboard-grid
+    .dashboard-card:last-child {
+        grid-column: auto;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .topbar {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 18px;
+    }
+
+
+    .topbar-right {
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .dashboard-content {
+        padding: 14px;
+    }
+
+
+    .legend {
+        flex-direction: column;
+    }
+
+
+    .table-wrapper {
+        width:
+            calc(
+                100% - 20px
+            );
+
+        margin: 10px;
+    }
+
+}
