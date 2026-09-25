@@ -6,6 +6,7 @@ import { pool } from "./config/database.js";
 import { sessionMiddleware } from "./config/session.js";
 
 import authRoutes from "./routes/authRoutes.js";
+import secaoRoutes from "./routes/secaoRoutes.js";
 
 import {
     exigirAutenticacao
@@ -69,6 +70,15 @@ app.use(
 app.use(
     "/api/auth",
     authRoutes
+);
+
+/* =========================================================
+   SEÇÕES
+========================================================= */
+
+app.use(
+    "/api/secoes",
+    secaoRoutes
 );
 
 
