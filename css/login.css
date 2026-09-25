@@ -1,27 +1,30 @@
 /* ==========================================================
    SICAMIL
-   Página de Login
+   TELA DE LOGIN
 ========================================================== */
 
 
 /* ==========================================================
-   ESTRUTURA PRINCIPAL
+   BODY
 ========================================================== */
 
 body {
-
     min-height: 100vh;
 
     overflow-x: hidden;
-
 }
 
+
+/* ==========================================================
+   PÁGINA
+========================================================== */
 
 .login-page {
 
     width: 100%;
 
     min-height: 100vh;
+    min-height: 100dvh;
 
     display: grid;
 
@@ -32,65 +35,39 @@ body {
 
     overflow: hidden;
 
-}
 
-
-/* ==========================================================
-   ÁREA ESQUERDA
-========================================================== */
-
-.login-hero {
-
-    min-height: 100vh;
-
-    position: relative;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-
-    /*
-       FUNDO PROVISÓRIO.
-
-       Quando colocarmos a imagem:
-       img/backgrounds/login-bg.png
-
-       vamos adicionar aqui.
-    */
+    /* FUNDO ÚNICO DA TELA */
 
     background:
 
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(54, 116, 174, 0.7),
-            transparent 38%
-        ),
-
-        radial-gradient(
-            circle at 65% 80%,
-            rgba(20, 84, 145, 0.5),
-            transparent 45%
-        ),
-
         linear-gradient(
-            145deg,
-            #0d416d 0%,
-            #0a3155 40%,
-            #071e36 75%,
-            #051629 100%
-        );
+            90deg,
+            rgba(1, 13, 27, 0.08) 0%,
+            rgba(1, 13, 27, 0.12) 35%,
+            rgba(1, 13, 27, 0.25) 55%,
+            rgba(1, 13, 27, 0.47) 72%,
+            rgba(1, 13, 27, 0.58) 100%
+        ),
+
+        url("../img/backgrounds/login-bg.png");
+
+
+    background-size: cover;
+
+    background-position:
+        center center;
+
+    background-repeat:
+        no-repeat;
 
 }
 
 
-/*
-    Escurecimento semelhante ao Figma
-*/
+/* pequena camada cinematográfica */
 
-.hero-overlay {
+.login-page::after {
+
+    content: "";
 
     position: absolute;
 
@@ -99,83 +76,23 @@ body {
     background:
 
         linear-gradient(
-            90deg,
-            rgba(0, 15, 30, 0.08),
-            rgba(0, 15, 30, 0.12),
-            rgba(0, 15, 30, 0.35)
+            180deg,
+            rgba(0, 12, 25, 0.04),
+            rgba(0, 12, 25, 0.12)
         );
 
-}
-
-
-/*
-    Efeito de céu / luz
-*/
-
-.login-hero::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 750px;
-
-    height: 750px;
-
-    left: -220px;
-
-    bottom: -360px;
-
-    border-radius: 50%;
-
-    background:
-
-        radial-gradient(
-            circle,
-            rgba(91, 164, 228, 0.17),
-            transparent 68%
-        );
+    pointer-events: none;
 
 }
 
 
 /* ==========================================================
-   CONTEÚDO ESQUERDO
+   LADO ESQUERDO
 ========================================================== */
 
-.hero-content {
+.login-hero {
 
-    position: relative;
-
-    z-index: 2;
-
-    width: 100%;
-
-    max-width: 700px;
-
-    padding: 50px;
-
-    text-align: center;
-
-}
-
-
-/* ==========================================================
-   LOGO PROVISÓRIO
-========================================================== */
-
-.sicamil-symbol {
-
-    width: 280px;
-
-    height: 85px;
-
-    margin:
-
-        0 auto
-        22px auto;
-
-    position: relative;
+    min-height: 100vh;
 
     display: flex;
 
@@ -183,232 +100,127 @@ body {
 
     justify-content: center;
 
-}
-
-
-.star {
-
-    font-size: 42px;
-
-    color: #dcebf8;
-
-    text-shadow:
-
-        0 4px 15px
-        rgba(0, 0, 0, 0.35);
-
-}
-
-
-.wing {
-
-    width: 95px;
-
-    height: 28px;
-
     position: relative;
 
-}
-
-
-.wing::before,
-.wing::after {
-
-    content: "";
-
-    position: absolute;
-
-    height: 12px;
-
-    border-radius: 3px;
-
-    background:
-
-        linear-gradient(
-            180deg,
-            #ffffff,
-            #adc8df
-        );
-
-}
-
-
-.wing-left {
-
-    margin-right: 15px;
-
-}
-
-
-.wing-right {
-
-    margin-left: 15px;
-
-}
-
-
-.wing-left::before {
-
-    width: 95px;
-
-    right: 0;
-
-    top: 2px;
-
-    transform:
-        skewX(28deg)
-        rotate(8deg);
-
-}
-
-
-.wing-left::after {
-
-    width: 72px;
-
-    right: 4px;
-
-    top: 21px;
-
-    transform:
-        skewX(26deg)
-        rotate(8deg);
-
-}
-
-
-.wing-right::before {
-
-    width: 95px;
-
-    left: 0;
-
-    top: 2px;
-
-    transform:
-        skewX(-28deg)
-        rotate(-8deg);
-
-}
-
-
-.wing-right::after {
-
-    width: 72px;
-
-    left: 4px;
-
-    top: 21px;
-
-    transform:
-        skewX(-26deg)
-        rotate(-8deg);
+    z-index: 1;
 
 }
 
 
 /* ==========================================================
-   SICAMIL
+   CONTEÚDO DA ESQUERDA
 ========================================================== */
 
-.hero-content h1 {
+.hero-content {
 
-    font-size:
+    width: 100%;
 
-        clamp(
-            3.3rem,
-            5vw,
-            5.5rem
-        );
+    max-width: 720px;
 
-    line-height: 1;
+    padding:
 
-    font-weight: 800;
+        40px
+        55px;
 
-    letter-spacing: 7px;
-
-    color: #ffffff;
-
-    text-shadow:
-
-        0 6px 20px
-        rgba(0, 0, 0, 0.32);
+    text-align: center;
 
 }
 
 
 /* ==========================================================
-   SUBTÍTULO
+   LOGO NOVA
 ========================================================== */
 
-.hero-content h2 {
+.sicamil-logo {
 
-    margin-top: 18px;
-
-    font-size:
-
-        clamp(
-            1rem,
-            1.3vw,
-            1.25rem
+    width:
+        min(
+            520px,
+            82%
         );
 
-    font-weight: 500;
+    height: auto;
 
-    line-height: 1.55;
+    margin:
+        0 auto;
 
-    letter-spacing: 6px;
+    object-fit: contain;
 
-    color: #e5eff9;
+
+    filter:
+
+        drop-shadow(
+            0 8px 18px
+            rgba(0, 0, 0, 0.40)
+        );
 
 }
 
 
 /* ==========================================================
-   LINHA AZUL
+   LINHA
 ========================================================== */
 
-.blue-line {
+.hero-line {
 
-    width: 42px;
+    width: 45px;
 
     height: 4px;
 
     margin:
 
-        30px auto
-        26px auto;
+        27px auto
+        25px;
 
-    border-radius: 20px;
+    border-radius: 30px;
 
-    background: #4b8fff;
+    background:
+
+        linear-gradient(
+            90deg,
+            #4385ff,
+            #72aaff
+        );
+
+    box-shadow:
+
+        0 4px 14px
+        rgba(67, 133, 255, 0.35);
 
 }
 
 
 /* ==========================================================
-   TEXTO HERO
+   FRASE
 ========================================================== */
 
-.hero-content p {
+.hero-description {
 
     font-size:
 
         clamp(
-            1.05rem,
-            1.5vw,
-            1.4rem
+            1rem,
+            1.4vw,
+            1.35rem
         );
 
-    line-height: 1.45;
+    font-weight: 400;
 
-    color: #c9d9e8;
+    line-height: 1.5;
+
+    color: #d5e2ef;
+
+
+    text-shadow:
+
+        0 3px 12px
+        rgba(0, 0, 0, 0.45);
 
 }
 
 
 /* ==========================================================
-   LADO DIREITO
+   ÁREA DIREITA
 ========================================================== */
 
 .login-area {
@@ -421,33 +233,94 @@ body {
 
     justify-content: center;
 
+
     position: relative;
 
-    padding: 40px 55px;
+    z-index: 2;
 
 
-    background:
+    padding:
 
-        radial-gradient(
-            circle at 100% 20%,
-            rgba(40, 100, 160, 0.18),
-            transparent 35%
-        ),
+        35px
+        55px;
 
-        linear-gradient(
-            150deg,
-            #071d33,
-            #04172a
-        );
+
+    /*
+       IMPORTANTE
+
+       sem fundo próprio.
+
+       A imagem principal continua
+       aparecendo por trás.
+    */
+
+    background: transparent;
 
 }
 
 
-/*
-    Camuflado abstrato provisório
-*/
+/* ==========================================================
+   CARD
+========================================================== */
 
-.login-area::before {
+.login-card {
+
+    width: 100%;
+
+    max-width: 560px;
+
+
+    position: relative;
+
+
+    padding:
+
+        50px
+        52px
+        40px;
+
+
+    border:
+
+        1px solid
+        rgba(
+            104,
+            169,
+            224,
+            0.42
+        );
+
+
+    border-radius: 18px;
+
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(5, 36, 65, 0.90),
+            rgba(3, 25, 47, 0.92)
+        );
+
+
+    box-shadow:
+
+        0 30px 80px
+        rgba(0, 0, 0, 0.38);
+
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+}
+
+
+/* brilho discreto */
+
+.login-card::before {
 
     content: "";
 
@@ -455,146 +328,128 @@ body {
 
     inset: 0;
 
-    opacity: 0.10;
+    border-radius:
+        inherit;
 
-    background:
-
-        radial-gradient(
-            ellipse at 30% 20%,
-            #4f789c 0 8%,
-            transparent 9%
-        ),
-
-        radial-gradient(
-            ellipse at 72% 35%,
-            #51799c 0 9%,
-            transparent 10%
-        ),
-
-        radial-gradient(
-            ellipse at 50% 70%,
-            #527b9e 0 10%,
-            transparent 11%
-        ),
-
-        radial-gradient(
-            ellipse at 90% 85%,
-            #4c7396 0 8%,
-            transparent 9%
-        );
-
-    background-size:
-
-        210px 180px;
-
-}
-
-
-/* ==========================================================
-   CARD LOGIN
-========================================================== */
-
-.login-card {
-
-    position: relative;
-
-    z-index: 2;
-
-    width: 100%;
-
-    max-width: 560px;
-
-    padding:
-
-        54px
-        54px
-        42px;
-
-    border:
-
-        1px solid
-        rgba(102, 164, 219, 0.38);
-
-    border-radius: 18px;
 
     background:
 
         linear-gradient(
-            145deg,
-            rgba(7, 38, 67, 0.95),
-            rgba(4, 27, 50, 0.94)
+            135deg,
+            rgba(96, 168, 235, 0.055),
+            transparent 45%
         );
 
-    box-shadow:
 
-        0 30px 80px
-        rgba(0, 0, 0, 0.33);
+    pointer-events: none;
 
 }
 
 
 /* ==========================================================
-   CABEÇALHO LOGIN
+   CABEÇALHO
 ========================================================== */
 
-.login-header h3 {
+.login-header {
+
+    position: relative;
+
+    z-index: 1;
+
+}
+
+
+.login-header h1 {
 
     font-size:
 
         clamp(
-            1.8rem,
+            1.9rem,
             2.5vw,
-            2.4rem
+            2.45rem
         );
+
+
+    font-weight: 700;
 
     line-height: 1.15;
 
-    color: #ffffff;
+    letter-spacing:
+        -0.5px;
 
-    font-weight: 700;
+
+    color: #ffffff;
 
 }
 
 
 .login-header p {
 
-    margin-top: 12px;
-
-    margin-bottom: 36px;
-
     max-width: 450px;
 
-    line-height: 1.55;
 
-    color: #a8bdd2;
+    margin-top:
+        12px;
 
-    font-size: 0.96rem;
+    margin-bottom:
+        34px;
+
+
+    font-size:
+        0.95rem;
+
+
+    line-height:
+        1.55;
+
+
+    color:
+        #a9bdd2;
 
 }
 
 
 /* ==========================================================
-   FORMULÁRIO
+   FORM
 ========================================================== */
+
+#loginForm {
+
+    position: relative;
+
+    z-index: 1;
+
+}
+
 
 .form-group {
 
-    margin-bottom: 24px;
+    margin-bottom:
+        22px;
 
 }
 
 
 .form-group label {
 
-    display: block;
+    display:
+        block;
 
-    margin-bottom: 9px;
 
-    font-size: 0.9rem;
+    margin-bottom:
+        9px;
 
-    font-weight: 600;
 
-    color: #ffffff;
+    font-size:
+        0.9rem;
+
+
+    font-weight:
+        600;
+
+
+    color:
+        #ffffff;
 
 }
 
@@ -603,113 +458,199 @@ body {
    INPUT
 ========================================================== */
 
-.input-box {
+.input-container {
 
-    position: relative;
+    width:
+        100%;
 
-    width: 100%;
+
+    position:
+        relative;
 
 }
 
 
-.input-box input {
+.input-container input {
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 58px;
+
+    height:
+        58px;
+
 
     padding:
 
         0 55px
         0 54px;
 
+
     border:
 
         1px solid
-        #416a91;
+        rgba(
+            99,
+            157,
+            209,
+            0.72
+        );
 
-    border-radius: 9px;
 
-    outline: none;
+    border-radius:
+        9px;
+
 
     background:
 
         rgba(
-            255,
-            255,
-            255,
-            0.025
+            8,
+            42,
+            72,
+            0.72
         );
 
-    color: #ffffff;
 
-    font-size: 0.92rem;
+    color:
+        #ffffff;
+
+
+    font-size:
+        0.94rem;
+
 
     transition:
 
         border-color
-        0.2s,
-
-        box-shadow
-        0.2s,
+        0.2s ease,
 
         background
-        0.2s;
+        0.2s ease,
+
+        box-shadow
+        0.2s ease;
 
 }
 
 
-.input-box input::placeholder {
+.input-container input::placeholder {
 
-    color: #829bb5;
+    color:
+        #839cb6;
 
 }
 
 
-.input-box input:focus {
+.input-container input:hover {
 
-    border-color: #4389ff;
+    border-color:
+
+        rgba(
+            120,
+            181,
+            235,
+            0.9
+        );
+
+}
+
+
+.input-container input:focus {
+
+    border-color:
+        #599aff;
+
 
     background:
 
         rgba(
-            255,
-            255,
-            255,
-            0.045
+            11,
+            50,
+            84,
+            0.90
         );
+
 
     box-shadow:
 
         0 0 0 3px
-        rgba(67, 137, 255, 0.13);
+        rgba(
+            78,
+            144,
+            255,
+            0.14
+        );
 
 }
 
 
 /* ==========================================================
-   ÍCONES INPUT
+   AUTOFILL CHROME
+========================================================== */
+
+.input-container input:-webkit-autofill,
+
+.input-container input:-webkit-autofill:hover,
+
+.input-container input:-webkit-autofill:focus {
+
+    -webkit-text-fill-color:
+        #ffffff;
+
+
+    -webkit-box-shadow:
+
+        0 0 0 1000px
+        #0a2c4b
+        inset;
+
+
+    caret-color:
+        white;
+
+}
+
+
+/* ==========================================================
+   ÍCONE
 ========================================================== */
 
 .input-icon {
 
-    position: absolute;
+    position:
+        absolute;
 
-    left: 18px;
 
-    top: 50%;
+    left:
+        18px;
 
-    width: 22px;
 
-    height: 22px;
+    top:
+        50%;
+
 
     transform:
-
         translateY(-50%);
 
-    fill: #b6cee5;
 
-    opacity: 0.9;
+    width:
+        22px;
+
+
+    height:
+        22px;
+
+
+    fill:
+        #b7cee4;
+
+
+    opacity:
+        0.9;
+
+
+    pointer-events:
+        none;
 
 }
 
@@ -720,40 +661,87 @@ body {
 
 .show-password {
 
-    position: absolute;
+    position:
+        absolute;
 
-    top: 50%;
 
-    right: 11px;
+    right:
+        10px;
+
+
+    top:
+        50%;
+
 
     transform:
-
         translateY(-50%);
 
-    display: flex;
 
-    align-items: center;
+    width:
+        40px;
 
-    justify-content: center;
 
-    width: 38px;
+    height:
+        40px;
 
-    height: 38px;
 
-    border: none;
+    display:
+        flex;
 
-    background: transparent;
+
+    align-items:
+        center;
+
+
+    justify-content:
+        center;
+
+
+    border:
+        none;
+
+
+    border-radius:
+        7px;
+
+
+    background:
+        transparent;
+
+
+    transition:
+        background
+        0.2s ease;
+
+}
+
+
+.show-password:hover {
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            0.06
+        );
 
 }
 
 
 .show-password svg {
 
-    width: 22px;
+    width:
+        22px;
 
-    height: 22px;
 
-    fill: #bed1e4;
+    height:
+        22px;
+
+
+    fill:
+        #bdd1e4;
 
 }
 
@@ -764,67 +752,110 @@ body {
 
 .btn-login {
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 62px;
 
-    margin-top: 1px;
+    height:
+        62px;
 
-    border: none;
 
-    border-radius: 9px;
+    margin-top:
+        2px;
 
-    display: grid;
+
+    display:
+        grid;
+
 
     grid-template-columns:
-
         1fr auto;
 
-    align-items: center;
+
+    align-items:
+        center;
+
 
     padding:
 
-        0 25px;
+        0
+        24px;
 
-    color: white;
 
-    font-size: 1rem;
+    border:
+        none;
 
-    font-weight: 700;
+
+    border-radius:
+        9px;
+
+
+    color:
+        #ffffff;
+
+
+    font-size:
+        1rem;
+
+
+    font-weight:
+        700;
+
 
     background:
 
         linear-gradient(
             90deg,
-            #176fe9,
-            #4589ff
+            #176ee8,
+            #4489ff
         );
+
+
+    box-shadow:
+
+        0 9px 22px
+        rgba(
+            22,
+            103,
+            220,
+            0.23
+        );
+
 
     transition:
 
-        transform 0.2s,
+        transform
+        0.2s ease,
 
-        box-shadow 0.2s,
+        filter
+        0.2s ease,
 
-        filter 0.2s;
+        box-shadow
+        0.2s ease;
 
 }
 
 
 .btn-login span:first-child {
 
-    justify-self: center;
+    justify-self:
+        center;
 
-    margin-left: 25px;
+
+    margin-left:
+        24px;
 
 }
 
 
 .btn-login .arrow {
 
-    font-size: 1.5rem;
+    font-size:
+        1.5rem;
 
-    font-weight: 400;
+
+    font-weight:
+        400;
 
 }
 
@@ -832,17 +863,30 @@ body {
 .btn-login:hover {
 
     transform:
-
         translateY(-2px);
 
-    filter:
 
-        brightness(1.07);
+    filter:
+        brightness(1.08);
+
 
     box-shadow:
 
-        0 12px 28px
-        rgba(39, 119, 255, 0.30);
+        0 14px 30px
+        rgba(
+            40,
+            122,
+            255,
+            0.34
+        );
+
+}
+
+
+.btn-login:active {
+
+    transform:
+        translateY(0);
 
 }
 
@@ -853,22 +897,41 @@ body {
 
 .forgot-password {
 
-    display: block;
+    display:
+        block;
 
-    margin-top: 21px;
 
-    text-align: center;
+    margin-top:
+        21px;
 
-    color: #71a9ff;
 
-    font-size: 0.86rem;
+    text-align:
+        center;
+
+
+    color:
+        #70a9ff;
+
+
+    font-size:
+        0.86rem;
+
+
+    transition:
+        color
+        0.2s ease;
 
 }
 
 
 .forgot-password:hover {
 
-    text-decoration: underline;
+    color:
+        #a0c7ff;
+
+
+    text-decoration:
+        underline;
 
 }
 
@@ -879,14 +942,27 @@ body {
 
 .login-divider {
 
-    width: 100%;
+    position:
+        relative;
 
-    height: 1px;
+
+    z-index:
+        1;
+
+
+    width:
+        100%;
+
+
+    height:
+        1px;
+
 
     margin:
 
-        28px 0
-        26px;
+        27px 0
+        25px;
+
 
     background:
 
@@ -894,7 +970,7 @@ body {
             121,
             166,
             205,
-            0.25
+            0.26
         );
 
 }
@@ -906,52 +982,94 @@ body {
 
 .recovery-card {
 
-    width: 100%;
+    position:
+        relative;
 
-    display: grid;
+
+    z-index:
+        1;
+
+
+    width:
+        100%;
+
+
+    display:
+        grid;
+
 
     grid-template-columns:
-
         48px 1fr;
 
-    gap: 16px;
 
-    align-items: start;
+    gap:
+        16px;
 
-    padding: 18px;
+
+    align-items:
+        start;
+
+
+    padding:
+        17px;
+
 
     border:
 
         1px solid
-        rgba(103, 164, 218, 0.30);
+        rgba(
+            103,
+            164,
+            218,
+            0.30
+        );
 
-    border-radius: 10px;
+
+    border-radius:
+        10px;
+
 
     background:
 
         rgba(
-            255,
-            255,
-            255,
-            0.025
+            12,
+            48,
+            81,
+            0.50
         );
 
 }
 
 
+/* ==========================================================
+   ÍCONE RECUPERAÇÃO
+========================================================== */
+
 .recovery-icon {
 
-    width: 48px;
+    width:
+        48px;
 
-    height: 48px;
 
-    display: flex;
+    height:
+        48px;
 
-    justify-content: center;
 
-    align-items: center;
+    display:
+        flex;
 
-    border-radius: 9px;
+
+    align-items:
+        center;
+
+
+    justify-content:
+        center;
+
+
+    border-radius:
+        9px;
+
 
     background:
 
@@ -959,7 +1077,7 @@ body {
             43,
             113,
             213,
-            0.17
+            0.18
         );
 
 }
@@ -967,56 +1085,100 @@ body {
 
 .recovery-icon svg {
 
-    width: 27px;
+    width:
+        27px;
 
-    height: 27px;
 
-    fill: #62a5ff;
+    height:
+        27px;
+
+
+    fill:
+        #64a6ff;
 
 }
 
 
+/* ==========================================================
+   TEXTO RECUPERAÇÃO
+========================================================== */
+
 .recovery-content strong {
 
-    display: block;
+    display:
+        block;
 
-    font-size: 0.91rem;
 
-    margin-bottom: 5px;
+    margin-bottom:
+        5px;
 
-    color: #ffffff;
+
+    font-size:
+        0.91rem;
+
+
+    color:
+        #ffffff;
 
 }
 
 
 .recovery-content p {
 
-    max-width: 350px;
+    max-width:
+        350px;
 
-    font-size: 0.82rem;
 
-    line-height: 1.45;
+    font-size:
+        0.82rem;
 
-    color: #9db5cd;
+
+    line-height:
+        1.45;
+
+
+    color:
+        #9db5cd;
 
 }
 
 
 .recovery-content a {
 
-    display: inline-flex;
+    display:
+        inline-flex;
 
-    gap: 8px;
 
-    margin-top: 9px;
+    align-items:
+        center;
 
-    align-items: center;
 
-    font-size: 0.81rem;
+    gap:
+        8px;
 
-    font-weight: 600;
 
-    color: #5499ff;
+    margin-top:
+        9px;
+
+
+    font-size:
+        0.81rem;
+
+
+    font-weight:
+        600;
+
+
+    color:
+        #559aff;
+
+}
+
+
+.recovery-content a:hover {
+
+    color:
+        #87b8ff;
 
 }
 
@@ -1034,46 +1196,78 @@ and
 
         padding:
 
-            20px 40px;
+            18px
+            38px;
 
     }
 
 
     .login-card {
 
-        max-width: 520px;
+        max-width:
+            520px;
+
 
         padding:
 
-            30px 40px;
+            27px
+            38px;
+
+    }
+
+
+    .login-header h1 {
+
+        font-size:
+            1.9rem;
 
     }
 
 
     .login-header p {
 
-        margin-bottom: 22px;
+        margin-top:
+            8px;
+
+
+        margin-bottom:
+            20px;
+
+
+        font-size:
+            0.87rem;
 
     }
 
 
     .form-group {
 
-        margin-bottom: 16px;
+        margin-bottom:
+            14px;
 
     }
 
 
-    .input-box input {
+    .input-container input {
 
-        height: 50px;
+        height:
+            49px;
 
     }
 
 
     .btn-login {
 
-        height: 52px;
+        height:
+            51px;
+
+    }
+
+
+    .forgot-password {
+
+        margin-top:
+            14px;
 
     }
 
@@ -1082,21 +1276,42 @@ and
 
         margin:
 
-            19px 0;
+            17px 0;
 
     }
 
 
     .recovery-card {
 
-        padding: 14px;
+        padding:
+            13px;
+
+
+        grid-template-columns:
+            40px 1fr;
 
     }
 
 
-    .hero-content h1 {
+    .recovery-icon {
 
-        font-size: 4rem;
+        width:
+            40px;
+
+
+        height:
+            40px;
+
+    }
+
+
+    .sicamil-logo {
+
+        width:
+            min(
+                440px,
+                75%
+            );
 
     }
 
@@ -1112,34 +1327,58 @@ and
 
     .login-page {
 
-        grid-template-columns:
+        display:
+            block;
 
-            1fr;
+
+        min-height:
+            100vh;
+
+
+        background-position:
+            35% center;
 
     }
 
 
     .login-hero {
 
-        display: none;
+        display:
+            none;
 
     }
 
 
     .login-area {
 
-        width: 100%;
+        width:
+            100%;
 
-        min-height: 100vh;
 
-        padding: 25px;
+        min-height:
+            100vh;
+
+
+        padding:
+            25px;
+
+
+        background:
+
+            rgba(
+                3,
+                20,
+                38,
+                0.48
+            );
 
     }
 
 
     .login-card {
 
-        max-width: 520px;
+        max-width:
+            520px;
 
     }
 
@@ -1153,9 +1392,18 @@ and
 @media
 (max-width: 520px) {
 
+    .login-page {
+
+        background-position:
+            30% center;
+
+    }
+
+
     .login-area {
 
-        padding: 15px;
+        padding:
+            15px;
 
     }
 
@@ -1164,21 +1412,52 @@ and
 
         padding:
 
-            30px 22px;
+            30px
+            22px;
+
+
+        border-radius:
+            14px;
 
     }
 
 
-    .login-header h3 {
+    .login-header h1 {
 
-        font-size: 1.8rem;
+        font-size:
+            1.75rem;
 
     }
 
 
-    .input-box input {
+    .login-header p {
 
-        height: 54px;
+        font-size:
+            0.87rem;
+
+
+        margin-bottom:
+            24px;
+
+    }
+
+
+    .input-container input {
+
+        height:
+            54px;
+
+
+        padding-left:
+            50px;
+
+    }
+
+
+    .btn-login {
+
+        height:
+            56px;
 
     }
 
@@ -1186,8 +1465,19 @@ and
     .recovery-card {
 
         grid-template-columns:
-
             1fr;
+
+    }
+
+
+    .recovery-icon {
+
+        width:
+            42px;
+
+
+        height:
+            42px;
 
     }
 

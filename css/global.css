@@ -1,3 +1,7 @@
+/* =========================================================
+   SICAMIL - CONFIGURAÇÕES GERAIS
+========================================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -8,31 +12,57 @@
 
 :root {
 
-    --blue-950: #031426;
-    --blue-900: #061b31;
-    --blue-850: #08233e;
-    --blue-800: #0b2d4e;
+    /* AZUIS */
 
-    --blue-700: #0d4c91;
+    --blue-950: #031426;
+    --blue-900: #051a30;
+    --blue-850: #07243f;
+    --blue-800: #092d4e;
+
+    --blue-700: #0d4f96;
+
     --blue-600: #176ee8;
-    --blue-500: #4387ff;
+    --blue-500: #4489ff;
+
+
+    /* TEXTO */
 
     --white: #ffffff;
 
-    --text-light: #d9e6f3;
-    --text-muted: #9eb3ca;
+    --text-light: #dce8f4;
+    --text-muted: #a3b8ce;
 
+
+    /* ESTADOS */
+
+    --green: #0fbb68;
+    --orange: #ff9b26;
+    --red: #ef4050;
+
+
+    /* BORDAS */
+
+    --border-blue:
+        rgba(
+            104,
+            166,
+            220,
+            0.38
+        );
 }
 
 
-html,
-body {
+html {
     width: 100%;
+
     min-height: 100%;
 }
 
 
 body {
+    width: 100%;
+
+    min-height: 100vh;
 
     font-family:
         "Inter",
@@ -44,6 +74,7 @@ body {
 
     color: var(--white);
 
+    -webkit-font-smoothing: antialiased;
 }
 
 
@@ -60,6 +91,20 @@ button {
 }
 
 
+input {
+    outline: none;
+}
+
+
 a {
+    color: inherit;
+
     text-decoration: none;
+}
+
+
+img {
+    display: block;
+
+    max-width: 100%;
 }
