@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Gerenciamento de Usuários - SICAMIL"
+    >
+
+    <title>
+        SICAMIL | Usuários
+    </title>
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="css/global.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/usuarios.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <div class="app-layout">
+
+
+        <div
+            id="sidebar-container"
+            aria-label="Menu principal"
+        ></div>
+
+
+        <main class="main-content">
+
+
+            <div id="header-container"></div>
+
+
+            <div class="usuarios-content">
+
+
+                <!-- =========================================
+                     CABEÇALHO
+                ========================================== -->
+
+                <section class="page-heading">
+
+                    <div>
+
+                        <span class="page-kicker">
+                            CADASTROS
+                        </span>
+
+                        <h2>
+                            Gerenciamento de Usuários
+                        </h2>
+
+                        <p>
+                            Controle de acesso, seção e permissões dos usuários do SICAMIL.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="btnNovoUsuario"
+                        class="btn-primary"
+                    >
+                        + Novo Usuário
+                    </button>
+
+                </section>
+
+
+
+                <!-- =========================================
+                     MENSAGENS
+                ========================================== -->
+
+                <div
+                    id="usuarioMensagem"
+                    class="usuario-message"
+                    role="alert"
+                    hidden
+                ></div>
+
+
+
+                <!-- =========================================
+                     FORMULÁRIO
+                ========================================== -->
+
+                <section
+                    id="formularioUsuario"
+                    class="form-card"
+                    hidden
+                >
+
+
+                    <header class="section-header">
+
+                        <div>
+
+                            <h3 id="tituloFormulario">
+                                Novo Usuário
+                            </h3>
+
+                            <p>
+                                Preencha os dados de acesso do usuário.
+                            </p>
+
+                        </div>
+
+                    </header>
+
+
+
+                    <form
+                        id="usuarioForm"
+                        autocomplete="off"
+                    >
+
+                        <input
+                            type="hidden"
+                            id="usuarioId"
+                        >
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group">
+
+                                <label for="usuarioNome">
+                                    Nome Completo
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="usuarioNome"
+                                    maxlength="150"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="usuarioNomeGuerra">
+                                    Nome de Guerra
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="usuarioNomeGuerra"
+                                    maxlength="100"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="usuarioLogin">
+                                    Login
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="usuarioLogin"
+                                    maxlength="80"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="usuarioEmail">
+                                    E-mail
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="usuarioEmail"
+                                    maxlength="150"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="usuarioTipo">
+                                    Tipo
+                                </label>
+
+                                <select
+                                    id="usuarioTipo"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Selecione
+                                    </option>
+
+                                    <option value="OPERACIONAL">
+                                        Operacional
+                                    </option>
+
+                                    <option value="GERENTE">
+                                        Gerente
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="usuarioSecao">
+                                    Seção
+                                </label>
+
+                                <select id="usuarioSecao">
+
+                                    <option value="">
+                                        Sem seção
+                                    </option>
+
+                                </select>
+
+                                <small id="secaoAjuda">
+                                    Obrigatória para usuário operacional.
+                                </small>
+
+                            </div>
+
+
+                            <div
+                                id="grupoSenha"
+                                class="form-group form-group-full"
+                            >
+
+                                <label for="usuarioSenha">
+                                    Senha Inicial
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="usuarioSenha"
+                                    minlength="8"
+                                    autocomplete="new-password"
+                                >
+
+                                <small>
+                                    Mínimo de 8 caracteres. Utilizada somente na criação da conta.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- =================================
+                             PERMISSÕES
+                        ================================== -->
+
+                        <div class="permissions-area">
+
+                            <div class="permissions-header">
+
+                                <div>
+
+                                    <h4>
+                                        Permissões
+                                    </h4>
+
+                                    <p>
+                                        Defina quais funções estarão disponíveis para este usuário.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                id="listaPermissoes"
+                                class="permissions-grid"
+                            >
+
+                                <div class="permissions-loading">
+                                    Carregando permissões...
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="form-actions">
+
+                            <button
+                                type="button"
+                                id="btnCancelar"
+                                class="btn-secondary"
+                            >
+                                Cancelar
+                            </button>
+
+
+                            <button
+                                type="submit"
+                                id="btnSalvar"
+                                class="btn-primary"
+                            >
+                                Salvar Usuário
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </section>
+
+
+
+                <!-- =========================================
+                     USUÁRIOS
+                ========================================== -->
+
+                <section class="users-card">
+
+
+                    <header class="section-header">
+
+                        <div>
+
+                            <h3>
+                                Usuários Cadastrados
+                            </h3>
+
+                            <p>
+                                Contas registradas no SICAMIL.
+                            </p>
+
+                        </div>
+
+
+                        <div class="section-counter">
+
+                            <span>
+                                Total
+                            </span>
+
+                            <strong id="totalUsuarios">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </header>
+
+
+
+                    <div class="filters-row">
+
+
+                        <div class="search-field">
+
+                            <input
+                                type="search"
+                                id="pesquisaUsuario"
+                                placeholder="Pesquisar nome, login ou seção..."
+                                aria-label="Pesquisar usuário"
+                            >
+
+                        </div>
+
+
+                        <select
+                            id="filtroTipo"
+                            aria-label="Filtrar por tipo"
+                        >
+
+                            <option value="TODOS">
+                                Todos os tipos
+                            </option>
+
+                            <option value="GERENTE">
+                                Gerentes
+                            </option>
+
+                            <option value="OPERACIONAL">
+                                Operacionais
+                            </option>
+
+                        </select>
+
+
+                        <select
+                            id="filtroStatus"
+                            aria-label="Filtrar por status"
+                        >
+
+                            <option value="TODOS">
+                                Todos os status
+                            </option>
+
+                            <option value="ATIVOS">
+                                Ativos
+                            </option>
+
+                            <option value="INATIVOS">
+                                Inativos
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="users-table-wrapper">
+
+                        <table class="users-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        USUÁRIO
+                                    </th>
+
+                                    <th>
+                                        LOGIN
+                                    </th>
+
+                                    <th>
+                                        TIPO
+                                    </th>
+
+                                    <th>
+                                        SEÇÃO
+                                    </th>
+
+                                    <th>
+                                        STATUS
+                                    </th>
+
+                                    <th>
+                                        AÇÕES
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="tabelaUsuarios">
+
+                                <tr>
+
+                                    <td
+                                        colspan="6"
+                                        class="table-empty"
+                                    >
+                                        Carregando usuários...
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <script
+        type="module"
+        src="js/usuarios.js"
+    ></script>
+
+</body>
+
+</html>

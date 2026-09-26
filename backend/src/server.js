@@ -7,6 +7,7 @@ import { sessionMiddleware } from "./config/session.js";
 
 import authRoutes from "./routes/authRoutes.js";
 import secaoRoutes from "./routes/secaoRoutes.js";
+import usuarioRoutes from "./routes/usuarioRoutes.js";
 
 import {
     exigirAutenticacao
@@ -79,6 +80,15 @@ app.use(
 app.use(
     "/api/secoes",
     secaoRoutes
+);
+
+/* =========================================================
+   USUÁRIOS
+========================================================= */
+
+app.use(
+    "/api/usuarios",
+    usuarioRoutes
 );
 
 
