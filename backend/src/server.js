@@ -8,6 +8,7 @@ import { sessionMiddleware } from "./config/session.js";
 import authRoutes from "./routes/authRoutes.js";
 import secaoRoutes from "./routes/secaoRoutes.js";
 import usuarioRoutes from "./routes/usuarioRoutes.js";
+import militarRoutes from "./routes/militarRoutes.js";
 
 import {
     exigirAutenticacao
@@ -89,6 +90,16 @@ app.use(
 app.use(
     "/api/usuarios",
     usuarioRoutes
+);
+
+
+/* =========================================================
+   MILITARES
+========================================================= */
+
+app.use(
+    "/api/militares",
+    militarRoutes
 );
 
 
@@ -272,17 +283,30 @@ app.use(
     ) => {
 
         console.error(
-            "Erro interno:",
+            "Erro da API:",
             erro
         );
 
 
-        res.status(500).json({
+        const status =
+            Number.isInteger(erro.status)
+                ? erro.status
+                : 500;
 
-            mensagem:
-                "Erro interno do servidor."
 
-        });
+        const mensagem =
+            status === 500
+                ? "Erro interno do servidor."
+                : erro.message;
+
+
+        return res
+            .status(status)
+            .json({
+
+                mensagem
+
+            });
 
     }
 );

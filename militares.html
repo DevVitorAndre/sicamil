@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Gerenciamento de Militares - SICAMIL"
+    >
+
+    <title>
+        SICAMIL | Militares
+    </title>
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="css/global.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/militares.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <div class="app-layout">
+
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+
+        <div
+            id="sidebar-container"
+            aria-label="Menu principal"
+        ></div>
+
+
+        <!-- =================================================
+             CONTEÚDO
+        ================================================== -->
+
+        <main class="main-content">
+
+
+            <div id="header-container"></div>
+
+
+            <div class="militares-content">
+
+
+                <!-- =========================================
+                     CABEÇALHO
+                ========================================== -->
+
+                <section class="page-heading">
+
+
+                    <div>
+
+                        <span class="page-kicker">
+                            EFETIVO
+                        </span>
+
+                        <h2>
+                            Gerenciamento de Militares
+                        </h2>
+
+                        <p>
+                            Cadastre e gerencie o efetivo militar do SICAMIL.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="btnNovoMilitar"
+                        class="btn-primary"
+                    >
+                        + Novo Militar
+                    </button>
+
+
+                </section>
+
+
+                <!-- =========================================
+                     MENSAGEM
+                ========================================== -->
+
+                <div
+                    id="militarMensagem"
+                    class="militar-message"
+                    role="alert"
+                    hidden
+                ></div>
+
+
+                <!-- =========================================
+                     FORMULÁRIO
+                ========================================== -->
+
+                <section
+                    id="formularioMilitar"
+                    class="military-form-card"
+                    hidden
+                >
+
+
+                    <header class="section-header">
+
+                        <div>
+
+                            <h3 id="tituloFormulario">
+                                Novo Militar
+                            </h3>
+
+                            <p>
+                                Informe os dados cadastrais do militar.
+                            </p>
+
+                        </div>
+
+                    </header>
+
+
+                    <form id="militarForm">
+
+
+                        <input
+                            type="hidden"
+                            id="militarId"
+                        >
+
+
+                        <div class="form-grid">
+
+
+                            <!-- PT / GRAD -->
+
+                            <div class="form-group">
+
+                                <label for="militarPostoGraduacao">
+                                    PT / Graduação
+                                    <span class="required">*</span>
+                                </label>
+
+                                <select
+                                    id="militarPostoGraduacao"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Selecione...
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- NOME COMPLETO -->
+
+                            <div class="form-group form-group-wide">
+
+                                <label for="militarNomeCompleto">
+                                    Nome Completo
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="militarNomeCompleto"
+                                    maxlength="150"
+                                    autocomplete="off"
+                                    placeholder="Digite o nome completo"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- NOME DE GUERRA -->
+
+                            <div class="form-group">
+
+                                <label for="militarNomeGuerra">
+                                    Nome de Guerra
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="militarNomeGuerra"
+                                    maxlength="100"
+                                    autocomplete="off"
+                                    placeholder="Ex.: SILVA"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- SARAM -->
+
+                            <div class="form-group">
+
+                                <label for="militarSaram">
+                                    SARAM
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="militarSaram"
+                                    maxlength="20"
+                                    inputmode="numeric"
+                                    autocomplete="off"
+                                    placeholder="Somente números"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- SEÇÃO -->
+
+                            <div class="form-group">
+
+                                <label for="militarSecao">
+                                    Seção
+                                    <span class="required">*</span>
+                                </label>
+
+                                <select
+                                    id="militarSecao"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Selecione...
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- BOTÕES -->
+
+                        <div class="form-actions">
+
+
+                            <button
+                                type="button"
+                                id="btnCancelarMilitar"
+                                class="btn-secondary"
+                            >
+                                Cancelar
+                            </button>
+
+
+                            <button
+                                type="submit"
+                                id="btnSalvarMilitar"
+                                class="btn-primary"
+                            >
+                                Salvar Militar
+                            </button>
+
+
+                        </div>
+
+
+                    </form>
+
+
+                </section>
+
+
+                <!-- =========================================
+                     MILITARES CADASTRADOS
+                ========================================== -->
+
+                <section class="military-card">
+
+
+                    <header class="section-header">
+
+
+                        <div>
+
+                            <h3>
+                                Militares Cadastrados
+                            </h3>
+
+                            <p>
+                                Efetivo registrado no SICAMIL.
+                            </p>
+
+                        </div>
+
+
+                        <div class="section-counter">
+
+                            <span>
+                                Total
+                            </span>
+
+                            <strong id="totalMilitares">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                    </header>
+
+
+                    <!-- =====================================
+                         FILTROS
+                    ====================================== -->
+
+                    <div class="filters-row">
+
+
+                        <div class="search-field">
+
+                            <input
+                                type="search"
+                                id="pesquisaMilitar"
+                                placeholder="Pesquisar nome, nome de guerra ou SARAM..."
+                                aria-label="Pesquisar militar"
+                            >
+
+                        </div>
+
+
+                        <select
+                            id="filtroPostoGraduacao"
+                            aria-label="Filtrar por posto ou graduação"
+                        >
+
+                            <option value="TODOS">
+                                Todos os PT/GRAD
+                            </option>
+
+                        </select>
+
+
+                        <select
+                            id="filtroSecao"
+                            aria-label="Filtrar por seção"
+                        >
+
+                            <option value="TODOS">
+                                Todas as seções
+                            </option>
+
+                        </select>
+
+
+                        <select
+                            id="filtroStatus"
+                            aria-label="Filtrar por status"
+                        >
+
+                            <option value="TODOS">
+                                Todos os status
+                            </option>
+
+                            <option value="ATIVOS">
+                                Ativos
+                            </option>
+
+                            <option value="INATIVOS">
+                                Inativos
+                            </option>
+
+                        </select>
+
+
+                    </div>
+
+
+                    <!-- =====================================
+                         TABELA
+                    ====================================== -->
+
+                    <div class="military-table-wrapper">
+
+
+                        <table class="military-table">
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        PT / GRAD
+                                    </th>
+
+                                    <th>
+                                        NOME COMPLETO
+                                    </th>
+
+                                    <th>
+                                        NOME DE GUERRA
+                                    </th>
+
+                                    <th>
+                                        SARAM
+                                    </th>
+
+                                    <th>
+                                        SEÇÃO
+                                    </th>
+
+                                    <th>
+                                        STATUS
+                                    </th>
+
+                                    <th>
+                                        AÇÕES
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="tabelaMilitares">
+
+
+                                <tr>
+
+                                    <td
+                                        colspan="7"
+                                        class="table-empty"
+                                    >
+                                        Carregando militares...
+                                    </td>
+
+                                </tr>
+
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+
+
+                </section>
+
+
+            </div>
+
+
+        </main>
+
+
+    </div>
+
+
+    <script
+        type="module"
+        src="js/militares.js"
+    ></script>
+
+
+</body>
+
+</html>
