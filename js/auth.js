@@ -45,6 +45,10 @@ formulario
     );
 
 
+/* =========================================================
+   MOSTRAR / OCULTAR SENHA
+========================================================= */
+
 function alternarSenha() {
 
     const senhaVisivel =
@@ -70,6 +74,10 @@ function alternarSenha() {
 
 }
 
+
+/* =========================================================
+   REALIZAR LOGIN
+========================================================= */
 
 async function realizarLogin(
     evento
@@ -117,42 +125,162 @@ async function realizarLogin(
     }
 
 
-    definirCarregamento(true);
+    definirCarregamento(
+        true
+    );
 
 
     try {
 
-        await authService.login(
-            login,
-            senha
-        );
+        const usuario =
+            await authService.login(
+                login,
+                senha
+            );
+
+
+        const paginaInicial =
+            obterPaginaInicial(
+                usuario
+            );
 
 
         window.location.href =
-            "dashboard.html";
+            paginaInicial;
+
 
     } catch (erro) {
 
         mostrarMensagem(
-            erro.message,
+            erro.message ||
+            "Não foi possível realizar o login.",
             "erro"
         );
 
     } finally {
 
-        definirCarregamento(false);
+        definirCarregamento(
+            false
+        );
 
     }
 
 }
 
 
+/* =========================================================
+   DEFINIR PÁGINA INICIAL
+
+   O usuário é direcionado para a primeira página
+   que possuir permissão.
+
+   Configurações fica disponível para todo usuário
+   autenticado e funciona como página de fallback.
+========================================================= */
+
+function obterPaginaInicial(
+    usuario
+) {
+
+    const paginas = [
+
+        {
+            permissao:
+                "DASHBOARD_VISUALIZAR",
+
+            pagina:
+                "dashboard.html"
+        },
+
+        {
+            permissao:
+                "CHAMADA_REALIZAR",
+
+            pagina:
+                "chamada.html"
+        },
+
+        {
+            permissao:
+                "REGISTROS_VISUALIZAR",
+
+            pagina:
+                "registros.html"
+        },
+
+        {
+            permissao:
+                "PESQUISA_REALIZAR",
+
+            pagina:
+                "pesquisa.html"
+        },
+
+        {
+            permissao:
+                "USUARIOS_GERENCIAR",
+
+            pagina:
+                "usuarios.html"
+        },
+
+        {
+            permissao:
+                "SECOES_GERENCIAR",
+
+            pagina:
+                "secoes.html"
+        },
+
+        {
+            permissao:
+                "MILITARES_GERENCIAR",
+
+            pagina:
+                "militares.html"
+        },
+
+        {
+            permissao:
+                "RELATORIOS_EXPORTAR",
+
+            pagina:
+                "relatorios.html"
+        }
+
+    ];
+
+
+    const paginaPermitida =
+        paginas.find(
+            item =>
+                usuario.possuiPermissao(
+                    item.permissao
+                )
+        );
+
+
+    return (
+        paginaPermitida
+            ?.pagina ||
+        "configuracoes.html"
+    );
+
+}
+
+
+/* =========================================================
+   CARREGAMENTO
+========================================================= */
+
 function definirCarregamento(
     carregando
 ) {
 
     if (!botaoEntrar) {
+
         return;
+
     }
 
 
@@ -183,6 +311,10 @@ function definirCarregamento(
 
 }
 
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
 
 function mostrarMensagem(
     mensagem,
@@ -227,6 +359,10 @@ function mostrarMensagem(
 
 }
 
+
+/* =========================================================
+   LIMPAR MENSAGEM
+========================================================= */
 
 function limparMensagem() {
 

@@ -1791,3 +1791,12 @@ tbody tr:last-child td {
     }
 
 }
+
+/* =========================================================
+   SIDEBAR - CONTROLE DE PERMISSÕES
+========================================================= */
+
+.sidebar-menu .menu-item[hidden],
+.sidebar-menu .menu-separator[hidden] {
+    display: none !important;
+}
