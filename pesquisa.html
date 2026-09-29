@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Pesquisa de Efetivo - SICAMIL"
+    >
+
+    <title>
+        SICAMIL | Pesquisa
+    </title>
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="css/global.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/pesquisa.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <div class="app-layout">
+
+
+        <div
+            id="sidebar-container"
+            aria-label="Menu principal"
+        ></div>
+
+
+        <main class="main-content">
+
+
+            <div id="header-container"></div>
+
+
+            <div class="pesquisa-content">
+
+
+                <!-- =========================================
+                     CABEÇALHO
+                ========================================== -->
+
+                <section class="page-heading">
+
+
+                    <div>
+
+                        <span class="page-kicker">
+                            CONSULTA DE EFETIVO
+                        </span>
+
+                        <h2>
+                            Pesquisa
+                        </h2>
+
+                        <p>
+                            Consulte a situação dos militares por nome, SARAM, seção e data.
+                        </p>
+
+                    </div>
+
+
+                    <div class="page-counter">
+
+                        <span>
+                            Resultados
+                        </span>
+
+                        <strong id="totalResultados">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =========================================
+                     MENSAGENS
+                ========================================== -->
+
+                <div
+                    id="pesquisaMensagem"
+                    class="pesquisa-message"
+                    role="alert"
+                    hidden
+                ></div>
+
+
+                <!-- =========================================
+                     PESQUISA
+                ========================================== -->
+
+                <section class="search-card">
+
+
+                    <header class="section-header">
+
+                        <div>
+
+                            <h3>
+                                Consulta
+                            </h3>
+
+                            <p>
+                                Pesquise pelo nome completo, nome de guerra ou SARAM.
+                            </p>
+
+                        </div>
+
+                    </header>
+
+
+                    <div class="search-grid">
+
+
+                        <!-- TERMO -->
+
+                        <div class="search-field search-field-main">
+
+                            <label for="termoPesquisa">
+                                Militar
+                            </label>
+
+                            <input
+                                type="search"
+                                id="termoPesquisa"
+                                placeholder="Nome, nome de guerra ou SARAM..."
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+                        <!-- DATA -->
+
+                        <div class="search-field">
+
+                            <label for="filtroData">
+                                Data
+                            </label>
+
+                            <input
+                                type="date"
+                                id="filtroData"
+                            >
+
+                        </div>
+
+
+                        <!-- SEÇÃO -->
+
+                        <div class="search-field">
+
+                            <label for="filtroSecao">
+                                Seção
+                            </label>
+
+                            <select id="filtroSecao">
+
+                                <option value="">
+                                    Todas as seções
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- SITUAÇÃO -->
+
+                        <div class="search-field">
+
+                            <label for="filtroSituacao">
+                                Situação
+                            </label>
+
+                            <select id="filtroSituacao">
+
+                                <option value="">
+                                    Todas as situações
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- AÇÕES -->
+
+                        <div class="search-actions">
+
+                            <button
+                                type="button"
+                                id="btnLimparPesquisa"
+                                class="btn-secondary"
+                            >
+                                Limpar
+                            </button>
+
+
+                            <button
+                                type="button"
+                                id="btnPesquisar"
+                                class="btn-primary"
+                            >
+                                Pesquisar
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =========================================
+                     RESULTADOS
+                ========================================== -->
+
+                <section class="results-card">
+
+
+                    <header class="section-header">
+
+
+                        <div>
+
+                            <h3>
+                                Resultado da Pesquisa
+                            </h3>
+
+                            <p>
+                                Histórico de situação dos militares encontrados.
+                            </p>
+
+                        </div>
+
+
+                        <div class="page-size">
+
+                            <label for="limitePagina">
+                                Exibir
+                            </label>
+
+                            <select id="limitePagina">
+
+                                <option value="10">
+                                    10
+                                </option>
+
+                                <option
+                                    value="20"
+                                    selected
+                                >
+                                    20
+                                </option>
+
+                                <option value="50">
+                                    50
+                                </option>
+
+                                <option value="100">
+                                    100
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </header>
+
+
+                    <div class="results-table-wrapper">
+
+
+                        <table class="results-table">
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        DATA
+                                    </th>
+
+                                    <th>
+                                        PT / GRAD
+                                    </th>
+
+                                    <th>
+                                        MILITAR
+                                    </th>
+
+                                    <th>
+                                        SARAM
+                                    </th>
+
+                                    <th>
+                                        SEÇÃO
+                                    </th>
+
+                                    <th>
+                                        SITUAÇÃO
+                                    </th>
+
+                                    <th>
+                                        CONDIÇÃO
+                                    </th>
+
+                                    <th>
+                                        OBSERVAÇÃO
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="tabelaPesquisa">
+
+                                <tr>
+
+                                    <td
+                                        colspan="8"
+                                        class="table-empty"
+                                    >
+                                        Utilize os filtros acima para consultar o efetivo.
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+
+
+                    <!-- =====================================
+                         PAGINAÇÃO
+                    ====================================== -->
+
+                    <footer class="pagination-footer">
+
+
+                        <div class="pagination-info">
+
+                            Página
+
+                            <strong id="paginaAtual">
+                                1
+                            </strong>
+
+                            de
+
+                            <strong id="totalPaginas">
+                                1
+                            </strong>
+
+                        </div>
+
+
+                        <div class="pagination-actions">
+
+
+                            <button
+                                type="button"
+                                id="btnPaginaAnterior"
+                                class="btn-page"
+                                disabled
+                            >
+                                ← Anterior
+                            </button>
+
+
+                            <button
+                                type="button"
+                                id="btnProximaPagina"
+                                class="btn-page"
+                                disabled
+                            >
+                                Próxima →
+                            </button>
+
+
+                        </div>
+
+
+                    </footer>
+
+
+                </section>
+
+
+            </div>
+
+
+        </main>
+
+
+    </div>
+
+
+    <script
+        type="module"
+        src="js/pesquisa.js"
+    ></script>
+
+
+</body>
+
+</html>

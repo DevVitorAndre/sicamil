@@ -1,0 +1,902 @@
+/* =========================================================
+   SICAMIL
+   PESQUISA DE EFETIVO
+========================================================= */
+
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
+
+.pesquisa-content {
+    padding: 22px;
+    background: #eef3f8;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.page-heading {
+    width: 100%;
+    min-height: 98px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 18px;
+
+    padding: 18px 20px;
+
+    border: 1px solid #c6d9e8;
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #eaf4fc 0%,
+            #e4f0fa 100%
+        );
+}
+
+
+.page-kicker {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #1970b9;
+
+    font-size: 0.63rem;
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+}
+
+
+.page-heading h2 {
+    margin: 3px 0 5px;
+
+    color: #173e63;
+
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+
+.page-heading p {
+    margin: 0;
+
+    color: #67839d;
+
+    font-size: 0.76rem;
+}
+
+
+/* =========================================================
+   CONTADOR
+========================================================= */
+
+.page-counter {
+    min-width: 120px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    gap: 3px;
+}
+
+
+.page-counter span {
+    color: #75899a;
+
+    font-size: 0.64rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+}
+
+
+.page-counter strong {
+    color: #176faf;
+
+    font-size: 1.55rem;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   MENSAGENS
+========================================================= */
+
+.pesquisa-message {
+    margin-bottom: 16px;
+
+    padding: 11px 14px;
+
+    border-radius: 7px;
+
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+
+.pesquisa-message.success {
+    border: 1px solid #b9e4cf;
+
+    color: #087647;
+
+    background: #e7f7ef;
+}
+
+
+.pesquisa-message.error {
+    border: 1px solid #f0c3c3;
+
+    color: #b52e2e;
+
+    background: #fdeaea;
+}
+
+
+.pesquisa-message.warning {
+    border: 1px solid #ead8aa;
+
+    color: #966118;
+
+    background: #fff5df;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.search-card,
+.results-card {
+    position: relative;
+
+    margin-bottom: 18px;
+
+    overflow: hidden;
+
+    border: 1px solid #c6d8e7;
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 7px 20px
+        rgba(17, 52, 87, 0.045);
+}
+
+
+.search-card::before,
+.results-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    z-index: 5;
+
+    width: 3px;
+    height: 66px;
+
+    background: #1683d6;
+}
+
+
+/* =========================================================
+   CABEÇALHO DOS CARDS
+========================================================= */
+
+.section-header {
+    min-height: 66px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 13px 17px;
+
+    border-bottom: 1px solid #c9d9e7;
+
+    background:
+        linear-gradient(
+            90deg,
+            #e9f4fc,
+            #e2eff9
+        );
+}
+
+
+.section-header h3 {
+    margin: 0 0 3px;
+
+    color: #183f64;
+
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+
+.section-header p {
+    margin: 0;
+
+    color: #6e879d;
+
+    font-size: 0.67rem;
+}
+
+
+/* =========================================================
+   ÁREA DE PESQUISA
+========================================================= */
+
+.search-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(280px, 1.5fr)
+        180px
+        minmax(220px, 1fr)
+        minmax(220px, 1fr)
+        auto;
+
+    align-items: end;
+
+    gap: 14px;
+
+    padding: 17px;
+}
+
+
+.search-field {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+.search-field label {
+    color: #49657c;
+
+    font-size: 0.67rem;
+    font-weight: 700;
+}
+
+
+.search-field input,
+.search-field select,
+.page-size select {
+    width: 100%;
+    height: 38px;
+
+    padding: 0 10px;
+
+    border: 1px solid #cbd9e4;
+    border-radius: 6px;
+
+    outline: none;
+
+    color: #2f506a;
+
+    background: #ffffff;
+
+    font-family: inherit;
+    font-size: 0.72rem;
+}
+
+
+.search-field input::placeholder {
+    color: #9aaab7;
+}
+
+
+.search-field input:focus,
+.search-field select:focus,
+.page-size select:focus {
+    border-color: #2e86c7;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(36, 128, 195, 0.10);
+}
+
+
+/* =========================================================
+   AÇÕES
+========================================================= */
+
+.search-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.btn-primary,
+.btn-secondary,
+.btn-page {
+    min-height: 38px;
+
+    padding: 0 15px;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+    font-size: 0.7rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.18s ease;
+}
+
+
+.btn-primary {
+    border: 1px solid #1471bc;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            180deg,
+            #2487d6,
+            #1471bc
+        );
+}
+
+
+.btn-primary:hover:not(:disabled) {
+    background:
+        linear-gradient(
+            180deg,
+            #197ac6,
+            #0f609f
+        );
+}
+
+
+.btn-secondary,
+.btn-page {
+    border: 1px solid #cbd8e3;
+
+    color: #415f77;
+
+    background: #ffffff;
+}
+
+
+.btn-secondary:hover:not(:disabled),
+.btn-page:hover:not(:disabled) {
+    background: #f3f7fa;
+}
+
+
+button:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   QUANTIDADE POR PÁGINA
+========================================================= */
+
+.page-size {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.page-size label {
+    color: #658098;
+
+    font-size: 0.66rem;
+    font-weight: 700;
+}
+
+
+.page-size select {
+    width: 72px;
+    height: 33px;
+}
+
+
+/* =========================================================
+   TABELA
+========================================================= */
+
+.results-table-wrapper {
+    width: 100%;
+
+    padding: 11px 13px 13px;
+
+    overflow-x: auto;
+}
+
+
+.results-table {
+    width: 100%;
+
+    min-width: 1180px;
+
+    border: 1px solid #ccdbe7;
+    border-radius: 7px;
+
+    border-collapse: separate;
+    border-spacing: 0;
+
+    table-layout: fixed;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   LARGURA DAS COLUNAS
+========================================================= */
+
+.results-table th:nth-child(1),
+.results-table td:nth-child(1) {
+    width: 10%;
+}
+
+
+.results-table th:nth-child(2),
+.results-table td:nth-child(2) {
+    width: 8%;
+}
+
+
+.results-table th:nth-child(3),
+.results-table td:nth-child(3) {
+    width: 20%;
+}
+
+
+.results-table th:nth-child(4),
+.results-table td:nth-child(4) {
+    width: 10%;
+}
+
+
+.results-table th:nth-child(5),
+.results-table td:nth-child(5) {
+    width: 11%;
+}
+
+
+.results-table th:nth-child(6),
+.results-table td:nth-child(6) {
+    width: 15%;
+}
+
+
+.results-table th:nth-child(7),
+.results-table td:nth-child(7) {
+    width: 12%;
+}
+
+
+.results-table th:nth-child(8),
+.results-table td:nth-child(8) {
+    width: 14%;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA TABELA
+========================================================= */
+
+.results-table thead {
+    background: #dceaf5;
+}
+
+
+.results-table th {
+    height: 39px;
+
+    padding: 9px 11px;
+
+    border-right: 1px solid #c6d7e4;
+    border-bottom: 1px solid #bfd2e1;
+
+    color: #315673;
+
+    font-size: 0.61rem;
+    font-weight: 800;
+
+    text-align: left;
+
+    letter-spacing: 0.15px;
+}
+
+
+.results-table th:last-child {
+    border-right: none;
+}
+
+
+/* =========================================================
+   LINHAS
+========================================================= */
+
+.results-table td {
+    min-height: 51px;
+
+    padding: 10px 11px;
+
+    border-right: 1px solid #d6e1e9;
+    border-bottom: 1px solid #dce5ec;
+
+    color: #37546c;
+
+    font-size: 0.69rem;
+
+    vertical-align: middle;
+}
+
+
+.results-table td:last-child {
+    border-right: none;
+}
+
+
+.results-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+.results-table tbody tr {
+    background: #ffffff;
+
+    transition: 0.15s ease;
+}
+
+
+.results-table tbody tr:nth-child(odd) {
+    background: #f7fbfe;
+}
+
+
+.results-table tbody tr:hover {
+    background: #edf6fd;
+}
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+.search-date {
+    color: #173e63;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   PT / GRAD
+========================================================= */
+
+.search-rank {
+    color: #176da9;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   MILITAR
+========================================================= */
+
+.search-military {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+.search-military strong {
+    color: #173f61;
+
+    font-size: 0.7rem;
+    font-weight: 800;
+}
+
+
+.search-military small {
+    color: #8496a5;
+
+    font-size: 0.6rem;
+}
+
+
+/* =========================================================
+   SARAM
+========================================================= */
+
+.search-saram {
+    color: #3b5870;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   SEÇÃO
+========================================================= */
+
+.search-section {
+    color: #176da9;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   SITUAÇÃO
+========================================================= */
+
+.situation-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px 9px;
+
+    border: 1px solid #c7d9e7;
+    border-radius: 15px;
+
+    color: #345c78;
+
+    background: #edf5fb;
+
+    font-size: 0.61rem;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   DISPONIBILIDADE
+========================================================= */
+
+.condition-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 88px;
+
+    padding: 5px 9px;
+
+    border-radius: 15px;
+
+    font-size: 0.6rem;
+    font-weight: 800;
+}
+
+
+.condition-badge.disponivel {
+    border: 1px solid #a9dfbe;
+
+    color: #087944;
+
+    background: #ddf5e7;
+}
+
+
+.condition-badge.indisponivel {
+    border: 1px solid #efbebe;
+
+    color: #b43b3b;
+
+    background: #fde7e7;
+}
+
+
+/* =========================================================
+   OBSERVAÇÃO
+========================================================= */
+
+.search-observation {
+    color: #657d90;
+
+    font-size: 0.65rem;
+
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   LINHA DISPONÍVEL
+========================================================= */
+
+.results-table tr.result-disponivel {
+    box-shadow:
+        inset 3px 0 0
+        #23a663;
+}
+
+
+/* =========================================================
+   LINHA INDISPONÍVEL
+========================================================= */
+
+.results-table tr.result-indisponivel {
+    box-shadow:
+        inset 3px 0 0
+        #d75656;
+}
+
+
+/* =========================================================
+   TABELA VAZIA
+========================================================= */
+
+.table-empty {
+    padding: 32px 20px !important;
+
+    color: #8295a5 !important;
+
+    font-size: 0.72rem !important;
+
+    text-align: center !important;
+}
+
+
+/* =========================================================
+   PAGINAÇÃO
+========================================================= */
+
+.pagination-footer {
+    min-height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 14px;
+
+    padding: 12px 14px;
+
+    border-top: 1px solid #d3e0e9;
+
+    background: #f8fbfd;
+}
+
+
+.pagination-info {
+    color: #70869a;
+
+    font-size: 0.68rem;
+}
+
+
+.pagination-info strong {
+    color: #315974;
+}
+
+
+.pagination-actions {
+    display: flex;
+
+    gap: 8px;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1350px) {
+
+    .search-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+
+    .search-field-main {
+        grid-column: 1 / -1;
+    }
+
+
+    .search-actions {
+        grid-column: 1 / -1;
+    }
+
+
+    .search-actions button {
+        flex: 1;
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .pesquisa-content {
+        padding: 14px;
+    }
+
+
+    .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+
+    .page-counter {
+        align-items: flex-start;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .search-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .search-field-main,
+    .search-actions {
+        grid-column: auto;
+    }
+
+
+    .search-actions {
+        flex-direction: column;
+    }
+
+
+    .search-actions button {
+        width: 100%;
+    }
+
+
+    .pagination-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+
+    .pagination-actions {
+        width: 100%;
+    }
+
+
+    .pagination-actions button {
+        flex: 1;
+    }
+
+}

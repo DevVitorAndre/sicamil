@@ -30,7 +30,10 @@ export const CONFIG = {
             "/chamadas",
 
         registros:
-            "/registros"
+            "/registros",
+            
+            pesquisa:
+    "/pesquisa"
 
     }
 
