@@ -1,0 +1,501 @@
+/* =========================================================
+   SICAMIL
+   TEMA GLOBAL
+========================================================= */
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+html[data-theme="dark"] {
+
+    color-scheme: dark;
+
+}
+
+
+/* =========================================================
+   FUNDO PRINCIPAL
+========================================================= */
+
+html[data-theme="dark"] body,
+html[data-theme="dark"] .main-content,
+
+html[data-theme="dark"] .dashboard-content,
+html[data-theme="dark"] .usuarios-content,
+html[data-theme="dark"] .secoes-content,
+html[data-theme="dark"] .militares-content,
+html[data-theme="dark"] .chamada-content,
+html[data-theme="dark"] .registros-content,
+html[data-theme="dark"] .pesquisa-content,
+html[data-theme="dark"] .relatorios-content,
+html[data-theme="dark"] .configuracoes-content {
+
+    background: #0f1d2a !important;
+
+    color: #dce8f1 !important;
+
+}
+
+
+/* =========================================================
+   CABEÇALHOS INTERNOS
+========================================================= */
+
+html[data-theme="dark"]
+.main-content .page-heading,
+
+html[data-theme="dark"]
+.main-content .config-page-heading {
+
+    border-color: #294357 !important;
+
+    background:
+        linear-gradient(
+            90deg,
+            #142a3c,
+            #112434
+        ) !important;
+
+}
+
+
+html[data-theme="dark"]
+.main-content .page-heading h1,
+
+html[data-theme="dark"]
+.main-content .page-heading h2,
+
+html[data-theme="dark"]
+.main-content .page-heading h3,
+
+html[data-theme="dark"]
+.main-content .config-page-heading h2 {
+
+    color: #e6f0f7 !important;
+
+}
+
+
+html[data-theme="dark"]
+.main-content .page-heading p,
+
+html[data-theme="dark"]
+.main-content .config-page-heading p {
+
+    color: #91a8ba !important;
+
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+html[data-theme="dark"]
+.main-content :is(
+
+    .stat-card,
+    .dashboard-card,
+    .panel-card,
+    .content-card,
+    .form-card,
+    .users-card,
+    .sections-card,
+    .militares-card,
+    .table-card,
+    .filters-card,
+    .filter-card,
+    .search-card,
+    .records-card,
+    .record-card,
+    .report-card,
+    .config-card,
+    .modal-content,
+    .modal-card
+
+) {
+
+    background: #172736 !important;
+
+    border-color: #2b4355 !important;
+
+    color: #dce8f1 !important;
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+html[data-theme="dark"]
+.dashboard-content .stat-card {
+
+    background:
+        linear-gradient(
+            145deg,
+            #172b3c,
+            #152635
+        ) !important;
+
+    border-color: #315069 !important;
+
+}
+
+
+html[data-theme="dark"]
+.dashboard-content .stat-card strong,
+
+html[data-theme="dark"]
+.dashboard-content .stat-card h3 {
+
+    color: #eef6fb !important;
+
+}
+
+
+html[data-theme="dark"]
+.dashboard-content .stat-card p,
+
+html[data-theme="dark"]
+.dashboard-content .stat-card span {
+
+    color: #95adbf;
+
+}
+
+
+html[data-theme="dark"]
+.main-content :is(
+
+    .bar-chart,
+    .chart-area,
+    .chart-body,
+    .situation-body,
+    .call-list,
+    .table-wrapper
+
+) {
+
+    background: #132432 !important;
+
+    border-color: #2c4558 !important;
+
+}
+
+
+/* =========================================================
+   TÍTULOS DE CARDS
+========================================================= */
+
+html[data-theme="dark"]
+.main-content :is(
+
+    .section-header,
+    .card-header,
+    .dashboard-card-header,
+    .config-card-header
+
+) {
+
+    border-color: #2b4355 !important;
+
+}
+
+
+html[data-theme="dark"]
+.main-content :is(
+
+    h1,
+    h2,
+    h3,
+    h4
+
+) {
+
+    color: #e5eff7;
+
+}
+
+
+/* =========================================================
+   TEXTOS
+========================================================= */
+
+html[data-theme="dark"]
+.main-content p,
+
+html[data-theme="dark"]
+.main-content small,
+
+html[data-theme="dark"]
+.main-content label {
+
+    color: #94aabd;
+
+}
+
+
+/* =========================================================
+   INPUTS / SELECTS / TEXTAREA
+========================================================= */
+
+html[data-theme="dark"]
+.main-content input,
+
+html[data-theme="dark"]
+.main-content select,
+
+html[data-theme="dark"]
+.main-content textarea {
+
+    color: #e4edf4 !important;
+
+    background: #10202e !important;
+
+    border-color: #365267 !important;
+
+}
+
+
+html[data-theme="dark"]
+.main-content input::placeholder,
+
+html[data-theme="dark"]
+.main-content textarea::placeholder {
+
+    color: #71899b !important;
+
+}
+
+
+html[data-theme="dark"]
+.main-content input:focus,
+
+html[data-theme="dark"]
+.main-content select:focus,
+
+html[data-theme="dark"]
+.main-content textarea:focus {
+
+    border-color: #4499d4 !important;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            68,
+            153,
+            212,
+            0.12
+        ) !important;
+
+}
+
+
+/* =========================================================
+   TABELAS
+========================================================= */
+
+html[data-theme="dark"]
+.main-content table {
+
+    color: #dce8f1 !important;
+
+    background: #172736 !important;
+
+}
+
+
+html[data-theme="dark"]
+.main-content thead,
+
+html[data-theme="dark"]
+.main-content thead tr,
+
+html[data-theme="dark"]
+.main-content th {
+
+    color: #dceaf5 !important;
+
+    background: #1e374a !important;
+
+    border-color: #355268 !important;
+
+}
+
+
+html[data-theme="dark"]
+.main-content tbody tr {
+
+    background: #172736;
+
+}
+
+
+html[data-theme="dark"]
+.main-content tbody tr:nth-child(even) {
+
+    background: #142432;
+
+}
+
+
+html[data-theme="dark"]
+.main-content td {
+
+    color: #d3e1ec !important;
+
+    border-color: #2b4355 !important;
+
+}
+
+
+html[data-theme="dark"]
+.main-content tbody tr:hover {
+
+    background: #1d3446 !important;
+
+}
+
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+html[data-theme="dark"]
+.main-content :is(
+
+    .filters-row,
+    .filter-row,
+    .filters-area,
+    .search-area
+
+) {
+
+    border-color: #2b4355 !important;
+
+}
+
+
+/* =========================================================
+   ELEMENTOS INTERNOS CLAROS
+========================================================= */
+
+html[data-theme="dark"]
+.main-content :is(
+
+    .account-field,
+    .density-option,
+    .theme-option,
+    .info-box,
+    .summary-box,
+    .detail-box
+
+) {
+
+    color: #dce8f1 !important;
+
+    background: #122230 !important;
+
+    border-color: #2d4659 !important;
+
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+html[data-theme="dark"]
+.main-content a {
+
+    color: #68b6ea;
+
+}
+
+
+/* =========================================================
+   LINHAS / DIVISORES
+========================================================= */
+
+html[data-theme="dark"]
+.main-content hr {
+
+    border-color: #2b4355 !important;
+
+}
+
+
+/* =========================================================
+   PAGINAÇÃO
+========================================================= */
+
+html[data-theme="dark"]
+.main-content :is(
+
+    .pagination button,
+    .paginacao button,
+    .page-button
+
+) {
+
+    color: #dce8f1 !important;
+
+    background: #172736 !important;
+
+    border-color: #365267 !important;
+
+}
+
+
+/* =========================================================
+   DENSIDADE COMPACTA GLOBAL
+========================================================= */
+
+html[data-density="compact"]
+.main-content :is(
+
+    th,
+    td
+
+) {
+
+    padding-top: 7px !important;
+
+    padding-bottom: 7px !important;
+
+}
+
+
+html[data-density="compact"]
+.main-content input,
+
+html[data-density="compact"]
+.main-content select {
+
+    min-height: 34px !important;
+
+}
+
+
+html[data-density="compact"]
+.main-content :is(
+
+    .form-card,
+    .users-card,
+    .sections-card,
+    .militares-card,
+    .table-card,
+    .filters-card,
+    .report-card,
+    .config-card
+
+) {
+
+    padding-top: 14px !important;
+
+    padding-bottom: 14px !important;
+
+}

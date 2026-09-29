@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Configurações do SICAMIL"
+    >
+
+    <title>
+        SICAMIL | Configurações
+    </title>
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="css/global.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/configuracoes.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+
+    <div
+        id="sidebar-container"
+        aria-label="Menu principal"
+    ></div>
+
+
+    <main class="main-content">
+
+
+        <div id="header-container"></div>
+
+
+        <div class="configuracoes-content">
+
+
+            <section class="config-page-heading">
+
+                <div>
+
+                    <span class="config-kicker">
+                        SISTEMA
+                    </span>
+
+                    <h2>
+                        Configurações
+                    </h2>
+
+                    <p>
+                        Gerencie sua conta, segurança e preferências de exibição do SICAMIL.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <div
+                id="configMensagem"
+                class="config-message"
+                role="alert"
+                hidden
+            ></div>
+
+
+            <div class="config-grid">
+
+
+                <!-- =========================================
+                     MINHA CONTA
+                ========================================== -->
+
+                <section class="config-card account-card">
+
+                    <header class="config-card-header">
+
+                        <div class="config-card-icon">
+                            👤
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Minha Conta
+                            </h3>
+
+                            <p>
+                                Informações vinculadas ao seu acesso.
+                            </p>
+
+                        </div>
+
+                    </header>
+
+
+                    <div class="account-profile">
+
+                        <div
+                            id="contaAvatar"
+                            class="account-avatar"
+                        >
+                            —
+                        </div>
+
+                        <div>
+
+                            <strong id="contaNomeGuerra">
+                                Carregando...
+                            </strong>
+
+                            <span id="contaTipo">
+                                —
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="account-details">
+
+
+                        <div class="account-field">
+
+                            <span>
+                                Nome completo
+                            </span>
+
+                            <strong id="contaNome">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="account-field">
+
+                            <span>
+                                Login
+                            </span>
+
+                            <strong id="contaLogin">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="account-field">
+
+                            <span>
+                                E-mail
+                            </span>
+
+                            <strong id="contaEmail">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="account-field">
+
+                            <span>
+                                Seção
+                            </span>
+
+                            <strong id="contaSecao">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="account-field">
+
+                            <span>
+                                Último acesso
+                            </span>
+
+                            <strong id="contaUltimoLogin">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="account-field">
+
+                            <span>
+                                Status
+                            </span>
+
+                            <strong
+                                id="contaStatus"
+                                class="status-account"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =========================================
+                     APARÊNCIA
+                ========================================== -->
+
+                <section class="config-card">
+
+                    <header class="config-card-header">
+
+                        <div class="config-card-icon">
+                            🎨
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Aparência
+                            </h3>
+
+                            <p>
+                                Personalize a exibição do sistema.
+                            </p>
+
+                        </div>
+
+                    </header>
+
+
+                    <div class="config-group">
+
+                        <label class="config-label">
+                            Tema
+                        </label>
+
+
+                        <div
+                            class="theme-options"
+                            id="themeOptions"
+                        >
+
+
+                            <button
+                                type="button"
+                                class="theme-option"
+                                data-theme-option="light"
+                            >
+
+                                <span class="theme-symbol">
+                                    ☀
+                                </span>
+
+                                <strong>
+                                    Claro
+                                </strong>
+
+                                <small>
+                                    Tema padrão
+                                </small>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="theme-option"
+                                data-theme-option="dark"
+                            >
+
+                                <span class="theme-symbol">
+                                    ☾
+                                </span>
+
+                                <strong>
+                                    Escuro
+                                </strong>
+
+                                <small>
+                                    Menor luminosidade
+                                </small>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="theme-option"
+                                data-theme-option="auto"
+                            >
+
+                                <span class="theme-symbol">
+                                    ◐
+                                </span>
+
+                                <strong>
+                                    Automático
+                                </strong>
+
+                                <small>
+                                    Segue o computador
+                                </small>
+
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="config-divider"></div>
+
+
+                    <div class="config-group">
+
+                        <label class="config-label">
+                            Densidade da interface
+                        </label>
+
+
+                        <div class="density-options">
+
+
+                            <label class="density-option">
+
+                                <input
+                                    type="radio"
+                                    name="densidade"
+                                    value="normal"
+                                >
+
+                                <span>
+
+                                    <strong>
+                                        Normal
+                                    </strong>
+
+                                    <small>
+                                        Mais espaçamento entre os elementos.
+                                    </small>
+
+                                </span>
+
+                            </label>
+
+
+                            <label class="density-option">
+
+                                <input
+                                    type="radio"
+                                    name="densidade"
+                                    value="compact"
+                                >
+
+                                <span>
+
+                                    <strong>
+                                        Compacta
+                                    </strong>
+
+                                    <small>
+                                        Melhor para visualizar mais registros.
+                                    </small>
+
+                                </span>
+
+                            </label>
+
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =========================================
+                     SEGURANÇA
+                ========================================== -->
+
+                <section class="config-card">
+
+                    <header class="config-card-header">
+
+                        <div class="config-card-icon">
+                            🔒
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Segurança
+                            </h3>
+
+                            <p>
+                                Altere a senha utilizada para acessar o SICAMIL.
+                            </p>
+
+                        </div>
+
+                    </header>
+
+
+                    <form
+                        id="senhaForm"
+                        class="password-form"
+                        autocomplete="off"
+                    >
+
+
+                        <div class="config-form-group">
+
+                            <label for="senhaAtual">
+                                Senha atual
+                            </label>
+
+                            <input
+                                type="password"
+                                id="senhaAtual"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="password-grid">
+
+
+                            <div class="config-form-group">
+
+                                <label for="novaSenha">
+                                    Nova senha
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="novaSenha"
+                                    minlength="8"
+                                    autocomplete="new-password"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="config-form-group">
+
+                                <label for="confirmarSenha">
+                                    Confirmar nova senha
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="confirmarSenha"
+                                    minlength="8"
+                                    autocomplete="new-password"
+                                    required
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+                        <p class="password-help">
+                            A nova senha deve possuir no mínimo 8 caracteres.
+                        </p>
+
+
+                        <button
+                            type="submit"
+                            id="btnAlterarSenha"
+                            class="config-primary-button"
+                        >
+                            Alterar senha
+                        </button>
+
+
+                    </form>
+
+                </section>
+
+
+
+                <!-- =========================================
+                     SISTEMA
+                ========================================== -->
+
+                <section class="config-card">
+
+                    <header class="config-card-header">
+
+                        <div class="config-card-icon">
+                            ℹ
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Sobre o SICAMIL
+                            </h3>
+
+                            <p>
+                                Informações da aplicação e conexão.
+                            </p>
+
+                        </div>
+
+                    </header>
+
+
+                    <div class="system-list">
+
+
+                        <div class="system-row">
+
+                            <span>
+                                Sistema
+                            </span>
+
+                            <strong>
+                                SICAMIL
+                            </strong>
+
+                        </div>
+
+
+                        <div class="system-row">
+
+                            <span>
+                                Descrição
+                            </span>
+
+                            <strong>
+                                Sistema de Controle de Militares
+                            </strong>
+
+                        </div>
+
+
+                        <div class="system-row">
+
+                            <span>
+                                Versão
+                            </span>
+
+                            <strong>
+                                1.0.0
+                            </strong>
+
+                        </div>
+
+ <div class="system-row">
+
+    <span>
+        Criado e desenvolvido por
+    </span>
+
+    <strong>
+        Vitor André da Silva do Nascimento
+    </strong>
+
+</div>
+
+
+<div class="system-row">
+
+    <span>
+        Ano de criação
+    </span>
+
+    <strong>
+        2026
+    </strong>
+
+</div>
+
+
+<div class="system-row">
+
+    <span>
+        <span>
+    Copyright
+</span>
+    </span>
+
+    <strong>
+        © 2026 SICAMIL
+    </strong>
+
+</div>
+
+
+                        <div class="system-row">
+
+                            <span>
+                                API e Banco de Dados
+                            </span>
+
+                            <strong
+                                id="statusSistema"
+                                class="system-online"
+                            >
+                                Verificando...
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+<script
+    type="module"
+    src="js/configuracoes.js"
+></script>
+
+</body>
+
+</html>

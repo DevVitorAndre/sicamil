@@ -11,7 +11,9 @@ class SessionService {
     /* =====================================================
        SALVAR USUÁRIO
 
-       Guarda apenas dados básicos do usuário no navegador.
+       Guarda apenas os dados necessários do usuário
+       no navegador.
+
        A autenticação verdadeira continua sendo controlada
        pelo backend através da sessão.
     ===================================================== */
@@ -45,11 +47,50 @@ class SessionService {
             tipo:
                 usuario.tipo,
 
+
+            /* =============================================
+               SEÇÃO
+            ============================================= */
+
             secao:
-                usuario.secao,
+                usuario.secao || null,
+
+
+            /* =============================================
+               MILITAR VINCULADO
+            ============================================= */
+
+            militar:
+                usuario.militar || null,
+
+
+            /* =============================================
+               POSTO / GRADUAÇÃO
+
+               Exemplo:
+               {
+                   id: "10",
+                   sigla: "3S",
+                   nome: "Terceiro Sargento",
+                   ordem: 10
+               }
+            ============================================= */
+
+            postoGraduacao:
+                usuario.postoGraduacao || null,
+
+
+            /* =============================================
+               PERMISSÕES
+            ============================================= */
 
             permissoes:
                 usuario.permissoes || [],
+
+
+            /* =============================================
+               STATUS
+            ============================================= */
 
             ativo:
                 usuario.ativo
@@ -59,7 +100,9 @@ class SessionService {
 
         sessionStorage.setItem(
             CHAVE_USUARIO,
-            JSON.stringify(dados)
+            JSON.stringify(
+                dados
+            )
         );
 
     }
@@ -87,7 +130,9 @@ class SessionService {
         try {
 
             const objeto =
-                JSON.parse(dados);
+                JSON.parse(
+                    dados
+                );
 
 
             return new Usuario(

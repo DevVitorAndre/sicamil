@@ -14,6 +14,7 @@ import registroRoutes from "./routes/registroRoutes.js";
 import pesquisaRoutes from "./routes/pesquisaRoutes.js";
 import relatorioRoutes from "./routes/relatorioRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
+import configuracaoRoutes from "./routes/configuracaoRoutes.js";
 
 const app =
     express();
@@ -238,6 +239,14 @@ app.get(
     }
 );
 
+/* =========================================================
+   CONFIGURAÇÕES
+========================================================= */
+
+app.use(
+    "/api/configuracoes",
+    configuracaoRoutes
+);
 
 /* =========================================================
    ROTA NAO ENCONTRADA

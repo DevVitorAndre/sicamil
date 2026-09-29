@@ -36,7 +36,9 @@ export const CONFIG = {
             "/pesquisa",
         
         relatorios:
-            "/relatorios"
+            "/relatorios",
+        configuracoes:
+            "/configuracoes"
 
     }
 

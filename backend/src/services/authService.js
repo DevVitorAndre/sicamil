@@ -4,10 +4,12 @@ import { pool } from "../config/database.js";
 
 
 /* =========================================================
-   BUSCAR USUARIO PELO LOGIN
+   BUSCAR USUÁRIO PELO LOGIN
 ========================================================= */
 
-async function buscarUsuarioPorLogin(login) {
+async function buscarUsuarioPorLogin(
+    login
+) {
 
     const resultado =
         await pool.query(
@@ -22,11 +24,46 @@ async function buscarUsuarioPorLogin(login) {
                 u.senha_hash,
                 u.tipo,
                 u.ativo,
+                u.militar_id,
 
-                s.id AS secao_id,
-                s.nome AS secao_nome,
-                s.sigla AS secao_sigla,
-                s.ativa AS secao_ativa,
+                s.id
+                    AS secao_id,
+
+                s.nome
+                    AS secao_nome,
+
+                s.sigla
+                    AS secao_sigla,
+
+                s.ativa
+                    AS secao_ativa,
+
+
+                m.id
+                    AS militar_id_real,
+
+                m.nome_completo
+                    AS militar_nome_completo,
+
+                m.nome_guerra
+                    AS militar_nome_guerra,
+
+                m.saram
+                    AS militar_saram,
+
+
+                pg.id
+                    AS posto_graduacao_id,
+
+                pg.sigla
+                    AS posto_graduacao_sigla,
+
+                pg.nome
+                    AS posto_graduacao_nome,
+
+                pg.ordem
+                    AS posto_graduacao_ordem,
+
 
                 COALESCE(
                     ARRAY_AGG(
@@ -39,23 +76,41 @@ async function buscarUsuarioPorLogin(login) {
                     '{}'
                 ) AS permissoes
 
+
             FROM usuarios u
+
 
             LEFT JOIN secoes s
                 ON s.id = u.secao_id
 
+
+            LEFT JOIN militares m
+                ON m.id = u.militar_id
+
+
+            LEFT JOIN postos_graduacoes pg
+                ON pg.id = m.posto_graduacao_id
+
+
             LEFT JOIN usuario_permissoes up
                 ON up.usuario_id = u.id
+
 
             LEFT JOIN permissoes p
                 ON p.id = up.permissao_id
 
+
             WHERE
-                LOWER(u.login) = LOWER($1)
+                LOWER(u.login) =
+                LOWER($1)
+
 
             GROUP BY
                 u.id,
-                s.id
+                s.id,
+                m.id,
+                pg.id
+
 
             LIMIT 1
             `,
@@ -74,10 +129,12 @@ async function buscarUsuarioPorLogin(login) {
 
 
 /* =========================================================
-   BUSCAR USUARIO PELO ID
+   BUSCAR USUÁRIO PELO ID
 ========================================================= */
 
-export async function buscarUsuarioPorId(id) {
+export async function buscarUsuarioPorId(
+    id
+) {
 
     const resultado =
         await pool.query(
@@ -91,11 +148,46 @@ export async function buscarUsuarioPorId(id) {
                 u.email,
                 u.tipo,
                 u.ativo,
+                u.militar_id,
 
-                s.id AS secao_id,
-                s.nome AS secao_nome,
-                s.sigla AS secao_sigla,
-                s.ativa AS secao_ativa,
+                s.id
+                    AS secao_id,
+
+                s.nome
+                    AS secao_nome,
+
+                s.sigla
+                    AS secao_sigla,
+
+                s.ativa
+                    AS secao_ativa,
+
+
+                m.id
+                    AS militar_id_real,
+
+                m.nome_completo
+                    AS militar_nome_completo,
+
+                m.nome_guerra
+                    AS militar_nome_guerra,
+
+                m.saram
+                    AS militar_saram,
+
+
+                pg.id
+                    AS posto_graduacao_id,
+
+                pg.sigla
+                    AS posto_graduacao_sigla,
+
+                pg.nome
+                    AS posto_graduacao_nome,
+
+                pg.ordem
+                    AS posto_graduacao_ordem,
+
 
                 COALESCE(
                     ARRAY_AGG(
@@ -108,23 +200,40 @@ export async function buscarUsuarioPorId(id) {
                     '{}'
                 ) AS permissoes
 
+
             FROM usuarios u
+
 
             LEFT JOIN secoes s
                 ON s.id = u.secao_id
 
+
+            LEFT JOIN militares m
+                ON m.id = u.militar_id
+
+
+            LEFT JOIN postos_graduacoes pg
+                ON pg.id = m.posto_graduacao_id
+
+
             LEFT JOIN usuario_permissoes up
                 ON up.usuario_id = u.id
+
 
             LEFT JOIN permissoes p
                 ON p.id = up.permissao_id
 
+
             WHERE
                 u.id = $1
 
+
             GROUP BY
                 u.id,
-                s.id
+                s.id,
+                m.id,
+                pg.id
+
 
             LIMIT 1
             `,
@@ -195,9 +304,11 @@ export async function autenticarUsuario(
         `
         UPDATE usuarios
 
-        SET ultimo_login = NOW()
+        SET
+            ultimo_login = NOW()
 
-        WHERE id = $1
+        WHERE
+            id = $1
         `,
         [
             usuario.id
@@ -213,12 +324,14 @@ export async function autenticarUsuario(
 
 
 /* =========================================================
-   FORMATAR USUARIO PARA O FRONTEND
+   FORMATAR USUÁRIO PARA O FRONTEND
 
    senha_hash nunca sai daqui.
 ========================================================= */
 
-function formatarUsuario(usuario) {
+function formatarUsuario(
+    usuario
+) {
 
     return {
 
@@ -264,8 +377,49 @@ function formatarUsuario(usuario) {
                 : null,
 
 
+        militar:
+            usuario.militar_id_real
+                ? {
+
+                    id:
+                        usuario.militar_id_real,
+
+                    nomeCompleto:
+                        usuario.militar_nome_completo,
+
+                    nomeGuerra:
+                        usuario.militar_nome_guerra,
+
+                    saram:
+                        usuario.militar_saram
+
+                }
+                : null,
+
+
+        postoGraduacao:
+            usuario.posto_graduacao_id
+                ? {
+
+                    id:
+                        usuario.posto_graduacao_id,
+
+                    sigla:
+                        usuario.posto_graduacao_sigla,
+
+                    nome:
+                        usuario.posto_graduacao_nome,
+
+                    ordem:
+                        usuario.posto_graduacao_ordem
+
+                }
+                : null,
+
+
         permissoes:
-            usuario.permissoes || []
+            usuario.permissoes ||
+            []
 
     };
 

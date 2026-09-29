@@ -8,6 +8,8 @@ export class Usuario {
         email = "",
         tipo = "",
         secao = null,
+        militar = null,
+        postoGraduacao = null,
         permissoes = [],
         ativo = true
     } = {}) {
@@ -26,19 +28,39 @@ export class Usuario {
 
         this.secao = secao;
 
-        this.permissoes = permissoes;
+        this.militar = militar;
 
-        this.ativo = ativo;
+        this.postoGraduacao =
+            postoGraduacao;
+
+        this.permissoes =
+            permissoes;
+
+        this.ativo =
+            ativo;
 
     }
 
 
-    possuiPermissao(permissao) {
+    /* =========================================================
+       PERMISSÕES
+    ========================================================= */
 
-        return this.permissoes.includes(permissao);
+    possuiPermissao(
+        permissao
+    ) {
+
+        return this.permissoes
+            .includes(
+                permissao
+            );
 
     }
 
+
+    /* =========================================================
+       NOME PARA EXIBIÇÃO
+    ========================================================= */
 
     get nomeExibicao() {
 
@@ -51,26 +73,81 @@ export class Usuario {
     }
 
 
+    /* =========================================================
+       IDENTIFICAÇÃO MILITAR
+
+       Exemplo:
+       3S VITOR ANDRÉ
+    ========================================================= */
+
+    get identificacaoMilitar() {
+
+        const ptGrad =
+            this.postoGraduacao
+                ?.sigla ||
+            "";
+
+
+        const nome =
+            this.nomeGuerra ||
+            this.militar
+                ?.nomeGuerra ||
+            this.nome ||
+            this.login ||
+            "Usuário";
+
+
+        return [
+            ptGrad,
+            nome
+        ]
+            .filter(
+                Boolean
+            )
+            .join(
+                " "
+            );
+
+    }
+
+
+    /* =========================================================
+       INICIAIS
+    ========================================================= */
+
     get iniciais() {
 
         const nome =
-            this.nomeExibicao.trim();
+            this.nomeExibicao
+                .trim();
+
 
         if (!nome) {
+
             return "--";
+
         }
 
 
         const partes =
             nome
-                .split(/\s+/)
-                .filter(Boolean);
+                .split(
+                    /\s+/
+                )
+                .filter(
+                    Boolean
+                );
 
 
-        if (partes.length === 1) {
+        if (
+            partes.length === 1
+        ) {
 
             return partes[0]
-                .substring(0, 2)
+                .substring(
+                    0,
+                    2
+                )
                 .toUpperCase();
 
         }
@@ -78,7 +155,9 @@ export class Usuario {
 
         return (
             partes[0][0] +
-            partes[partes.length - 1][0]
+            partes[
+                partes.length - 1
+            ][0]
         ).toUpperCase();
 
     }

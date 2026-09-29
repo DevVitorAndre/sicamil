@@ -1,6 +1,19 @@
+import "./theme.js";
+
+
 import {
     sessionService
 } from "./services/sessionService.js";
+
+
+import {
+    api
+} from "./services/api.js";
+
+
+import {
+    CONFIG
+} from "./config.js";
 
 
 /* =========================================================
@@ -31,6 +44,8 @@ export async function carregarComponentes() {
     preencherDataAtual();
 
     preencherUsuario();
+
+    configurarBotaoSair();
 
 }
 
@@ -124,7 +139,7 @@ function aplicarPermissoesMenu() {
 
 
     itensProtegidos.forEach(
-        (item) => {
+        item => {
 
             const permissao =
                 item.dataset.permission;
@@ -149,7 +164,7 @@ function aplicarPermissoesMenu() {
 
 
 /* =========================================================
-   ESCONDER "CADASTROS" CASO NÃO HAJA OPÇÕES
+   ESCONDER CADASTROS CASO NÃO HAJA OPÇÕES
 ========================================================= */
 
 function ajustarTituloCadastros() {
@@ -174,12 +189,14 @@ function ajustarTituloCadastros() {
 
 
     const existeItemVisivel =
-        Array.from(
-            itens
-        ).some(
-            (item) =>
-                !item.hidden
-        );
+        Array
+            .from(
+                itens
+            )
+            .some(
+                item =>
+                    !item.hidden
+            );
 
 
     titulo.hidden =
@@ -208,7 +225,7 @@ function marcarPaginaAtual() {
 
 
     links.forEach(
-        (link) => {
+        link => {
 
             const destino =
                 link
@@ -266,7 +283,7 @@ function preencherDataAtual() {
 
     if (diaSemana) {
 
-        diaSemana.textContent =
+        const texto =
             agora.toLocaleDateString(
                 "pt-BR",
                 {
@@ -274,6 +291,12 @@ function preencherDataAtual() {
                         "long"
                 }
             );
+
+
+        diaSemana.textContent =
+            texto.charAt(0)
+                .toUpperCase() +
+            texto.slice(1);
 
     }
 
@@ -331,13 +354,48 @@ function preencherUsuario() {
         );
 
 
+    const nomeGuerra =
+        usuario.nomeGuerra ||
+        usuario.nome ||
+        usuario.login ||
+        "Usuário";
+
+
+    /*
+        Quando o backend enviar algo como:
+
+        postoGraduacao: {
+            sigla: "3S"
+        }
+
+        automaticamente aparecerá:
+
+        3S VITOR ANDRÉ
+    */
+
+    const postoGraduacao =
+        usuario.postoGraduacao
+            ?.sigla ||
+        "";
+
+
+    const identificacao =
+        [
+            postoGraduacao,
+            nomeGuerra
+        ]
+            .filter(
+                Boolean
+            )
+            .join(
+                " "
+            );
+
+
     if (saudacao) {
 
         saudacao.textContent =
-            usuario.nomeGuerra ||
-            usuario.nome ||
-            usuario.login ||
-            "Usuário";
+            nomeGuerra;
 
     }
 
@@ -345,10 +403,7 @@ function preencherUsuario() {
     if (nome) {
 
         nome.textContent =
-            usuario.nome ||
-            usuario.nomeGuerra ||
-            usuario.login ||
-            "Usuário";
+            identificacao;
 
     }
 
@@ -367,9 +422,143 @@ function preencherUsuario() {
 
         avatar.textContent =
             usuario.iniciais ||
-            "--";
+            obterIniciais(
+                nomeGuerra
+            );
 
     }
+
+}
+
+
+/* =========================================================
+   INICIAIS
+========================================================= */
+
+function obterIniciais(
+    nome = ""
+) {
+
+    const partes =
+        nome
+            .trim()
+            .split(
+                /\s+/
+            )
+            .filter(
+                Boolean
+            );
+
+
+    if (
+        partes.length === 0
+    ) {
+
+        return "--";
+
+    }
+
+
+    if (
+        partes.length === 1
+    ) {
+
+        return partes[0]
+            .substring(
+                0,
+                2
+            )
+            .toUpperCase();
+
+    }
+
+
+    return (
+        partes[0][0] +
+        partes[
+            partes.length - 1
+        ][0]
+    ).toUpperCase();
+
+}
+
+
+/* =========================================================
+   BOTÃO SAIR
+========================================================= */
+
+function configurarBotaoSair() {
+
+    const botao =
+        document.getElementById(
+            "btnSairSistema"
+        );
+
+
+    if (!botao) {
+
+        return;
+
+    }
+
+
+    botao.addEventListener(
+        "click",
+        async () => {
+
+            if (
+                botao.disabled
+            ) {
+
+                return;
+
+            }
+
+
+            botao.disabled =
+                true;
+
+
+            botao.textContent =
+                "Saindo...";
+
+
+            try {
+
+                await api.post(
+                    CONFIG.ROTAS.logout
+                );
+
+
+                window.location.href =
+                    "index.html";
+
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao sair do SICAMIL:",
+                    erro
+                );
+
+
+                botao.disabled =
+                    false;
+
+
+                botao.textContent =
+                    "Sair";
+
+
+                window.alert(
+                    erro.message ||
+                    "Não foi possível encerrar a sessão."
+                );
+
+            }
+
+        }
+    );
 
 }
 
@@ -397,7 +586,7 @@ function formatarTipoUsuario(
         .toLowerCase()
         .replace(
             /\b\w/g,
-            (letra) =>
+            letra =>
                 letra.toUpperCase()
         );
 
