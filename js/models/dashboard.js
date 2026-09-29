@@ -1,6 +1,4 @@
 import { Usuario } from "./Usuario.js";
-import { Militar } from "./Militar.js";
-import { Chamada } from "./Chamada.js";
 
 
 export class Dashboard {
@@ -11,7 +9,7 @@ export class Dashboard {
         efetivoPorSecao = [],
         situacoes = [],
         chamadas = [],
-        presentes = []
+        militaresDisponiveis = []
     } = {}) {
 
 
@@ -24,19 +22,19 @@ export class Dashboard {
         this.resumo = {
 
             efetivoTotal:
-                resumo.efetivoTotal ?? null,
+                resumo.efetivoTotal ?? 0,
 
-            presentesHoje:
-                resumo.presentesHoje ?? null,
+            disponiveisHoje:
+                resumo.disponiveisHoje ?? 0,
 
-            naoDisponiveis:
-                resumo.naoDisponiveis ?? null,
+            indisponiveisHoje:
+                resumo.indisponiveisHoje ?? 0,
 
             secoesPendentes:
-                resumo.secoesPendentes ?? null,
+                resumo.secoesPendentes ?? 0,
 
             secoesConcluidas:
-                resumo.secoesConcluidas ?? null
+                resumo.secoesConcluidas ?? 0
 
         };
 
@@ -55,23 +53,15 @@ export class Dashboard {
 
         this.chamadas =
             Array.isArray(chamadas)
-
-                ? chamadas.map(
-                    chamada =>
-                        new Chamada(chamada)
-                )
-
+                ? chamadas
                 : [];
 
 
-        this.presentes =
-            Array.isArray(presentes)
-
-                ? presentes.map(
-                    militar =>
-                        new Militar(militar)
-                )
-
+        this.militaresDisponiveis =
+            Array.isArray(
+                militaresDisponiveis
+            )
+                ? militaresDisponiveis
                 : [];
 
     }

@@ -13,11 +13,7 @@ import chamadaRoutes from "./routes/chamadaRoutes.js";
 import registroRoutes from "./routes/registroRoutes.js";
 import pesquisaRoutes from "./routes/pesquisaRoutes.js";
 import relatorioRoutes from "./routes/relatorioRoutes.js";
-
-import {
-    exigirAutenticacao
-} from "./middleware/authMiddleware.js";
-
+import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 const app =
     express();
@@ -77,6 +73,17 @@ app.use(
     "/api/auth",
     authRoutes
 );
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+
+app.use(
+    "/api/dashboard",
+    dashboardRoutes
+);
+
 
 /* =========================================================
    SEÇÕES
@@ -227,66 +234,6 @@ app.get(
                 });
 
         }
-
-    }
-);
-
-
-/* =========================================================
-   DASHBOARD
-
-   Agora protegido por login.
-========================================================= */
-
-app.get(
-    "/api/dashboard",
-
-    exigirAutenticacao,
-
-    (req, res) => {
-
-        res.status(200).json({
-
-            usuario:
-                null,
-
-
-            resumo: {
-
-                efetivoTotal:
-                    null,
-
-                presentesHoje:
-                    null,
-
-                naoDisponiveis:
-                    null,
-
-                secoesPendentes:
-                    null,
-
-                secoesConcluidas:
-                    null
-
-            },
-
-
-            efetivoPorSecao:
-                [],
-
-
-            situacoes:
-                [],
-
-
-            chamadas:
-                [],
-
-
-            presentes:
-                []
-
-        });
 
     }
 );

@@ -14,6 +14,7 @@ import {
     formatarNumero
 } from "./utils/formatters.js";
 
+let efetivoPorSecaoAtual = [];
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -61,6 +62,16 @@ async function iniciarDashboard() {
         renderizarDashboard(
             dashboard
         );
+
+        efetivoPorSecaoAtual =
+    Array.isArray(
+        dashboard.efetivoPorSecao
+    )
+        ? dashboard.efetivoPorSecao
+        : [];
+
+
+configurarFiltroEfetivo();
 
 
     } catch (erro) {
@@ -113,16 +124,16 @@ function renderizarDashboard(
 
 
     preencherValor(
-        "presentesHoje",
+        "disponiveisHoje",
         dashboard.resumo
-            ?.presentesHoje
+            ?.disponiveisHoje
     );
 
 
     preencherValor(
-        "naoDisponiveis",
+        "indisponiveisHoje",
         dashboard.resumo
-            ?.naoDisponiveis
+            ?.indisponiveisHoje
     );
 
 
@@ -155,12 +166,92 @@ function renderizarDashboard(
     );
 
 
-    renderizarPresentes(
-        dashboard.presentes
+    renderizarDisponiveis(
+        dashboard.militaresDisponiveis
     );
 
 }
 
+/* =========================================================
+   FILTRO EFETIVO POR SEÇÃO
+========================================================= */
+
+function configurarFiltroEfetivo() {
+
+    const select =
+        document.getElementById(
+            "filtroEfetivoSecao"
+        );
+
+
+    if (!select) {
+
+        return;
+
+    }
+
+
+    select.innerHTML = `
+
+        <option value="">
+            Todas
+        </option>
+
+        ${efetivoPorSecaoAtual
+            .map(
+                secao => `
+
+                    <option value="${secao.id}">
+                        ${escaparHTML(
+                            secao.sigla ||
+                            secao.nome
+                        )}
+                    </option>
+
+                `
+            )
+            .join("")}
+
+    `;
+
+
+    select.onchange =
+        () => {
+
+            const secaoId =
+                select.value;
+
+
+            if (!secaoId) {
+
+                renderizarEfetivoPorSecao(
+                    efetivoPorSecaoAtual
+                );
+
+                return;
+
+            }
+
+
+            const filtrado =
+                efetivoPorSecaoAtual.filter(
+                    secao =>
+                        String(
+                            secao.id
+                        ) ===
+                        String(
+                            secaoId
+                        )
+                );
+
+
+            renderizarEfetivoPorSecao(
+                filtrado
+            );
+
+        };
+
+}
 
 /* =========================================================
    EFETIVO POR SEÇÃO
@@ -306,13 +397,17 @@ function renderizarSituacoes(
     ) {
 
         totalElemento.textContent =
-            "—";
+            "0";
 
 
         legenda.innerHTML = `
+
             <div class="empty-state">
-                Nenhum dado disponível.
+
+                Nenhuma situação registrada hoje.
+
             </div>
+
         `;
 
 
@@ -323,6 +418,20 @@ function renderizarSituacoes(
         return;
 
     }
+
+
+    const cores = [
+
+        "#1687e8",
+        "#18b86b",
+        "#f04455",
+        "#f59d2a",
+        "#7857d8",
+        "#14a6a6",
+        "#db63a5",
+        "#6d8296"
+
+    ];
 
 
     const total =
@@ -345,38 +454,122 @@ function renderizarSituacoes(
         );
 
 
+    const dadosComCor =
+        dados.map(
+            (
+                item,
+                indice
+            ) => ({
+
+                ...item,
+
+                cor:
+                    item.cor ||
+                    cores[
+                        indice %
+                        cores.length
+                    ]
+
+            })
+        );
+
+
+    let acumulado =
+        0;
+
+
+    const partes =
+        dadosComCor.map(
+            item => {
+
+                const quantidade =
+                    Number(
+                        item.total || 0
+                    );
+
+
+                const inicio =
+                    total > 0
+                        ? (
+                            acumulado /
+                            total
+                        ) * 100
+                        : 0;
+
+
+                acumulado +=
+                    quantidade;
+
+
+                const fim =
+                    total > 0
+                        ? (
+                            acumulado /
+                            total
+                        ) * 100
+                        : 0;
+
+
+                return `
+                    ${item.cor}
+                    ${inicio}% 
+                    ${fim}%
+                `;
+
+            }
+        );
+
+
+    grafico.style.background =
+        total > 0
+
+            ? `conic-gradient(
+                ${partes.join(",")}
+            )`
+
+            : "#e1e9f0";
+
+
     legenda.innerHTML =
-        dados
+        dadosComCor
             .map(
-                (item) => `
+                item => `
+
                     <div class="legend-item">
 
                         <span
                             class="dot"
                             style="
                                 background:
-                                ${item.cor || "#7f9bb5"};
+                                ${item.cor};
                             "
                         ></span>
+
 
                         <div>
 
                             <strong>
+
                                 ${escaparHTML(
                                     item.nome ||
                                     "Situação"
                                 )}
+
                             </strong>
 
+
                             <small>
+
                                 ${formatarNumero(
                                     item.total
                                 )}
+
                             </small>
 
                         </div>
 
                     </div>
+
                 `
             )
             .join("");
@@ -465,16 +658,16 @@ function renderizarChamadas(
 
 
 /* =========================================================
-   PRESENTES
+   MILITARES DISPONÍVEIS
 ========================================================= */
 
-function renderizarPresentes(
+function renderizarDisponiveis(
     militares = []
 ) {
 
     const tbody =
         document.getElementById(
-            "tabelaPresentes"
+            "tabelaDisponiveis"
         );
 
 
@@ -491,14 +684,18 @@ function renderizarPresentes(
     ) {
 
         tbody.innerHTML = `
+
             <tr>
+
                 <td
                     colspan="4"
                     class="table-empty"
                 >
                     Nenhum militar disponível.
                 </td>
+
             </tr>
+
         `;
 
         return;
@@ -509,40 +706,61 @@ function renderizarPresentes(
     tbody.innerHTML =
         militares
             .map(
-                (militar) => `
+                militar => `
+
                     <tr>
 
                         <td>
+
                             ${escaparHTML(
-                                militar.postoGraduacao ||
+                                militar
+                                    .postoGraduacao
+                                    ?.sigla ||
                                 "—"
                             )}
+
                         </td>
 
-                        <td>
-                            ${escaparHTML(
-                                militar.nomeGuerra ||
-                                "—"
-                            )}
-                        </td>
 
                         <td>
+
                             ${escaparHTML(
-                                militar.secao?.sigla ||
-                                militar.secao?.nome ||
+                                militar
+                                    .nomeGuerra ||
                                 "—"
                             )}
+
                         </td>
 
+
                         <td>
+
                             ${escaparHTML(
-                                militar.situacao?.nome ||
-                                militar.situacao ||
+                                militar
+                                    .secao
+                                    ?.sigla ||
+                                militar
+                                    .secao
+                                    ?.nome ||
                                 "—"
                             )}
+
+                        </td>
+
+
+                        <td>
+
+                            ${escaparHTML(
+                                militar
+                                    .situacao
+                                    ?.nome ||
+                                "—"
+                            )}
+
                         </td>
 
                     </tr>
+
                 `
             )
             .join("");
@@ -559,13 +777,13 @@ function exibirCarregamento() {
     [
 
         "efetivoTotal",
-        "presentesHoje",
-        "naoDisponiveis",
+        "disponiveisHoje",
+        "indisponiveisHoje",
         "secoesPendentes",
         "secoesConcluidas"
 
     ].forEach(
-        (id) => {
+        id => {
 
             const elemento =
                 document.getElementById(
