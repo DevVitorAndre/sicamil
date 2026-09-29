@@ -24,7 +24,13 @@ export const CONFIG = {
             "/usuarios",
 
         militares:
-            "/militares"
+            "/militares",
+
+        chamadas:
+            "/chamadas",
+
+        registros:
+            "/registros"
 
     }
 

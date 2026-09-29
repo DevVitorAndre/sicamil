@@ -9,6 +9,8 @@ import authRoutes from "./routes/authRoutes.js";
 import secaoRoutes from "./routes/secaoRoutes.js";
 import usuarioRoutes from "./routes/usuarioRoutes.js";
 import militarRoutes from "./routes/militarRoutes.js";
+import chamadaRoutes from "./routes/chamadaRoutes.js";
+import registroRoutes from "./routes/registroRoutes.js";
 
 import {
     exigirAutenticacao
@@ -102,6 +104,24 @@ app.use(
     militarRoutes
 );
 
+/* =========================================================
+   CHAMADAS
+========================================================= */
+
+app.use(
+    "/api/chamadas",
+    chamadaRoutes
+);
+
+/* =========================================================
+   REGISTROS
+========================================================= */
+
+app.use(
+    "/api/registros",
+    registroRoutes
+);
+    
 
 /* =========================================================
    HEALTH DA API

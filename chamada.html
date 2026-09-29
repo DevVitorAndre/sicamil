@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Controle de Chamada - SICAMIL"
+    >
+
+    <title>
+        SICAMIL | Chamada
+    </title>
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="css/global.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/chamada.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <div class="app-layout">
+
+
+        <!-- =========================================
+             SIDEBAR
+        ========================================== -->
+
+        <div
+            id="sidebar-container"
+            aria-label="Menu principal"
+        ></div>
+
+
+        <!-- =========================================
+             CONTEÚDO
+        ========================================== -->
+
+        <main class="main-content">
+
+
+            <!-- HEADER -->
+
+            <div id="header-container"></div>
+
+
+            <div class="chamada-content">
+
+
+                <!-- =========================================
+                     CABEÇALHO
+                ========================================== -->
+
+                <section class="page-heading">
+
+
+                    <div>
+
+                        <span class="page-kicker">
+                            CONTROLE DE EFETIVO
+                        </span>
+
+                        <h2>
+                            Chamada
+                        </h2>
+
+                        <p>
+                            Registre a situação diária dos militares da seção.
+                        </p>
+
+                    </div>
+
+
+                    <div class="chamada-heading-status">
+
+                        <span>
+                            Status
+                        </span>
+
+                        <strong
+                            id="chamadaStatus"
+                            class="chamada-status pendente"
+                        >
+                            Não iniciada
+                        </strong>
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =========================================
+                     MENSAGEM
+                ========================================== -->
+
+                <div
+                    id="chamadaMensagem"
+                    class="chamada-message"
+                    role="alert"
+                    hidden
+                ></div>
+
+
+                <!-- =========================================
+                     CONFIGURAÇÃO DA CHAMADA
+                ========================================== -->
+
+                <section class="chamada-config-card">
+
+
+                    <header class="section-header">
+
+                        <div>
+
+                            <h3>
+                                Chamada do Dia
+                            </h3>
+
+                            <p>
+                                Selecione a data e a seção para carregar o efetivo.
+                            </p>
+
+                        </div>
+
+                    </header>
+
+
+                    <div class="chamada-config-body">
+
+
+                        <!-- DATA -->
+
+                        <div class="config-field">
+
+                            <label for="chamadaData">
+                                Data
+                            </label>
+
+                            <input
+                                type="date"
+                                id="chamadaData"
+                            >
+
+                        </div>
+
+
+                        <!-- SEÇÃO -->
+
+                        <div
+                            class="config-field"
+                            id="grupoChamadaSecao"
+                        >
+
+                            <label for="chamadaSecao">
+                                Seção
+                            </label>
+
+                            <select id="chamadaSecao">
+
+                                <option value="">
+                                    Selecione...
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- BOTÃO -->
+
+                        <div class="config-action">
+
+                            <button
+                                type="button"
+                                id="btnCarregarChamada"
+                                class="btn-primary"
+                            >
+                                Carregar Chamada
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =========================================
+                     INDICADORES
+                ========================================== -->
+
+                <section class="chamada-indicadores">
+
+
+                    <article class="chamada-indicador">
+
+                        <span>
+                            Efetivo
+                        </span>
+
+                        <strong id="totalMilitares">
+                            0
+                        </strong>
+
+                    </article>
+
+
+                    <article class="chamada-indicador presente">
+
+                        <span>
+                            Disponíveis
+                        </span>
+
+                        <strong id="totalPresentes">
+                            0
+                        </strong>
+
+                    </article>
+
+
+                    <article class="chamada-indicador indisponivel">
+
+                        <span>
+                            Indisponíveis
+                        </span>
+
+                        <strong id="totalIndisponiveis">
+                            0
+                        </strong>
+
+                    </article>
+
+
+                    <article class="chamada-indicador pendente">
+
+                        <span>
+                            Pendentes
+                        </span>
+
+                        <strong id="totalPendentes">
+                            0
+                        </strong>
+
+                    </article>
+
+
+                </section>
+
+
+                <!-- =========================================
+                     LISTA DA CHAMADA
+                ========================================== -->
+
+                <section
+                    class="chamada-card"
+                    id="painelChamada"
+                >
+
+
+                    <header class="section-header">
+
+
+                        <div>
+
+                            <h3 id="tituloSecaoChamada">
+                                Efetivo da Seção
+                            </h3>
+
+                            <p id="subtituloChamada">
+                                Carregue uma seção para iniciar a chamada.
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="btnMarcarTodosPresentes"
+                            class="btn-mark-all"
+                            disabled
+                        >
+                            ✓ Marcar todos como Presente
+                        </button>
+
+
+                    </header>
+
+
+                    <!-- =====================================
+                         TABELA
+                    ====================================== -->
+
+                    <div class="chamada-table-wrapper">
+
+
+                        <table class="chamada-table">
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        PT / GRAD
+                                    </th>
+
+                                    <th>
+                                        MILITAR
+                                    </th>
+
+                                    <th class="col-presenca">
+                                        PRESENTE
+                                    </th>
+
+                                    <th class="col-presenca">
+                                        FALTA
+                                    </th>
+
+                                    <th>
+                                        SITUAÇÃO
+                                    </th>
+
+                                    <th>
+                                        OBSERVAÇÃO
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="tabelaChamada">
+
+                                <tr>
+
+                                    <td
+                                        colspan="6"
+                                        class="table-empty"
+                                    >
+                                        Selecione a data e a seção para carregar a chamada.
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+
+
+                    <!-- =====================================
+                         RODAPÉ
+                    ====================================== -->
+
+                    <footer class="chamada-footer">
+
+
+                        <div class="chamada-footer-info">
+
+                            <span>
+                                Responsável:
+                            </span>
+
+                            <strong id="responsavelChamada">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="chamada-footer-actions">
+
+
+                            <button
+                                type="button"
+                                id="btnSalvarChamada"
+                                class="btn-secondary"
+                                disabled
+                            >
+                                Salvar Chamada
+                            </button>
+
+
+                            <button
+                                type="button"
+                                id="btnFinalizarChamada"
+                                class="btn-finalizar"
+                                disabled
+                            >
+                                Finalizar Chamada
+                            </button>
+
+
+                        </div>
+
+
+                    </footer>
+
+
+                </section>
+
+
+            </div>
+
+
+        </main>
+
+
+    </div>
+
+
+    <script
+        type="module"
+        src="js/chamada.js"
+    ></script>
+
+
+</body>
+
+</html>

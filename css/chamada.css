@@ -1,0 +1,1076 @@
+/* =========================================================
+   SICAMIL
+   CONTROLE DE CHAMADA
+========================================================= */
+
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
+
+.chamada-content {
+    padding: 22px;
+    background: #eef3f8;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA PÁGINA
+========================================================= */
+
+.page-heading {
+    width: 100%;
+    min-height: 98px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 18px;
+
+    padding: 18px 20px;
+
+    border: 1px solid #c6d9e8;
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #eaf4fc 0%,
+            #e4f0fa 100%
+        );
+}
+
+
+.page-kicker {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #1970b9;
+
+    font-size: 0.63rem;
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+}
+
+
+.page-heading h2 {
+    margin: 3px 0 5px;
+
+    color: #173e63;
+
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+
+.page-heading p {
+    margin: 0;
+
+    color: #67839d;
+
+    font-size: 0.76rem;
+}
+
+
+/* =========================================================
+   STATUS SUPERIOR
+========================================================= */
+
+.chamada-heading-status {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.chamada-heading-status > span {
+    color: #72889b;
+
+    font-size: 0.67rem;
+    font-weight: 700;
+}
+
+
+.chamada-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 105px;
+
+    padding: 6px 11px;
+
+    border-radius: 20px;
+
+    font-size: 0.64rem;
+    font-weight: 800;
+}
+
+
+/* PENDENTE */
+
+.chamada-status.pendente {
+    border: 1px solid #e5d5a6;
+
+    color: #956715;
+
+    background: #fff4d6;
+}
+
+
+/* EM ANDAMENTO */
+
+.chamada-status.andamento {
+    border: 1px solid #aed0e9;
+
+    color: #146aa8;
+
+    background: #e6f3fc;
+}
+
+
+/* REALIZADA */
+
+.chamada-status.realizada {
+    border: 1px solid #a9dfbe;
+
+    color: #087944;
+
+    background: #ddf5e7;
+}
+
+
+/* =========================================================
+   MENSAGENS
+========================================================= */
+
+.chamada-message {
+    margin-bottom: 16px;
+
+    padding: 11px 14px;
+
+    border-radius: 7px;
+
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+
+.chamada-message.success {
+    border: 1px solid #b9e4cf;
+
+    color: #087647;
+
+    background: #e7f7ef;
+}
+
+
+.chamada-message.error {
+    border: 1px solid #f0c3c3;
+
+    color: #b52e2e;
+
+    background: #fdeaea;
+}
+
+
+.chamada-message.warning {
+    border: 1px solid #ead8aa;
+
+    color: #966118;
+
+    background: #fff5df;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.chamada-config-card,
+.chamada-card {
+    position: relative;
+
+    margin-bottom: 18px;
+
+    overflow: hidden;
+
+    border: 1px solid #c6d8e7;
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 7px 20px
+        rgba(17, 52, 87, 0.045);
+}
+
+
+/* detalhe azul lateral */
+
+.chamada-config-card::before,
+.chamada-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    z-index: 5;
+
+    width: 3px;
+    height: 66px;
+
+    background: #1683d6;
+}
+
+
+/* =========================================================
+   CABEÇALHO DOS CARDS
+========================================================= */
+
+.section-header {
+    min-height: 66px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 13px 17px;
+
+    border-bottom: 1px solid #c9d9e7;
+
+    background:
+        linear-gradient(
+            90deg,
+            #e9f4fc,
+            #e2eff9
+        );
+}
+
+
+.section-header h3 {
+    margin: 0 0 3px;
+
+    color: #183f64;
+
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+
+.section-header p {
+    margin: 0;
+
+    color: #6e879d;
+
+    font-size: 0.67rem;
+}
+
+
+/* =========================================================
+   CONFIGURAÇÃO
+========================================================= */
+
+.chamada-config-body {
+    display: grid;
+
+    grid-template-columns:
+        180px
+        minmax(260px, 1fr)
+        auto;
+
+    align-items: end;
+
+    gap: 14px;
+
+    padding: 17px;
+}
+
+
+.config-field {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+.config-field label {
+    color: #49657c;
+
+    font-size: 0.67rem;
+    font-weight: 700;
+}
+
+
+.config-field input,
+.config-field select {
+    width: 100%;
+    height: 38px;
+
+    padding: 0 10px;
+
+    border: 1px solid #cbd9e4;
+    border-radius: 6px;
+
+    outline: none;
+
+    color: #2f506a;
+
+    background: #ffffff;
+
+    font-family: inherit;
+    font-size: 0.72rem;
+}
+
+
+.config-field input:focus,
+.config-field select:focus {
+    border-color: #2e86c7;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(36, 128, 195, 0.10);
+}
+
+
+.config-action {
+    display: flex;
+    align-items: flex-end;
+}
+
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.btn-primary,
+.btn-secondary,
+.btn-finalizar,
+.btn-mark-all {
+    min-height: 38px;
+
+    padding: 0 15px;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+    font-size: 0.7rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.18s ease;
+}
+
+
+/* PRINCIPAL */
+
+.btn-primary {
+    border: 1px solid #1471bc;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            180deg,
+            #2487d6,
+            #1471bc
+        );
+}
+
+
+.btn-primary:hover:not(:disabled) {
+    background:
+        linear-gradient(
+            180deg,
+            #197ac6,
+            #0f609f
+        );
+}
+
+
+/* SECUNDÁRIO */
+
+.btn-secondary {
+    border: 1px solid #cbd8e3;
+
+    color: #415f77;
+
+    background: #ffffff;
+}
+
+
+.btn-secondary:hover:not(:disabled) {
+    background: #f3f7fa;
+}
+
+
+/* MARCAR TODOS */
+
+.btn-mark-all {
+    border: 1px solid #a8d6b9;
+
+    color: #087945;
+
+    background: #ecf9f1;
+}
+
+
+.btn-mark-all:hover:not(:disabled) {
+    background: #ddf4e7;
+}
+
+
+/* FINALIZAR */
+
+.btn-finalizar {
+    border: 1px solid #13844f;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            180deg,
+            #22a866,
+            #13844f
+        );
+}
+
+
+.btn-finalizar:hover:not(:disabled) {
+    background:
+        linear-gradient(
+            180deg,
+            #198e56,
+            #0d7041
+        );
+}
+
+
+/* DESABILITADOS */
+
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-finalizar:disabled,
+.btn-mark-all:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   INDICADORES
+========================================================= */
+
+.chamada-indicadores {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0, 1fr)
+        );
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+}
+
+
+.chamada-indicador {
+    min-height: 82px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 5px;
+
+    padding: 15px 17px;
+
+    border: 1px solid #d4e0e9;
+    border-left: 4px solid #2d7fbe;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 5px 15px
+        rgba(17, 52, 87, 0.035);
+}
+
+
+.chamada-indicador span {
+    color: #6a8195;
+
+    font-size: 0.66rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.35px;
+}
+
+
+.chamada-indicador strong {
+    color: #173e63;
+
+    font-size: 1.45rem;
+    font-weight: 800;
+}
+
+
+/* DISPONÍVEL */
+
+.chamada-indicador.presente {
+    border-left-color: #24a764;
+}
+
+
+.chamada-indicador.presente strong {
+    color: #158650;
+}
+
+
+/* INDISPONÍVEL */
+
+.chamada-indicador.indisponivel {
+    border-left-color: #d45252;
+}
+
+
+.chamada-indicador.indisponivel strong {
+    color: #bd4343;
+}
+
+
+/* PENDENTES */
+
+.chamada-indicador.pendente {
+    border-left-color: #e49a2b;
+}
+
+
+.chamada-indicador.pendente strong {
+    color: #bd791b;
+}
+
+
+/* =========================================================
+   TABELA
+========================================================= */
+
+.chamada-table-wrapper {
+    width: 100%;
+
+    padding: 11px 13px 13px;
+
+    overflow-x: auto;
+}
+
+
+.chamada-table {
+    width: 100%;
+
+    min-width: 1050px;
+
+    border: 1px solid #ccdbe7;
+    border-radius: 7px;
+
+    border-collapse: separate;
+    border-spacing: 0;
+
+    table-layout: fixed;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   LARGURA DAS COLUNAS
+========================================================= */
+
+.chamada-table th:nth-child(1),
+.chamada-table td:nth-child(1) {
+    width: 8%;
+}
+
+
+.chamada-table th:nth-child(2),
+.chamada-table td:nth-child(2) {
+    width: 21%;
+}
+
+
+.chamada-table th:nth-child(3),
+.chamada-table td:nth-child(3) {
+    width: 8%;
+}
+
+
+.chamada-table th:nth-child(4),
+.chamada-table td:nth-child(4) {
+    width: 8%;
+}
+
+
+.chamada-table th:nth-child(5),
+.chamada-table td:nth-child(5) {
+    width: 24%;
+}
+
+
+.chamada-table th:nth-child(6),
+.chamada-table td:nth-child(6) {
+    width: 31%;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA TABELA
+========================================================= */
+
+.chamada-table thead {
+    background: #dceaf5;
+}
+
+
+.chamada-table th {
+    height: 39px;
+
+    padding: 9px 11px;
+
+    border-right: 1px solid #c6d7e4;
+    border-bottom: 1px solid #bfd2e1;
+
+    color: #315673;
+
+    font-size: 0.61rem;
+    font-weight: 800;
+
+    text-align: left;
+
+    letter-spacing: 0.15px;
+}
+
+
+.chamada-table th:last-child {
+    border-right: none;
+}
+
+
+.chamada-table .col-presenca {
+    text-align: center;
+}
+
+
+/* =========================================================
+   LINHAS DA TABELA
+========================================================= */
+
+.chamada-table td {
+    min-height: 51px;
+
+    padding: 9px 11px;
+
+    border-right: 1px solid #d6e1e9;
+    border-bottom: 1px solid #dce5ec;
+
+    color: #37546c;
+
+    font-size: 0.69rem;
+
+    vertical-align: middle;
+}
+
+
+.chamada-table td:last-child {
+    border-right: none;
+}
+
+
+.chamada-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+.chamada-table tbody tr {
+    background: #ffffff;
+
+    transition: 0.15s ease;
+}
+
+
+.chamada-table tbody tr:nth-child(odd) {
+    background: #f7fbfe;
+}
+
+
+.chamada-table tbody tr:hover {
+    background: #edf6fd;
+}
+
+
+/* =========================================================
+   PT / GRAD
+========================================================= */
+
+.chamada-rank {
+    color: #075d9d;
+
+    font-size: 0.7rem;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   MILITAR
+========================================================= */
+
+.chamada-militar {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+.chamada-militar strong {
+    color: #173f61;
+
+    font-size: 0.7rem;
+    font-weight: 800;
+}
+
+
+.chamada-militar small {
+    color: #8396a7;
+
+    font-size: 0.6rem;
+}
+
+
+/* =========================================================
+   PRESENTE / FALTA
+========================================================= */
+
+.presenca-cell {
+    text-align: center;
+}
+
+
+.presenca-radio {
+    width: 17px;
+    height: 17px;
+
+    margin: 0;
+
+    cursor: pointer;
+
+    accent-color: #1778bb;
+}
+
+
+/* =========================================================
+   SITUAÇÃO
+========================================================= */
+
+.situacao-select {
+    width: 100%;
+    height: 34px;
+
+    padding: 0 8px;
+
+    border: 1px solid #c7d7e3;
+    border-radius: 5px;
+
+    outline: none;
+
+    color: #35536a;
+
+    background: #ffffff;
+
+    font-family: inherit;
+    font-size: 0.66rem;
+}
+
+
+.situacao-select:focus {
+    border-color: #2e86c7;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(36, 128, 195, 0.09);
+}
+
+
+/* =========================================================
+   OBSERVAÇÃO
+========================================================= */
+
+.observacao-input {
+    width: 100%;
+    height: 34px;
+
+    padding: 0 9px;
+
+    border: 1px solid #c7d7e3;
+    border-radius: 5px;
+
+    outline: none;
+
+    color: #405e75;
+
+    background: #ffffff;
+
+    font-family: inherit;
+    font-size: 0.66rem;
+}
+
+
+.observacao-input::placeholder {
+    color: #a0afbb;
+}
+
+
+.observacao-input:focus {
+    border-color: #2e86c7;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(36, 128, 195, 0.09);
+}
+
+
+/* =========================================================
+   LINHA DISPONÍVEL
+========================================================= */
+
+.chamada-table tr.linha-disponivel {
+    box-shadow:
+        inset 3px 0 0
+        #23a663;
+}
+
+
+/* =========================================================
+   LINHA INDISPONÍVEL
+========================================================= */
+
+.chamada-table tr.linha-indisponivel {
+    box-shadow:
+        inset 3px 0 0
+        #d75656;
+}
+
+
+/* =========================================================
+   LINHA PENDENTE
+========================================================= */
+
+.chamada-table tr.linha-pendente {
+    box-shadow:
+        inset 3px 0 0
+        #e4a037;
+}
+
+
+/* =========================================================
+   TABELA VAZIA
+========================================================= */
+
+.table-empty {
+    padding: 32px 20px !important;
+
+    color: #8295a5 !important;
+
+    font-size: 0.72rem !important;
+
+    text-align: center !important;
+}
+
+
+/* =========================================================
+   RODAPÉ DA CHAMADA
+========================================================= */
+
+.chamada-footer {
+    min-height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 12px 14px;
+
+    border-top: 1px solid #d3e0e9;
+
+    background: #f8fbfd;
+}
+
+
+.chamada-footer-info {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    color: #71889b;
+
+    font-size: 0.66rem;
+}
+
+
+.chamada-footer-info strong {
+    color: #365c78;
+}
+
+
+.chamada-footer-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+/* =========================================================
+   CHAMADA FINALIZADA
+========================================================= */
+
+.chamada-card.finalizada
+.situacao-select,
+
+.chamada-card.finalizada
+.observacao-input,
+
+.chamada-card.finalizada
+.presenca-radio {
+    pointer-events: none;
+
+    opacity: 0.72;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .chamada-config-body {
+        grid-template-columns:
+            1fr
+            1fr;
+    }
+
+
+    .config-action {
+        grid-column: 1 / -1;
+    }
+
+
+    .config-action .btn-primary {
+        width: 100%;
+    }
+
+
+    .chamada-indicadores {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .chamada-content {
+        padding: 14px;
+    }
+
+
+    .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+
+    .chamada-config-body {
+        grid-template-columns: 1fr;
+    }
+
+
+    .config-action {
+        grid-column: auto;
+    }
+
+
+    .chamada-indicadores {
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+
+    .btn-mark-all {
+        width: 100%;
+    }
+
+
+    .chamada-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+
+    .chamada-footer-actions {
+        width: 100%;
+    }
+
+
+    .chamada-footer-actions button {
+        flex: 1;
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .chamada-indicadores {
+        grid-template-columns: 1fr;
+    }
+
+
+    .chamada-footer-actions {
+        flex-direction: column;
+    }
+
+
+    .chamada-footer-actions button {
+        width: 100%;
+    }
+
+}
