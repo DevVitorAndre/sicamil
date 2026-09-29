@@ -24,6 +24,30 @@ const PORT =
     process.env.PORT || 3000;
 
 
+const producao =
+    process.env.NODE_ENV === "production";
+
+
+/* =========================================================
+   PROXY / HTTPS
+
+   Em produção, a TI poderá utilizar um proxy reverso
+   na frente do Node.js.
+
+   Isso permite que o Express reconheça corretamente
+   conexões HTTPS encaminhadas pelo servidor da TI.
+========================================================= */
+
+if (producao) {
+
+    app.set(
+        "trust proxy",
+        1
+    );
+
+}
+
+
 /* =========================================================
    SEGURANCA
 ========================================================= */
@@ -33,20 +57,40 @@ app.use(
 );
 
 
+
 /* =========================================================
    CORS
+
+   Desenvolvimento:
+   Frontend e backend utilizam portas diferentes.
+
+   Produção:
+   O frontend e a API serão publicados no mesmo endereço,
+   por exemplo:
+
+   https://sicamil.intraer
+   https://sicamil.intraer/api
+
+   Nesse caso não é necessário liberar CORS externamente.
 ========================================================= */
 
-app.use(
-    cors({
+if (!producao) {
 
-        origin: true,
+    app.use(
+        cors({
 
-        credentials: true
+            origin: [
+                "http://127.0.0.1:5500",
+                "http://localhost:5500"
+            ],
 
-    })
-);
+            credentials:
+                true
 
+        })
+    );
+
+}
 
 /* =========================================================
    JSON

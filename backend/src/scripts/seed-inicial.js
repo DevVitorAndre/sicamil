@@ -53,7 +53,11 @@ const PERMISSOES = [
 ];
 
 
-async function validarConfiguracao() {
+/* =========================================================
+   VALIDAR CONFIGURAÇÃO
+========================================================= */
+
+function validarConfiguracao() {
 
     const obrigatorias = [
 
@@ -68,12 +72,15 @@ async function validarConfiguracao() {
 
     const faltando =
         obrigatorias.filter(
-            (campo) =>
-                !process.env[campo]?.trim()
+            campo =>
+                !process.env[campo]
+                    ?.trim()
         );
 
 
-    if (faltando.length > 0) {
+    if (
+        faltando.length > 0
+    ) {
 
         throw new Error(
             `Variáveis ausentes no .env: ${faltando.join(", ")}`
@@ -81,23 +88,50 @@ async function validarConfiguracao() {
 
     }
 
+
+    if (
+        process.env.ADMIN_PASSWORD.length < 8
+    ) {
+
+        throw new Error(
+            "ADMIN_PASSWORD deve possuir pelo menos 8 caracteres."
+        );
+
+    }
+
 }
 
 
-async function cadastrarPermissoes(cliente) {
+/* =========================================================
+   CADASTRAR PERMISSÕES
+========================================================= */
+
+async function cadastrarPermissoes(
+    cliente
+) {
 
     console.log("");
-    console.log("Cadastrando permissões...");
+    console.log(
+        "Cadastrando permissões..."
+    );
 
 
-    for (const permissao of PERMISSOES) {
+    for (
+        const permissao
+        of PERMISSOES
+    ) {
 
         const existente =
             await cliente.query(
                 `
-                SELECT id
+                SELECT
+                    id
+
                 FROM permissoes
-                WHERE LOWER(codigo) = LOWER($1)
+
+                WHERE
+                    LOWER(codigo) =
+                    LOWER($1)
                 `,
                 [
                     permissao.codigo
@@ -105,7 +139,9 @@ async function cadastrarPermissoes(cliente) {
             );
 
 
-        if (existente.rowCount === 0) {
+        if (
+            existente.rowCount === 0
+        ) {
 
             await cliente.query(
                 `
@@ -113,7 +149,10 @@ async function cadastrarPermissoes(cliente) {
                     codigo,
                     nome
                 )
-                VALUES ($1, $2)
+                VALUES (
+                    $1,
+                    $2
+                )
                 `,
                 [
                     permissao.codigo,
@@ -139,28 +178,47 @@ async function cadastrarPermissoes(cliente) {
 }
 
 
-async function cadastrarGerente(cliente) {
+/* =========================================================
+   CADASTRAR PRIMEIRO GERENTE
+========================================================= */
+
+async function cadastrarGerente(
+    cliente
+) {
 
     console.log("");
-    console.log("Configurando primeiro gerente...");
+    console.log(
+        "Configurando primeiro gerente..."
+    );
 
 
     const login =
-        process.env.ADMIN_LOGIN.trim();
+        process.env.ADMIN_LOGIN
+            .trim();
 
 
     const email =
-        process.env.ADMIN_EMAIL.trim();
+        process.env.ADMIN_EMAIL
+            .trim();
 
 
     const existente =
         await cliente.query(
             `
-            SELECT id
+            SELECT
+                id
+
             FROM usuarios
+
             WHERE
-                LOWER(login) = LOWER($1)
-                OR LOWER(email) = LOWER($2)
+                LOWER(login) =
+                    LOWER($1)
+
+                OR
+
+                LOWER(email) =
+                    LOWER($2)
+
             LIMIT 1
             `,
             [
@@ -173,7 +231,9 @@ async function cadastrarGerente(cliente) {
     let usuarioId;
 
 
-    if (existente.rowCount > 0) {
+    if (
+        existente.rowCount > 0
+    ) {
 
         usuarioId =
             existente.rows[0].id;
@@ -218,10 +278,16 @@ async function cadastrarGerente(cliente) {
                 RETURNING id
                 `,
                 [
-                    process.env.ADMIN_NOME.trim(),
-                    process.env.ADMIN_NOME_GUERRA.trim(),
+                    process.env.ADMIN_NOME
+                        .trim(),
+
+                    process.env.ADMIN_NOME_GUERRA
+                        .trim(),
+
                     login,
+
                     email,
+
                     senhaHash
                 ]
             );
@@ -238,16 +304,25 @@ async function cadastrarGerente(cliente) {
     }
 
 
+    /* =====================================================
+       ATRIBUI TODAS AS PERMISSÕES AO GERENTE
+    ===================================================== */
+
     const permissoes =
         await cliente.query(
             `
-            SELECT id
+            SELECT
+                id
+
             FROM permissoes
             `
         );
 
 
-    for (const permissao of permissoes.rows) {
+    for (
+        const permissao
+        of permissoes.rows
+    ) {
 
         await cliente.query(
             `
@@ -255,7 +330,10 @@ async function cadastrarGerente(cliente) {
                 usuario_id,
                 permissao_id
             )
-            VALUES ($1, $2)
+            VALUES (
+                $1,
+                $2
+            )
 
             ON CONFLICT (
                 usuario_id,
@@ -278,6 +356,10 @@ async function cadastrarGerente(cliente) {
 
 }
 
+
+/* =========================================================
+   EXECUTAR SEED
+========================================================= */
 
 async function executarSeed() {
 
@@ -358,7 +440,8 @@ async function executarSeed() {
         console.error("");
 
 
-        process.exitCode = 1;
+        process.exitCode =
+            1;
 
 
     } finally {
