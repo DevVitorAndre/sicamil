@@ -32,8 +32,11 @@ export const CONFIG = {
         registros:
             "/registros",
             
-            pesquisa:
-    "/pesquisa"
+        pesquisa:
+            "/pesquisa",
+        
+        relatorios:
+            "/relatorios"
 
     }
 

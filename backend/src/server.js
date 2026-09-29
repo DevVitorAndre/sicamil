@@ -12,6 +12,7 @@ import militarRoutes from "./routes/militarRoutes.js";
 import chamadaRoutes from "./routes/chamadaRoutes.js";
 import registroRoutes from "./routes/registroRoutes.js";
 import pesquisaRoutes from "./routes/pesquisaRoutes.js";
+import relatorioRoutes from "./routes/relatorioRoutes.js";
 
 import {
     exigirAutenticacao
@@ -121,6 +122,15 @@ app.use(
 app.use(
     "/api/chamadas",
     chamadaRoutes
+);
+
+/* =========================================================
+   RELATÓRIOS
+========================================================= */
+
+app.use(
+    "/api/relatorios",
+    relatorioRoutes
 );
 
 /* =========================================================

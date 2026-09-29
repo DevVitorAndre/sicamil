@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Relatórios de Efetivo - SICAMIL"
+    >
+
+    <title>
+        SICAMIL | Relatórios
+    </title>
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="css/global.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/relatorios.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <div class="app-layout">
+
+
+        <div
+            id="sidebar-container"
+            aria-label="Menu principal"
+        ></div>
+
+
+        <main class="main-content">
+
+
+            <div id="header-container"></div>
+
+
+            <div class="relatorios-content">
+
+
+                <!-- =========================================
+                     CABEÇALHO
+                ========================================== -->
+
+                <section class="page-heading">
+
+
+                    <div>
+
+                        <span class="page-kicker">
+                            ANÁLISE DE EFETIVO
+                        </span>
+
+                        <h2>
+                            Relatórios
+                        </h2>
+
+                        <p>
+                            Gere relatórios consolidados do efetivo e das chamadas registradas.
+                        </p>
+
+                    </div>
+
+
+                    <div class="report-actions">
+
+                        <button
+                            type="button"
+                            id="btnExportarPlanilha"
+                            class="btn-export secondary"
+                            disabled
+                        >
+                            Exportar Planilha
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="btnExportarPdf"
+                            class="btn-export primary"
+                            disabled
+                        >
+                            Exportar PDF
+                        </button>
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =========================================
+                     MENSAGEM
+                ========================================== -->
+
+                <div
+                    id="relatorioMensagem"
+                    class="relatorio-message"
+                    role="alert"
+                    hidden
+                ></div>
+
+
+                <!-- =========================================
+                     FILTROS
+                ========================================== -->
+
+                <section class="filter-card">
+
+
+                    <header class="section-header">
+
+                        <div>
+
+                            <h3>
+                                Parâmetros do Relatório
+                            </h3>
+
+                            <p>
+                                Defina o período, seção e situação desejados.
+                            </p>
+
+                        </div>
+
+                    </header>
+
+
+                    <div class="filters-grid">
+
+
+                        <div class="filter-field">
+
+                            <label for="dataInicio">
+                                Data inicial
+                            </label>
+
+                            <input
+                                type="date"
+                                id="dataInicio"
+                            >
+
+                        </div>
+
+
+                        <div class="filter-field">
+
+                            <label for="dataFim">
+                                Data final
+                            </label>
+
+                            <input
+                                type="date"
+                                id="dataFim"
+                            >
+
+                        </div>
+
+
+                        <div class="filter-field">
+
+                            <label for="filtroSecao">
+                                Seção
+                            </label>
+
+                            <select id="filtroSecao">
+
+                                <option value="">
+                                    Todas as seções
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="filter-field">
+
+                            <label for="filtroSituacao">
+                                Situação
+                            </label>
+
+                            <select id="filtroSituacao">
+
+                                <option value="">
+                                    Todas as situações
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="filter-actions">
+
+                            <button
+                                type="button"
+                                id="btnLimpar"
+                                class="btn-secondary"
+                            >
+                                Limpar
+                            </button>
+
+
+                            <button
+                                type="button"
+                                id="btnGerarRelatorio"
+                                class="btn-primary"
+                            >
+                                Gerar Relatório
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =========================================
+                     RESUMO
+                ========================================== -->
+
+                <section class="report-indicators">
+
+
+                    <article class="report-indicator">
+
+                        <span>
+                            Registros
+                        </span>
+
+                        <strong id="totalRegistros">
+                            0
+                        </strong>
+
+                    </article>
+
+
+                    <article class="report-indicator militares">
+
+                        <span>
+                            Militares distintos
+                        </span>
+
+                        <strong id="militaresDistintos">
+                            0
+                        </strong>
+
+                    </article>
+
+
+                    <article class="report-indicator disponivel">
+
+                        <span>
+                            Disponíveis
+                        </span>
+
+                        <strong id="totalDisponiveis">
+                            0
+                        </strong>
+
+                    </article>
+
+
+                    <article class="report-indicator indisponivel">
+
+                        <span>
+                            Indisponíveis
+                        </span>
+
+                        <strong id="totalIndisponiveis">
+                            0
+                        </strong>
+
+                    </article>
+
+
+                    <article class="report-indicator chamadas">
+
+                        <span>
+                            Chamadas
+                        </span>
+
+                        <strong id="totalChamadas">
+                            0
+                        </strong>
+
+                    </article>
+
+
+                    <article class="report-indicator secoes">
+
+                        <span>
+                            Seções
+                        </span>
+
+                        <strong id="totalSecoes">
+                            0
+                        </strong>
+
+                    </article>
+
+
+                </section>
+
+
+                <!-- =========================================
+                     CONSOLIDADOS
+                ========================================== -->
+
+                <section class="report-grid">
+
+
+                    <!-- POR SEÇÃO -->
+
+                    <article class="report-card">
+
+
+                        <header class="section-header">
+
+                            <div>
+
+                                <h3>
+                                    Consolidado por Seção
+                                </h3>
+
+                                <p>
+                                    Distribuição do efetivo registrado.
+                                </p>
+
+                            </div>
+
+                        </header>
+
+
+                        <div class="table-wrapper">
+
+
+                            <table class="summary-table">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            SEÇÃO
+                                        </th>
+
+                                        <th>
+                                            TOTAL
+                                        </th>
+
+                                        <th>
+                                            DISP.
+                                        </th>
+
+                                        <th>
+                                            INDISP.
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody id="tabelaSecoes">
+
+                                    <tr>
+
+                                        <td
+                                            colspan="4"
+                                            class="table-empty"
+                                        >
+                                            Gere um relatório para visualizar os dados.
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+
+                        </div>
+
+
+                    </article>
+
+
+                    <!-- POR SITUAÇÃO -->
+
+                    <article class="report-card">
+
+
+                        <header class="section-header">
+
+                            <div>
+
+                                <h3>
+                                    Consolidado por Situação
+                                </h3>
+
+                                <p>
+                                    Quantitativo por situação registrada.
+                                </p>
+
+                            </div>
+
+                        </header>
+
+
+                        <div class="table-wrapper">
+
+
+                            <table class="summary-table">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            SITUAÇÃO
+                                        </th>
+
+                                        <th>
+                                            CONDIÇÃO
+                                        </th>
+
+                                        <th>
+                                            TOTAL
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody id="tabelaSituacoes">
+
+                                    <tr>
+
+                                        <td
+                                            colspan="3"
+                                            class="table-empty"
+                                        >
+                                            Gere um relatório para visualizar os dados.
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+
+                        </div>
+
+
+                    </article>
+
+
+                </section>
+
+
+                <!-- =========================================
+                     RELAÇÃO NOMINAL
+                ========================================== -->
+
+                <section class="report-card nominal-card">
+
+
+                    <header class="section-header">
+
+
+                        <div>
+
+                            <h3>
+                                Relação Nominal
+                            </h3>
+
+                            <p>
+                                Militares encontrados conforme os filtros selecionados.
+                            </p>
+
+                        </div>
+
+
+                        <div class="nominal-counter">
+
+                            <span>
+                                Linhas
+                            </span>
+
+                            <strong id="totalNominal">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                    </header>
+
+
+                    <div class="nominal-table-wrapper">
+
+
+                        <table class="nominal-table">
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        DATA
+                                    </th>
+
+                                    <th>
+                                        PT / GRAD
+                                    </th>
+
+                                    <th>
+                                        MILITAR
+                                    </th>
+
+                                    <th>
+                                        SARAM
+                                    </th>
+
+                                    <th>
+                                        SEÇÃO
+                                    </th>
+
+                                    <th>
+                                        SITUAÇÃO
+                                    </th>
+
+                                    <th>
+                                        CONDIÇÃO
+                                    </th>
+
+                                    <th>
+                                        OBSERVAÇÃO
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="tabelaMilitares">
+
+                                <tr>
+
+                                    <td
+                                        colspan="8"
+                                        class="table-empty"
+                                    >
+                                        Gere um relatório para visualizar a relação nominal.
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+
+
+                </section>
+
+
+            </div>
+
+
+        </main>
+
+
+    </div>
+
+
+    <script
+        type="module"
+        src="js/relatorios.js"
+    ></script>
+
+
+</body>
+
+</html>
